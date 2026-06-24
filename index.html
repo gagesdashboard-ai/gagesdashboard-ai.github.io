@@ -16,6 +16,11 @@
     nav a { display: block; text-align: center; padding: 16px; font-size: 1rem; font-weight: 500; color: #aaaaaa; text-decoration: none; cursor: pointer; transition: color 0.15s; }
     nav a:hover { color: #ffffff; }
     nav a.active { color: #ffffff; font-weight: 600; }
+    .nav-item { display: flex; flex-direction: column; }
+    .dropdown { display: none; flex-direction: column; background: #111; }
+    .dropdown.open { display: flex; }
+    .dropdown a { font-size: 0.875rem; font-weight: 400; color: #888; padding: 10px 16px; text-align: center; border-top: 1px solid #222; }
+    .dropdown a:hover { color: #ffffff; background: #1a1a1a; }
     main { flex: 1; padding: 40px; background: #000000; }
   </style>
 </head>
@@ -27,10 +32,23 @@
   <div class="layout">
     <nav>
       <a href="#" class="active">Profile</a>
-      <a href="#">Commercial</a>
+      <div class="nav-item">
+        <a href="#" onclick="toggleDropdown(event, 'commercial-dropdown')">Commercial</a>
+        <div class="dropdown" id="commercial-dropdown">
+          <a href="https://product.costar.com/home" target="_blank">CoStar</a>
+        </div>
+      </div>
       <a href="#">Residential</a>
     </nav>
     <main></main>
   </div>
+  <script>
+    function toggleDropdown(e, id) {
+      e.preventDefault();
+      const dropdown = document.getElementById(id);
+      dropdown.classList.toggle('open');
+      e.currentTarget.classList.toggle('active');
+    }
+  </script>
 </body>
 </html>
