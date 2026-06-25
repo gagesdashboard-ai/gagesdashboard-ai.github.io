@@ -16,9 +16,9 @@
     header .subtitle { font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: #666; margin-top: 6px; }
     .logo { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); height: 96px; width: auto; }
 
-    .layout { display: flex; flex: 1; }
+    .layout { display: flex; flex: 1; min-height: 0; }
 
-    nav { width: 200px; background: #0D0D0D; display: flex; flex-direction: column; justify-content: space-evenly; padding: 40px 0; }
+    nav { width: 200px; background: #0D0D0D; display: flex; flex-direction: column; justify-content: space-evenly; padding: 40px 0; flex-shrink: 0; }
     nav a { display: block; text-align: center; padding: 18px 16px; font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 400; color: #888; text-decoration: none; cursor: pointer; transition: color 0.2s; letter-spacing: 0.5px; }
     nav a:hover { color: #ffffff; }
     nav a.active { color: #ffffff; font-weight: 600; }
@@ -28,8 +28,21 @@
     .dropdown a { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 400; color: #555; padding: 10px 16px; text-align: center; letter-spacing: 1.5px; text-transform: uppercase; }
     .dropdown a:hover { color: #ffffff; }
 
-    main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px; background: #0D0D0D; }
+    main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px; background: #0D0D0D; min-height: 0; }
+    main.calendar-active { padding: 24px; align-items: stretch; }
 
+    /* Calendar panel */
+    #home-panel { display: none; flex-direction: column; width: 100%; height: 100%; }
+    #home-panel iframe {
+      width: 100%;
+      flex: 1;
+      border: none;
+      border-radius: 4px;
+      min-height: 600px;
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    /* E&O Card */
     .card { width: 100%; max-width: 560px; }
     .card-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
     .card-title { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 32px; color: #fff; }
@@ -61,7 +74,7 @@
   </header>
   <div class="layout">
     <nav>
-      <a href="#" onclick="showPanel(event, null)">Home</a>
+      <a href="#" onclick="showPanel(event, 'home-panel')">Home</a>
       <div class="nav-item">
         <a href="#" onclick="toggleDropdown(event, 'profile-dropdown')">Profile</a>
         <div class="dropdown" id="profile-dropdown">
@@ -82,6 +95,16 @@
       </div>
     </nav>
     <main id="main-panel">
+
+      <!-- Home: Calendar -->
+      <div id="home-panel" style="display:none; width:100%; height:100%;">
+        <iframe
+          src="https://outlook.office365.com/owa/calendar/12181659029f4cf7806875d56986eb19@shepherdgroupre.com/86fc5440fc8a4049bf0e02a753ba57c57529967293964519218/calendar.html"
+          title="Outlook Calendar">
+        </iframe>
+      </div>
+
+      <!-- E&O Policy -->
       <div id="eo-panel" class="card" style="display:none;">
         <div class="card-label">Profile / Insurance</div>
         <div class="card-title">Errors &amp; Omissions Policy</div>
@@ -137,6 +160,7 @@
           Email: <a href="mailto:claims@risceo.com">claims@risceo.com</a> &nbsp;·&nbsp; Phone: <a href="tel:18006377319">(800) 637-7319</a>
         </div>
       </div>
+
     </main>
   </div>
   <script>
@@ -149,33 +173,36 @@
       const dot = document.getElementById('status-dot');
       const txt = document.getElementById('status-text');
       if (diff > 60) {
-        dot.className = 'status-dot green';
-        txt.className = 'status-text green';
+        dot.className = 'status-dot green'; txt.className = 'status-text green';
         txt.textContent = 'Active — Coverage in good standing';
       } else if (diff > 0) {
-        dot.className = 'status-dot yellow';
-        txt.className = 'status-text yellow';
+        dot.className = 'status-dot yellow'; txt.className = 'status-text yellow';
         txt.textContent = 'Expiring soon — Renew immediately';
       } else {
-        dot.className = 'status-dot red';
-        txt.className = 'status-text red';
+        dot.className = 'status-dot red'; txt.className = 'status-text red';
         txt.textContent = 'Expired — Action required';
       }
     }
 
     function toggleDropdown(e, id) {
       e.preventDefault();
-      const dropdown = document.getElementById(id);
-      dropdown.classList.toggle('open');
+      document.getElementById(id).classList.toggle('open');
       e.currentTarget.classList.toggle('active');
     }
 
     function showPanel(e, panelId) {
       e.preventDefault();
       document.querySelectorAll('#main-panel > div').forEach(el => el.style.display = 'none');
-      if (panelId) {
-        document.getElementById(panelId).style.display = 'block';
-        if (panelId === 'eo-panel') updateStatus();
+      const main = document.getElementById('main-panel');
+      if (panelId === 'home-panel') {
+        main.classList.add('calendar-active');
+        document.getElementById('home-panel').style.display = 'block';
+      } else {
+        main.classList.remove('calendar-active');
+        if (panelId) {
+          document.getElementById(panelId).style.display = 'block';
+          if (panelId === 'eo-panel') updateStatus();
+        }
       }
     }
   </script>
