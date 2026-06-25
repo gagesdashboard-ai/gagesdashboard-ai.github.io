@@ -120,6 +120,7 @@
         <div class="dropdown" id="profile-dropdown">
           <a href="#" onclick="showPanel(event,'eo-panel')">E&amp;O Policy</a>
           <a href="#" onclick="showPanel(event,'krec-panel')">KREC</a>
+          <a href="#" onclick="showPanel(event,'trec-panel')">TREC</a>
         </div>
       </div>
       <div class="nav-item">
@@ -216,6 +217,26 @@
         </div>
       </div>
 
+      <!-- TREC PANEL -->
+      <div id="trec-panel" class="card" style="display:none;">
+        <div class="card-label">Profile / Licensing</div>
+        <div class="card-title">TREC License</div>
+        <hr class="divider" />
+        <div class="fields" style="margin-bottom:36px;">
+          <div><div class="field-label">License Type</div><div class="field-value">Affiliate Broker</div></div>
+          <div><div class="field-label">License Number</div><div class="field-value highlight">382231</div></div>
+          <div><div class="field-label">Status</div><div class="field-value highlight" style="color:#4CAF7D;">Active</div></div>
+          <div><div class="field-label">State</div><div class="field-value">Tennessee</div></div>
+          <div><div class="field-label">Issuing Authority</div><div class="field-value">Dept. of Commerce &amp; Insurance</div></div>
+          <div><div class="field-label">Address</div><div class="field-value">3615 Wilbur Pl, Nashville TN 37204</div></div>
+        </div>
+        <div class="field-label" style="margin-bottom:14px; letter-spacing:2.5px;">Upcoming Deadlines</div>
+        <div class="deadline-grid" id="trec-deadlines"></div>
+        <div class="claims-note">
+          Tennessee Real Estate Commission &nbsp;·&nbsp; <a href="https://licensedprofessions.tn.gov/" target="_blank">Log in to TREC Portal →</a>
+        </div>
+      </div>
+
     </main>
   </div>
 
@@ -284,6 +305,18 @@
       }).join('');
     }
 
+    function renderTREC(){
+      const deadlines=[
+        {name:'License Expiration',   date:'2027-05-22', completed:false},
+        {name:'Continuing Education', date:'2027-05-22', completed:false},
+      ];
+      document.getElementById('trec-deadlines').innerHTML=deadlines.map(d=>{
+        const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);
+        const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+        return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;
+      }).join('');
+    }
+
     function toggleDropdown(e,id){e.preventDefault();document.getElementById(id).classList.toggle('open');e.currentTarget.classList.toggle('active');}
     function showPanel(e,panelId){
       e.preventDefault();
@@ -294,7 +327,7 @@
         document.getElementById('home-panel').style.display='grid';loadCalendar();
       } else {
         main.style.alignItems='center';main.style.padding='48px';
-        if(panelId){document.getElementById(panelId).style.display='block';if(panelId==='eo-panel')updateEOStatus();if(panelId==='krec-panel')renderKREC();}
+        if(panelId){document.getElementById(panelId).style.display='block';if(panelId==='eo-panel')updateEOStatus();if(panelId==='krec-panel')renderKREC();if(panelId==='trec-panel')renderTREC();}
       }
     }
   </script>
