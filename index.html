@@ -4,30 +4,83 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gage Burd – Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root { color-scheme: dark; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #000000; font-family: 'Playfair Display', Georgia, serif; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; }
-    header { display: flex; align-items: center; justify-content: center; position: relative; padding: 28px 40px; background: #000000; }
-    header h1 { font-size: 2rem; font-weight: 700; letter-spacing: 1px; color: #ffffff; }
+    body { background: #0D0D0D; font-family: 'Playfair Display', Georgia, serif; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 32px 40px;
+      background: #0D0D0D;
+    }
+    .header-text { text-align: center; }
+    header h1 { font-size: 2.2rem; font-weight: 700; letter-spacing: 1.5px; color: #ffffff; }
+    header .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #666;
+      margin-top: 6px;
+    }
     .logo { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); height: 72px; width: auto; }
+
     .layout { display: flex; flex: 1; }
-    nav { width: 200px; background: #000000; display: flex; flex-direction: column; justify-content: space-evenly; padding: 40px 0; }
-    nav a { display: block; text-align: center; padding: 16px; font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 400; color: #aaaaaa; text-decoration: none; cursor: pointer; transition: color 0.15s; letter-spacing: 0.5px; }
+
+    nav {
+      width: 200px;
+      background: #141414;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      padding: 40px 0;
+    }
+    nav a {
+      display: block;
+      text-align: center;
+      padding: 18px 16px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #888;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+      letter-spacing: 0.5px;
+    }
     nav a:hover { color: #ffffff; }
     nav a.active { color: #ffffff; font-weight: 600; }
+
     .nav-item { display: flex; flex-direction: column; }
-    .dropdown { display: none; flex-direction: column; background: #0a0a0a; }
+    .dropdown { display: none; flex-direction: column; background: #111; }
     .dropdown.open { display: flex; }
-    .dropdown a { font-size: 0.8rem; font-weight: 400; color: #777; padding: 10px 16px; text-align: center; letter-spacing: 1px; }
+    .dropdown a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #666;
+      padding: 10px 16px;
+      text-align: center;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
     .dropdown a:hover { color: #ffffff; }
-    main { flex: 1; padding: 40px; background: #000000; }
+
+    main { flex: 1; padding: 40px; background: #1A1A1A; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Gage Burd</h1>
+    <div class="header-text">
+      <h1>Gage Burd</h1>
+      <div class="subtitle">Real Estate Dashboard</div>
+    </div>
     <img class="logo" src="https://www.shepherdgroupre.com/wp-content/uploads/sites/2492/2025/07/Logo-with-bottom-padding.png" alt="Shepherd Group" />
   </header>
   <div class="layout">
