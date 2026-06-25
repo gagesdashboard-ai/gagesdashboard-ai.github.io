@@ -10,69 +10,46 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0D0D0D; font-family: 'Playfair Display', Georgia, serif; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; }
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      padding: 32px 40px;
-      background: #0D0D0D;
-    }
+    header { display: flex; align-items: center; justify-content: center; position: relative; padding: 32px 40px; background: #0D0D0D; }
     .header-text { text-align: center; }
     header h1 { font-size: 2.2rem; font-weight: 700; letter-spacing: 1.5px; color: #ffffff; }
-    header .subtitle {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 300;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: #666;
-      margin-top: 6px;
-    }
+    header .subtitle { font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: #666; margin-top: 6px; }
     .logo { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); height: 96px; width: auto; }
 
     .layout { display: flex; flex: 1; }
 
-    nav {
-      width: 200px;
-      background: #0D0D0D;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      padding: 40px 0;
-    }
-    nav a {
-      display: block;
-      text-align: center;
-      padding: 18px 16px;
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1rem;
-      font-weight: 400;
-      color: #888;
-      text-decoration: none;
-      cursor: pointer;
-      transition: color 0.2s;
-      letter-spacing: 0.5px;
-    }
+    nav { width: 200px; background: #0D0D0D; display: flex; flex-direction: column; justify-content: space-evenly; padding: 40px 0; }
+    nav a { display: block; text-align: center; padding: 18px 16px; font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 400; color: #888; text-decoration: none; cursor: pointer; transition: color 0.2s; letter-spacing: 0.5px; }
     nav a:hover { color: #ffffff; }
     nav a.active { color: #ffffff; font-weight: 600; }
-
     .nav-item { display: flex; flex-direction: column; }
     .dropdown { display: none; flex-direction: column; background: #0D0D0D; }
     .dropdown.open { display: flex; }
-    .dropdown a {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: #555;
-      padding: 10px 16px;
-      text-align: center;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
+    .dropdown a { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 400; color: #555; padding: 10px 16px; text-align: center; letter-spacing: 1.5px; text-transform: uppercase; }
     .dropdown a:hover { color: #ffffff; }
 
-    main { flex: 1; padding: 40px; background: #0D0D0D; }
+    main { flex: 1; padding: 48px; background: #0D0D0D; }
+
+    /* E&O Card */
+    .card { max-width: 560px; }
+    .card-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
+    .card-title { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 32px; color: #fff; }
+    .status-badge { display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 36px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .status-dot.green { background: #4CAF7D; box-shadow: 0 0 8px #4CAF7D; }
+    .status-dot.yellow { background: #E5A428; box-shadow: 0 0 8px #E5A428; }
+    .status-dot.red { background: #E05252; box-shadow: 0 0 8px #E05252; }
+    .status-text.green { color: #4CAF7D; }
+    .status-text.yellow { color: #E5A428; }
+    .status-text.red { color: #E05252; }
+    .divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px 0; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; }
+    .field-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 2.5px; text-transform: uppercase; color: #555; margin-bottom: 6px; }
+    .field-value { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 400; color: #ccc; }
+    .field-value.highlight { color: #ffffff; font-weight: 500; }
+    .claims-note { margin-top: 40px; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #444; line-height: 1.7; }
+    .claims-note a { color: #666; text-decoration: none; }
+    .claims-note a:hover { color: #aaa; }
   </style>
 </head>
 <body>
@@ -85,7 +62,12 @@
   </header>
   <div class="layout">
     <nav>
-      <a href="#" class="active">Profile</a>
+      <div class="nav-item">
+        <a href="#" onclick="toggleDropdown(event, 'profile-dropdown')">Profile</a>
+        <div class="dropdown" id="profile-dropdown">
+          <a href="#" onclick="showPanel(event, 'eo-panel')">E&amp;O Policy</a>
+        </div>
+      </div>
       <div class="nav-item">
         <a href="#" onclick="toggleDropdown(event, 'commercial-dropdown')">Commercial</a>
         <div class="dropdown" id="commercial-dropdown">
@@ -99,14 +81,101 @@
         </div>
       </div>
     </nav>
-    <main></main>
+    <main id="main-panel">
+      <!-- E&O Panel -->
+      <div id="eo-panel" class="card" style="display:none;">
+        <div class="card-label">Profile / Insurance</div>
+        <div class="card-title">Errors &amp; Omissions Policy</div>
+        <div class="status-badge">
+          <div class="status-dot" id="status-dot"></div>
+          <span class="status-text" id="status-text"></span>
+        </div>
+        <hr class="divider" />
+        <div class="fields">
+          <div>
+            <div class="field-label">Carrier</div>
+            <div class="field-value">Continental Casualty Co. (CNA)</div>
+          </div>
+          <div>
+            <div class="field-label">Producer</div>
+            <div class="field-value">Rice Insurance (RISC)</div>
+          </div>
+          <div>
+            <div class="field-label">Policy Number</div>
+            <div class="field-value highlight">26 EO 0033KY</div>
+          </div>
+          <div>
+            <div class="field-label">License</div>
+            <div class="field-value">KY: 293113–S</div>
+          </div>
+          <div>
+            <div class="field-label">Effective Date</div>
+            <div class="field-value">April 1, 2026</div>
+          </div>
+          <div>
+            <div class="field-label">Expiration Date</div>
+            <div class="field-value highlight" id="exp-display">April 1, 2028</div>
+          </div>
+          <div>
+            <div class="field-label">Per Claim Limit</div>
+            <div class="field-value">$100,000</div>
+          </div>
+          <div>
+            <div class="field-label">Aggregate Limit</div>
+            <div class="field-value">$1,000,000</div>
+          </div>
+          <div>
+            <div class="field-label">Deductible</div>
+            <div class="field-value">$0</div>
+          </div>
+          <div>
+            <div class="field-label">Days Remaining</div>
+            <div class="field-value highlight" id="days-remaining"></div>
+          </div>
+        </div>
+        <div class="claims-note">
+          To report a claim contact RISC in writing within 90 days.<br />
+          Email: <a href="mailto:claims@risceo.com">claims@risceo.com</a> &nbsp;·&nbsp; Phone: <a href="tel:18006377319">(800) 637-7319</a>
+        </div>
+      </div>
+    </main>
   </div>
   <script>
+    const expDate = new Date('2028-04-01');
+
+    function updateStatus() {
+      const today = new Date();
+      const diff = Math.ceil((expDate - today) / (1000 * 60 * 60 * 24));
+      document.getElementById('days-remaining').textContent = diff + ' days';
+      const dot = document.getElementById('status-dot');
+      const txt = document.getElementById('status-text');
+      if (diff > 60) {
+        dot.className = 'status-dot green';
+        txt.className = 'status-text green';
+        txt.textContent = 'Active — Coverage in good standing';
+      } else if (diff > 0) {
+        dot.className = 'status-dot yellow';
+        txt.className = 'status-text yellow';
+        txt.textContent = 'Expiring soon — Renew immediately';
+      } else {
+        dot.className = 'status-dot red';
+        txt.className = 'status-text red';
+        txt.textContent = 'Expired — Action required';
+      }
+    }
+
     function toggleDropdown(e, id) {
       e.preventDefault();
       const dropdown = document.getElementById(id);
       dropdown.classList.toggle('open');
       e.currentTarget.classList.toggle('active');
+    }
+
+    function showPanel(e, panelId) {
+      e.preventDefault();
+      document.querySelectorAll('#main-panel > div').forEach(el => el.style.display = 'none');
+      document.getElementById(panelId).style.display = 'block';
+      if (panelId === 'eo-panel') updateStatus();
     }
   </script>
 </body>
