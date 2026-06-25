@@ -30,7 +30,6 @@
 
     main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px; background: #0D0D0D; }
 
-    /* E&O Card */
     .card { width: 100%; max-width: 560px; }
     .card-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
     .card-title { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 32px; color: #fff; }
@@ -62,6 +61,7 @@
   </header>
   <div class="layout">
     <nav>
+      <a href="#" onclick="showPanel(event, null)">Home</a>
       <div class="nav-item">
         <a href="#" onclick="toggleDropdown(event, 'profile-dropdown')">Profile</a>
         <div class="dropdown" id="profile-dropdown">
@@ -173,8 +173,10 @@
     function showPanel(e, panelId) {
       e.preventDefault();
       document.querySelectorAll('#main-panel > div').forEach(el => el.style.display = 'none');
-      document.getElementById(panelId).style.display = 'block';
-      if (panelId === 'eo-panel') updateStatus();
+      if (panelId) {
+        document.getElementById(panelId).style.display = 'block';
+        if (panelId === 'eo-panel') updateStatus();
+      }
     }
   </script>
 </body>
