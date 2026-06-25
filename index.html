@@ -157,21 +157,6 @@
     .edit-select option { background: #1a1a1a; }
     .edit-actions { display: flex; gap: 6px; margin-left: auto; }
 
-    /* CSV Mapper */
-    .csv-mapper { background: #111; border: 1px solid #2a2a2a; border-radius: 8px; padding: 22px 24px; margin-bottom: 4px; }
-    .csv-mapper-title { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 10px; }
-    .csv-mapper-info { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #777; margin-bottom: 20px; line-height: 1.5; }
-    .csv-mapper-info strong { color: #aaa; }
-    .mapper-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
-    .mapper-row { display: flex; flex-direction: column; gap: 6px; }
-    .mapper-label { font-family: 'Inter', sans-serif; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: #555; }
-    .mapper-select { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4px; padding: 8px 12px; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #ccc; outline: none; }
-    .mapper-select:focus { border-color: #444; }
-    .mapper-select option { background: #1a1a1a; }
-    .mapper-actions { display: flex; gap: 10px; align-items: center; }
-    .import-btn { background: #0e2018; border: 1px solid #2a5a3a; border-radius: 4px; color: #5ad4a0; padding: 9px 20px; font-family: 'Inter', sans-serif; font-size: 0.78rem; letter-spacing: 0.5px; cursor: pointer; transition: all 0.15s; }
-    .import-btn:hover { background: #0a2a1a; border-color: #5ad4a0; }
-
     /* Proforma */
     .proforma-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
     .proforma-section { padding: 24px; }
@@ -478,21 +463,21 @@
     function renderTREC(){const dl=[{name:'License Expiration',date:'2027-05-22',completed:false},{name:'Continuing Education',date:'2027-05-22',completed:false}];document.getElementById('trec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
 
     /* ─────────────────────────────────────────────────────────
-       PDF SEED INJECTION
-       When I read a PDF and push listings, I update LISTING_SEED
-       and bump LISTING_SEED_VERSION. On next page load the new
-       listings are merged in — existing entries kept as-is,
-       new addresses appended.
+       PDF SEED INJECTION — v1 (2026-06-25)
+       Listings extracted from PDFs uploaded by Gage.
+       Bump LISTING_SEED_VERSION each time new PDFs are pushed.
     ───────────────────────────────────────────────────────── */
-    const LISTING_SEED_VERSION = 'v0';
+    const LISTING_SEED_VERSION = 'v1';
     const LISTING_SEED = [
-      /* PDF imports will be populated here */
+      {address:'321 Marley Street, Scottsville, KY 42164', price:'280,000', stage:'active', date:'2026-06-25', beds:'3', baths:'2', sqft:'1,404', mls:'RA20263777', source:'pdf'},
+      {address:'2158 Summit Ave, Nashville, TN 37218', price:'889,000', stage:'active', date:'2025-11-14', beds:'4', baths:'4', sqft:'2,835', mls:'3211605', source:'pdf'},
+      {address:"1282 Clarence O'Dell Road, Bowling Green, KY 42101", price:'285,999', stage:'pending', date:'2026-05-01', close:'2026-07-06', beds:'3', baths:'2', sqft:'1,767', mls:'RA20262503', source:'pdf'},
     ];
 
     /* ── Active Listings ── */
     let listings = JSON.parse(localStorage.getItem('listings') || '[]');
 
-    // Merge seed on version change
+    // Merge seed on version change — preserves existing edits, appends new addresses
     (function seedListings() {
       if (localStorage.getItem('lstSeedVer') !== LISTING_SEED_VERSION && LISTING_SEED.length) {
         const existing = new Set(listings.map(l => l.address.trim().toLowerCase()));
@@ -527,7 +512,8 @@
           </div>`;
         }
         const dom=l.date?Math.floor((Date.now()-new Date(l.date))/(1000*60*60*24))+'d on market':'';
-        const meta=[l.price?'$'+l.price:'',dom].filter(Boolean).join(' · ');
+        const closeNote=l.close?' · Closing '+l.close:'';
+        const meta=[l.price?'$'+l.price:'',dom+closeNote,l.beds?l.beds+'bd/'+l.baths+'ba':'',l.sqft?l.sqft+' sqft':''].filter(Boolean).join(' · ');
         return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(l.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${l.stage}">${lstLabel[l.stage]}</span><button class="tc-edit" onclick="editLstIdx=${i};renderListings()" title="Edit">✎</button><button class="tc-delete" onclick="deleteListing(${i})">✕</button></div></div>`;
       }).join('');
     }
