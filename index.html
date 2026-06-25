@@ -31,29 +31,13 @@
     main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px; background: #0D0D0D; min-height: 0; overflow-y: auto; }
 
     /* Widget grid */
-    #home-panel {
-      display: none;
-      width: 100%;
-      height: 100%;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto 1fr;
-      gap: 16px;
-    }
-    .widget {
-      background: #141414;
-      border-radius: 8px;
-      padding: 20px 24px;
-      display: flex;
-      flex-direction: column;
-    }
-    .widget-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.6rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #444;
-      margin-bottom: 12px;
-    }
+    #home-panel { display: none; width: 100%; height: 100%; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; gap: 16px; }
+    .widget { background: #141414; border-radius: 8px; padding: 20px 24px; display: flex; flex-direction: column; }
+    .widget-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: #444; margin-bottom: 12px; }
+    .widget-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .widget-header .widget-label { margin-bottom: 0; }
+    .cal-refresh { background: none; border: none; color: #444; cursor: pointer; font-size: 0.75rem; font-family: 'Inter', sans-serif; letter-spacing: 1px; transition: color 0.15s; padding: 0; }
+    .cal-refresh:hover { color: #aaa; }
 
     /* Date/Time */
     #widget-datetime .time { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 600; color: #fff; line-height: 1; }
@@ -68,13 +52,7 @@
     /* Calendar day view */
     #widget-calendar { grid-column: 1; grid-row: 2; min-height: 320px; overflow-y: auto; }
     .cal-empty { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #444; margin-top: 8px; }
-    .cal-event {
-      display: flex;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid #1e1e1e;
-      align-items: flex-start;
-    }
+    .cal-event { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #1e1e1e; align-items: flex-start; }
     .cal-event:last-child { border-bottom: none; }
     .cal-event-bar { width: 3px; border-radius: 2px; background: #4A6FA5; flex-shrink: 0; align-self: stretch; min-height: 36px; }
     .cal-event-time { font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #555; width: 54px; flex-shrink: 0; padding-top: 2px; }
@@ -172,7 +150,10 @@
         </div>
 
         <div class="widget" id="widget-calendar">
-          <div class="widget-label">Today's Schedule</div>
+          <div class="widget-header">
+            <div class="widget-label">Today's Schedule</div>
+            <button class="cal-refresh" onclick="loadCalendar()">↻ Refresh</button>
+          </div>
           <div id="cal-events"><span class="cal-loading">Loading calendar...</span></div>
         </div>
 
@@ -246,11 +227,8 @@
     function parseICSDate(str) {
       if (!str) return null;
       const s = str.replace('Z','').replace(/[:-]/g,'');
-      if (s.length === 8) {
-        return new Date(+s.slice(0,4), +s.slice(4,6)-1, +s.slice(6,8));
-      }
-      return new Date(+s.slice(0,4), +s.slice(4,6)-1, +s.slice(6,8),
-                      +s.slice(9,11)||0, +s.slice(11,13)||0);
+      if (s.length === 8) return new Date(+s.slice(0,4), +s.slice(4,6)-1, +s.slice(6,8));
+      return new Date(+s.slice(0,4), +s.slice(4,6)-1, +s.slice(6,8), +s.slice(9,11)||0, +s.slice(11,13)||0);
     }
 
     function fmtTime(d) {
@@ -260,29 +238,26 @@
     }
 
     function loadCalendar() {
-      const proxy = 'https://corsproxy.io/?' + encodeURIComponent(ICS_URL);
-      fetch(proxy)
+      document.getElementById('cal-events').innerHTML = '<span class="cal-loading">Loading...</span>';
+      // Cache-bust with timestamp so we always get fresh data
+      const bustUrl = ICS_URL + (ICS_URL.includes('?') ? '&' : '?') + '_=' + Date.now();
+      const proxy = 'https://corsproxy.io/?' + encodeURIComponent(bustUrl);
+      fetch(proxy, { cache: 'no-store' })
         .then(r => r.text())
         .then(text => {
-          // unfold lines
           text = text.replace(/\r\n[ \t]/g,'').replace(/\r/g,'');
           const events = [];
           const blocks = text.split('BEGIN:VEVENT');
           blocks.shift();
           blocks.forEach(block => {
-            const get = (key) => {
-              const m = block.match(new RegExp(key+'(?:;[^:]*)?:(.+)'));
-              return m ? m[1].trim() : '';
-            };
+            const get = (key) => { const m = block.match(new RegExp(key+'(?:;[^:]*)?:(.+)')); return m ? m[1].trim() : ''; };
             const startRaw = get('DTSTART');
-            const endRaw   = get('DTEND');
             const summary  = get('SUMMARY').replace(/\\,/g,',').replace(/\\n/g,' ');
             const location = get('LOCATION').replace(/\\,/g,',');
             const start = parseICSDate(startRaw);
-            const end   = parseICSDate(endRaw);
+            const end   = parseICSDate(get('DTEND'));
             if (start) events.push({ summary, location, start, end, allDay: startRaw.length === 8 });
           });
-
           const now = new Date();
           const todayEvents = events.filter(e => {
             const s = e.start;
@@ -297,9 +272,7 @@
           container.innerHTML = todayEvents.map(e => `
             <div class="cal-event">
               <div class="cal-event-bar"></div>
-              <div>
-                <div class="cal-event-time">${fmtTime(e.start)}</div>
-              </div>
+              <div class="cal-event-time">${fmtTime(e.start)}</div>
               <div>
                 <div class="cal-event-title">${e.summary}</div>
                 ${e.location ? `<div class="cal-event-loc">${e.location}</div>` : ''}
@@ -348,8 +321,7 @@
       const main=document.getElementById('main-panel');
       if(panelId==='home-panel'){
         main.style.alignItems='stretch'; main.style.padding='24px';
-        const hp=document.getElementById('home-panel');
-        hp.style.display='grid';
+        document.getElementById('home-panel').style.display='grid';
         loadCalendar();
       } else {
         main.style.alignItems='center'; main.style.padding='48px';
