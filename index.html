@@ -23,24 +23,160 @@
     nav a:hover { color: #ffffff; }
     nav a.active { color: #ffffff; font-weight: 600; }
     .nav-item { display: flex; flex-direction: column; }
-    .dropdown { display: none; flex-direction: column; background: #0D0D0D; }
+    .dropdown { display: none; flex-direction: column; }
     .dropdown.open { display: flex; }
     .dropdown a { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 400; color: #555; padding: 10px 16px; text-align: center; letter-spacing: 1.5px; text-transform: uppercase; }
     .dropdown a:hover { color: #ffffff; }
 
-    main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px; background: #0D0D0D; min-height: 0; }
-    main.calendar-active { padding: 24px; align-items: stretch; }
+    main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px; background: #0D0D0D; min-height: 0; overflow-y: auto; }
 
-    /* Calendar panel */
-    #home-panel { display: none; flex-direction: column; width: 100%; height: 100%; }
-    #home-panel iframe {
+    /* Widget grid */
+    #home-panel {
+      display: none;
       width: 100%;
-      flex: 1;
-      border: none;
-      border-radius: 4px;
-      min-height: 600px;
-      filter: invert(1) hue-rotate(180deg);
+      height: 100%;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 16px;
     }
+    .widget {
+      background: #141414;
+      border-radius: 8px;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .widget-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 12px;
+    }
+
+    /* Date/Time widget */
+    #widget-datetime .time {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1;
+    }
+    #widget-datetime .date {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: #666;
+      margin-top: 6px;
+      letter-spacing: 1px;
+    }
+
+    /* Weather widget */
+    #widget-weather .weather-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    #widget-weather .temp {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    #widget-weather .condition {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 4px;
+    }
+    #widget-weather .weather-icon { font-size: 1.8rem; }
+
+    /* Calendar widget */
+    #widget-calendar {
+      grid-column: 1;
+      grid-row: 2;
+      padding: 0;
+      overflow: hidden;
+      min-height: 380px;
+    }
+    #widget-calendar iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: invert(1) hue-rotate(180deg);
+      border-radius: 8px;
+      min-height: 380px;
+    }
+
+    /* To-do widget */
+    #widget-todo {
+      grid-column: 2;
+      grid-row: 2;
+    }
+    .todo-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .todo-input {
+      flex: 1;
+      background: #1e1e1e;
+      border: 1px solid #2a2a2a;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #ccc;
+      outline: none;
+    }
+    .todo-input::placeholder { color: #444; }
+    .todo-input:focus { border-color: #444; }
+    .todo-add-btn {
+      background: #1e1e1e;
+      border: 1px solid #2a2a2a;
+      border-radius: 4px;
+      color: #888;
+      padding: 8px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .todo-add-btn:hover { color: #fff; border-color: #444; }
+    .todo-list { list-style: none; overflow-y: auto; flex: 1; }
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .todo-item:last-child { border-bottom: none; }
+    .todo-checkbox {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+      accent-color: #4CAF7D;
+      cursor: pointer;
+    }
+    .todo-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: #bbb;
+      flex: 1;
+    }
+    .todo-text.done { text-decoration: line-through; color: #444; }
+    .todo-delete {
+      background: none;
+      border: none;
+      color: #333;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 0 4px;
+      transition: color 0.15s;
+    }
+    .todo-delete:hover { color: #888; }
 
     /* E&O Card */
     .card { width: 100%; max-width: 560px; }
@@ -57,7 +193,7 @@
     .divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px 0; }
     .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; }
     .field-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 2.5px; text-transform: uppercase; color: #555; margin-bottom: 6px; }
-    .field-value { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 400; color: #ccc; }
+    .field-value { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #ccc; }
     .field-value.highlight { color: #ffffff; font-weight: 500; }
     .claims-note { margin-top: 40px; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #444; line-height: 1.7; }
     .claims-note a { color: #666; text-decoration: none; }
@@ -96,15 +232,45 @@
     </nav>
     <main id="main-panel">
 
-      <!-- Home: Calendar -->
-      <div id="home-panel" style="display:none; width:100%; height:100%;">
-        <iframe
-          src="https://outlook.office365.com/owa/calendar/12181659029f4cf7806875d56986eb19@shepherdgroupre.com/86fc5440fc8a4049bf0e02a753ba57c57529967293964519218/calendar.html"
-          title="Outlook Calendar">
-        </iframe>
+      <!-- HOME PANEL -->
+      <div id="home-panel" style="display:none;">
+
+        <!-- Row 1: Date/Time + Weather -->
+        <div class="widget" id="widget-datetime">
+          <div class="widget-label">Date &amp; Time</div>
+          <div class="time" id="clock">--:--</div>
+          <div class="date" id="datestr">--</div>
+        </div>
+
+        <div class="widget" id="widget-weather">
+          <div class="widget-label">Nashville Weather</div>
+          <div class="weather-main">
+            <div class="weather-icon" id="weather-icon">--</div>
+            <div class="temp" id="weather-temp">--°</div>
+          </div>
+          <div class="condition" id="weather-condition">Loading...</div>
+        </div>
+
+        <!-- Row 2: Calendar + To-do -->
+        <div class="widget" id="widget-calendar">
+          <iframe
+            src="https://outlook.office365.com/owa/calendar/12181659029f4cf7806875d56986eb19@shepherdgroupre.com/86fc5440fc8a4049bf0e02a753ba57c57529967293964519218/calendar.html"
+            title="Outlook Calendar">
+          </iframe>
+        </div>
+
+        <div class="widget" id="widget-todo">
+          <div class="widget-label">To-Do</div>
+          <div class="todo-input-row">
+            <input class="todo-input" id="todo-input" type="text" placeholder="Add a task..." />
+            <button class="todo-add-btn" onclick="addTodo()">+ Add</button>
+          </div>
+          <ul class="todo-list" id="todo-list"></ul>
+        </div>
+
       </div>
 
-      <!-- E&O Policy -->
+      <!-- E&O PANEL -->
       <div id="eo-panel" class="card" style="display:none;">
         <div class="card-label">Profile / Insurance</div>
         <div class="card-title">Errors &amp; Omissions Policy</div>
@@ -114,46 +280,16 @@
         </div>
         <hr class="divider" />
         <div class="fields">
-          <div>
-            <div class="field-label">Carrier</div>
-            <div class="field-value">Continental Casualty Co. (CNA)</div>
-          </div>
-          <div>
-            <div class="field-label">Producer</div>
-            <div class="field-value">Rice Insurance (RISC)</div>
-          </div>
-          <div>
-            <div class="field-label">Policy Number</div>
-            <div class="field-value highlight">26 EO 0033KY</div>
-          </div>
-          <div>
-            <div class="field-label">License</div>
-            <div class="field-value">KY: 293113–S</div>
-          </div>
-          <div>
-            <div class="field-label">Effective Date</div>
-            <div class="field-value">April 1, 2026</div>
-          </div>
-          <div>
-            <div class="field-label">Expiration Date</div>
-            <div class="field-value highlight">April 1, 2028</div>
-          </div>
-          <div>
-            <div class="field-label">Per Claim Limit</div>
-            <div class="field-value">$100,000</div>
-          </div>
-          <div>
-            <div class="field-label">Aggregate Limit</div>
-            <div class="field-value">$1,000,000</div>
-          </div>
-          <div>
-            <div class="field-label">Deductible</div>
-            <div class="field-value">$0</div>
-          </div>
-          <div>
-            <div class="field-label">Days Remaining</div>
-            <div class="field-value highlight" id="days-remaining"></div>
-          </div>
+          <div><div class="field-label">Carrier</div><div class="field-value">Continental Casualty Co. (CNA)</div></div>
+          <div><div class="field-label">Producer</div><div class="field-value">Rice Insurance (RISC)</div></div>
+          <div><div class="field-label">Policy Number</div><div class="field-value highlight">26 EO 0033KY</div></div>
+          <div><div class="field-label">License</div><div class="field-value">KY: 293113–S</div></div>
+          <div><div class="field-label">Effective Date</div><div class="field-value">April 1, 2026</div></div>
+          <div><div class="field-label">Expiration Date</div><div class="field-value highlight">April 1, 2028</div></div>
+          <div><div class="field-label">Per Claim Limit</div><div class="field-value">$100,000</div></div>
+          <div><div class="field-label">Aggregate Limit</div><div class="field-value">$1,000,000</div></div>
+          <div><div class="field-label">Deductible</div><div class="field-value">$0</div></div>
+          <div><div class="field-label">Days Remaining</div><div class="field-value highlight" id="days-remaining"></div></div>
         </div>
         <div class="claims-note">
           To report a claim contact RISC in writing within 90 days.<br />
@@ -163,12 +299,107 @@
 
     </main>
   </div>
+
   <script>
+    // ── Clock ──────────────────────────────────────────
+    function updateClock() {
+      const now = new Date();
+      const h = now.getHours(), m = now.getMinutes();
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const h12 = h % 12 || 12;
+      document.getElementById('clock').textContent =
+        h12 + ':' + String(m).padStart(2,'0') + ' ' + ampm;
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      document.getElementById('datestr').textContent =
+        days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // ── Weather ────────────────────────────────────────
+    function weatherIcon(code) {
+      if (code === 0) return '☀️';
+      if (code <= 3) return '⛅';
+      if (code <= 48) return '🌫️';
+      if (code <= 55) return '🌦️';
+      if (code <= 65) return '🌧️';
+      if (code <= 77) return '❄️';
+      if (code <= 82) return '🌧️';
+      return '⛈️';
+    }
+    function weatherDesc(code) {
+      if (code === 0) return 'Clear sky';
+      if (code === 1) return 'Mainly clear';
+      if (code === 2) return 'Partly cloudy';
+      if (code === 3) return 'Overcast';
+      if (code <= 48) return 'Foggy';
+      if (code <= 55) return 'Drizzle';
+      if (code <= 65) return 'Rainy';
+      if (code <= 77) return 'Snowy';
+      if (code <= 82) return 'Rain showers';
+      return 'Thunderstorm';
+    }
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=36.1627&longitude=-86.7816&current=temperature_2m,weathercode&temperature_unit=fahrenheit')
+      .then(r => r.json())
+      .then(d => {
+        const temp = Math.round(d.current.temperature_2m);
+        const code = d.current.weathercode;
+        document.getElementById('weather-temp').textContent = temp + '°F';
+        document.getElementById('weather-icon').textContent = weatherIcon(code);
+        document.getElementById('weather-condition').textContent = weatherDesc(code);
+      })
+      .catch(() => { document.getElementById('weather-condition').textContent = 'Unavailable'; });
+
+    // ── To-Do ──────────────────────────────────────────
+    let todos = JSON.parse(localStorage.getItem('todos') || '[]');
+
+    function saveTodos() { localStorage.setItem('todos', JSON.stringify(todos)); }
+
+    function renderTodos() {
+      const list = document.getElementById('todo-list');
+      list.innerHTML = '';
+      todos.forEach((t, i) => {
+        const li = document.createElement('li');
+        li.className = 'todo-item';
+        li.innerHTML = `
+          <input type="checkbox" class="todo-checkbox" ${t.done ? 'checked' : ''} onchange="toggleTodo(${i})" />
+          <span class="todo-text ${t.done ? 'done' : ''}">${t.text}</span>
+          <button class="todo-delete" onclick="deleteTodo(${i})">✕</button>`;
+        list.appendChild(li);
+      });
+    }
+
+    function addTodo() {
+      const input = document.getElementById('todo-input');
+      const text = input.value.trim();
+      if (!text) return;
+      todos.push({ text, done: false });
+      saveTodos(); renderTodos();
+      input.value = '';
+    }
+
+    function toggleTodo(i) {
+      todos[i].done = !todos[i].done;
+      saveTodos(); renderTodos();
+    }
+
+    function deleteTodo(i) {
+      todos.splice(i, 1);
+      saveTodos(); renderTodos();
+    }
+
+    document.getElementById('todo-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') addTodo();
+    });
+
+    renderTodos();
+
+    // ── Nav / Panels ───────────────────────────────────
     const expDate = new Date('2028-04-01');
 
-    function updateStatus() {
-      const today = new Date();
-      const diff = Math.ceil((expDate - today) / (1000 * 60 * 60 * 24));
+    function updateEOStatus() {
+      const diff = Math.ceil((expDate - new Date()) / (1000 * 60 * 60 * 24));
       document.getElementById('days-remaining').textContent = diff + ' days';
       const dot = document.getElementById('status-dot');
       const txt = document.getElementById('status-text');
@@ -195,13 +426,16 @@
       document.querySelectorAll('#main-panel > div').forEach(el => el.style.display = 'none');
       const main = document.getElementById('main-panel');
       if (panelId === 'home-panel') {
-        main.classList.add('calendar-active');
-        document.getElementById('home-panel').style.display = 'block';
+        main.style.alignItems = 'stretch';
+        main.style.padding = '24px';
+        const hp = document.getElementById('home-panel');
+        hp.style.display = 'grid';
       } else {
-        main.classList.remove('calendar-active');
+        main.style.alignItems = 'center';
+        main.style.padding = '48px';
         if (panelId) {
           document.getElementById(panelId).style.display = 'block';
-          if (panelId === 'eo-panel') updateStatus();
+          if (panelId === 'eo-panel') updateEOStatus();
         }
       }
     }
