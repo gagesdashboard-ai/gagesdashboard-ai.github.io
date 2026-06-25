@@ -27,8 +27,6 @@
     .dropdown.open { display: flex; }
     .dropdown a { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 400; color: #555; padding: 10px 16px; text-align: center; letter-spacing: 1.5px; text-transform: uppercase; }
     .dropdown a:hover { color: #ffffff; }
-    .dropdown a.sub { font-size: 0.68rem; color: #3a3a3a; letter-spacing: 1px; padding: 7px 16px; }
-    .dropdown a.sub:hover { color: #777; }
 
     main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px; background: #0D0D0D; min-height: 0; overflow-y: auto; }
 
@@ -72,7 +70,6 @@
     .todo-delete { background: none; border: none; color: #333; cursor: pointer; font-size: 0.9rem; padding: 0 4px; transition: color 0.15s; }
     .todo-delete:hover { color: #888; }
 
-    /* Shared card styles */
     .card { width: 100%; max-width: 600px; }
     .card-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
     .card-title { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 32px; color: #fff; }
@@ -81,8 +78,6 @@
     .field-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 2.5px; text-transform: uppercase; color: #555; margin-bottom: 6px; }
     .field-value { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #ccc; }
     .field-value.highlight { color: #ffffff; font-weight: 500; }
-
-    /* Status badge */
     .status-badge { display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 36px; }
     .status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .status-dot.green { background: #4CAF7D; box-shadow: 0 0 8px #4CAF7D; }
@@ -91,13 +86,8 @@
     .status-text.green { color: #4CAF7D; }
     .status-text.yellow { color: #E5A428; }
     .status-text.red { color: #E05252; }
-
-    /* KREC deadline rows */
     .deadline-grid { display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px; }
-    .deadline-row {
-      display: flex; align-items: center; justify-content: space-between;
-      background: #0a0a0a; border-radius: 6px; padding: 16px 20px;
-    }
+    .deadline-row { display: flex; align-items: center; justify-content: space-between; background: #0a0a0a; border-radius: 6px; padding: 16px 20px; }
     .deadline-left { display: flex; flex-direction: column; gap: 4px; }
     .deadline-name { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; color: #ccc; }
     .deadline-date { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #555; letter-spacing: 0.5px; }
@@ -109,7 +99,6 @@
     .deadline-status { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; }
     .deadline-status.done { color: #4CAF7D; }
     .deadline-status.pending { color: #555; }
-
     .claims-note { margin-top: 32px; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #444; line-height: 1.7; }
     .claims-note a { color: #666; text-decoration: none; }
     .claims-note a:hover { color: #aaa; }
@@ -131,7 +120,6 @@
         <div class="dropdown" id="profile-dropdown">
           <a href="#" onclick="showPanel(event,'eo-panel')">E&amp;O Policy</a>
           <a href="#" onclick="showPanel(event,'krec-panel')">KREC</a>
-          <a class="sub" href="https://oop.ky.gov/DPLServices/Logout.aspx" target="_blank">↳ Login</a>
         </div>
       </div>
       <div class="nav-item">
@@ -213,7 +201,6 @@
         <div class="card-label">Profile / Licensing</div>
         <div class="card-title">KREC License</div>
         <hr class="divider" />
-
         <div class="fields" style="margin-bottom:36px;">
           <div><div class="field-label">License Type</div><div class="field-value">Sales Associate</div></div>
           <div><div class="field-label">License Number</div><div class="field-value highlight">293113</div></div>
@@ -222,10 +209,8 @@
           <div><div class="field-label">Post-Licensing Education</div><div class="field-value highlight" style="color:#4CAF7D;">✓ Completed June 18, 2026</div></div>
           <div><div class="field-label">Affiliated Broker</div><div class="field-value">BHG Realty</div></div>
         </div>
-
         <div class="field-label" style="margin-bottom:14px; letter-spacing:2.5px;">Upcoming Deadlines</div>
         <div class="deadline-grid" id="krec-deadlines"></div>
-
         <div class="claims-note">
           Kentucky Real Estate Commission &nbsp;·&nbsp; <a href="https://oop.ky.gov/DPLServices/Logout.aspx" target="_blank">Log in to KREC Portal →</a>
         </div>
@@ -235,34 +220,20 @@
   </div>
 
   <script>
-    // ── Clock ──────────────────────────────────────────
-    function updateClock() {
-      const now = new Date();
-      const h = now.getHours(), m = now.getMinutes();
-      document.getElementById('clock').textContent = (h%12||12) + ':' + String(m).padStart(2,'0') + ' ' + (h>=12?'PM':'AM');
-      const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-      const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
-      document.getElementById('datestr').textContent = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
-    }
-    updateClock(); setInterval(updateClock, 1000);
+    function updateClock(){const now=new Date();const h=now.getHours(),m=now.getMinutes();document.getElementById('clock').textContent=(h%12||12)+':'+String(m).padStart(2,'0')+' '+(h>=12?'PM':'AM');const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];const months=['January','February','March','April','May','June','July','August','September','October','November','December'];document.getElementById('datestr').textContent=days[now.getDay()]+', '+months[now.getMonth()]+' '+now.getDate()+', '+now.getFullYear();}
+    updateClock();setInterval(updateClock,1000);
 
-    // ── Weather ────────────────────────────────────────
     function weatherIcon(c){return c===0?'☀️':c<=3?'⛅':c<=48?'🌫️':c<=55?'🌦️':c<=65?'🌧️':c<=77?'❄️':c<=82?'🌧️':'⛈️';}
     function weatherDesc(c){return c===0?'Clear sky':c===1?'Mainly clear':c===2?'Partly cloudy':c===3?'Overcast':c<=48?'Foggy':c<=55?'Drizzle':c<=65?'Rainy':c<=77?'Snowy':c<=82?'Rain showers':'Thunderstorm';}
     fetch('https://api.open-meteo.com/v1/forecast?latitude=36.1627&longitude=-86.7816&current=temperature_2m,weathercode&temperature_unit=fahrenheit')
-      .then(r=>r.json()).then(d=>{
-        document.getElementById('weather-temp').textContent=Math.round(d.current.temperature_2m)+'°F';
-        document.getElementById('weather-icon').textContent=weatherIcon(d.current.weathercode);
-        document.getElementById('weather-condition').textContent=weatherDesc(d.current.weathercode);
-      }).catch(()=>{ document.getElementById('weather-condition').textContent='Unavailable'; });
+      .then(r=>r.json()).then(d=>{document.getElementById('weather-temp').textContent=Math.round(d.current.temperature_2m)+'°F';document.getElementById('weather-icon').textContent=weatherIcon(d.current.weathercode);document.getElementById('weather-condition').textContent=weatherDesc(d.current.weathercode);}).catch(()=>{document.getElementById('weather-condition').textContent='Unavailable';});
 
-    // ── Calendar ICS ───────────────────────────────────
     const ICS_URL='https://outlook.office365.com/owa/calendar/12181659029f4cf7806875d56986eb19@shepherdgroupre.com/86fc5440fc8a4049bf0e02a753ba57c57529967293964519218/calendar.ics';
     function parseICSDate(str){if(!str)return null;const s=str.replace('Z','').replace(/[:-]/g,'');if(s.length===8)return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8));return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8),+s.slice(9,11)||0,+s.slice(11,13)||0);}
     function fmtTime(d){if(!d||isNaN(d))return'All day';const h=d.getHours(),m=d.getMinutes();return(h%12||12)+(m?':'+String(m).padStart(2,'0'):'')+(h>=12?'pm':'am');}
     function loadCalendar(){
       document.getElementById('cal-events').innerHTML='<span class="cal-loading">Loading...</span>';
-      const bustUrl=ICS_URL+(ICS_URL.includes('?')?'&':'?')+'_='+Date.now();
+      const bustUrl=ICS_URL+'?_='+Date.now();
       fetch('https://corsproxy.io/?'+encodeURIComponent(bustUrl),{cache:'no-store'})
         .then(r=>r.text()).then(text=>{
           text=text.replace(/\r\n[ \t]/g,'').replace(/\r/g,'');
@@ -280,61 +251,39 @@
         }).catch(()=>{document.getElementById('cal-events').innerHTML='<span class="cal-empty">Could not load calendar</span>';});
     }
 
-    // ── To-Do ──────────────────────────────────────────
     let todos=JSON.parse(localStorage.getItem('todos')||'[]');
     function saveTodos(){localStorage.setItem('todos',JSON.stringify(todos));}
-    function renderTodos(){
-      const list=document.getElementById('todo-list');list.innerHTML='';
-      todos.forEach((t,i)=>{const li=document.createElement('li');li.className='todo-item';li.innerHTML=`<input type="checkbox" class="todo-checkbox" ${t.done?'checked':''} onchange="toggleTodo(${i})"/><span class="todo-text ${t.done?'done':''}">${t.text}</span><button class="todo-delete" onclick="deleteTodo(${i})">✕</button>`;list.appendChild(li);});
-    }
+    function renderTodos(){const list=document.getElementById('todo-list');list.innerHTML='';todos.forEach((t,i)=>{const li=document.createElement('li');li.className='todo-item';li.innerHTML=`<input type="checkbox" class="todo-checkbox" ${t.done?'checked':''} onchange="toggleTodo(${i})"/><span class="todo-text ${t.done?'done':''}">${t.text}</span><button class="todo-delete" onclick="deleteTodo(${i})">✕</button>`;list.appendChild(li);});}
     function addTodo(){const inp=document.getElementById('todo-input');const t=inp.value.trim();if(!t)return;todos.push({text:t,done:false});saveTodos();renderTodos();inp.value='';}
     function toggleTodo(i){todos[i].done=!todos[i].done;saveTodos();renderTodos();}
     function deleteTodo(i){todos.splice(i,1);saveTodos();renderTodos();}
     document.getElementById('todo-input').addEventListener('keydown',e=>{if(e.key==='Enter')addTodo();});
     renderTodos();
 
-    // ── Status helpers ─────────────────────────────────
-    function daysUntil(dateStr){return Math.ceil((new Date(dateStr)-new Date())/(1000*60*60*24));}
-    function statusColor(days){return days>180?'green':days>60?'yellow':'red';}
+    function daysUntil(d){return Math.ceil((new Date(d)-new Date())/(1000*60*60*24));}
+    function statusColor(d){return d>180?'green':d>60?'yellow':'red';}
 
-    // ── E&O Status ─────────────────────────────────────
     function updateEOStatus(){
       const diff=daysUntil('2028-04-01');
       document.getElementById('eo-days').textContent=diff+' days';
       const dot=document.getElementById('eo-status-dot'),txt=document.getElementById('eo-status-text');
-      const c=statusColor(diff);
-      dot.className='status-dot '+c; txt.className='status-text '+c;
+      const c=statusColor(diff);dot.className='status-dot '+c;txt.className='status-text '+c;
       txt.textContent=c==='green'?'Active — Coverage in good standing':c==='yellow'?'Expiring soon — Renew immediately':'Expired — Action required';
     }
 
-    // ── KREC Deadlines ─────────────────────────────────
     function renderKREC(){
       const deadlines=[
-        { name:'License Expiration',      date:'2028-03-31', completed: false },
-        { name:'Continuing Education',    date:'2027-12-31', completed: false },
-        { name:'Core Education',          date:'2028-12-31', completed: false },
+        {name:'License Expiration',   date:'2028-03-31', completed:false},
+        {name:'Continuing Education', date:'2027-12-31', completed:false},
+        {name:'Core Education',       date:'2028-12-31', completed:false},
       ];
-      const container=document.getElementById('krec-deadlines');
-      container.innerHTML=deadlines.map(d=>{
-        const days=daysUntil(d.date);
-        const c=d.completed?'green':statusColor(days);
+      document.getElementById('krec-deadlines').innerHTML=deadlines.map(d=>{
+        const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);
         const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-        const daysLabel=d.completed?'—':days+' days';
-        const statusLabel=d.completed?'Completed':'Pending';
-        return `<div class="deadline-row">
-          <div class="deadline-left">
-            <div class="deadline-name">${d.name}</div>
-            <div class="deadline-date">Due ${label}</div>
-          </div>
-          <div class="deadline-right">
-            <div class="deadline-days ${c}">${daysLabel}</div>
-            <div class="deadline-status ${d.completed?'done':'pending'}">${statusLabel}</div>
-          </div>
-        </div>`;
+        return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;
       }).join('');
     }
 
-    // ── Nav ────────────────────────────────────────────
     function toggleDropdown(e,id){e.preventDefault();document.getElementById(id).classList.toggle('open');e.currentTarget.classList.toggle('active');}
     function showPanel(e,panelId){
       e.preventDefault();
@@ -342,15 +291,10 @@
       const main=document.getElementById('main-panel');
       if(panelId==='home-panel'){
         main.style.alignItems='stretch';main.style.padding='24px';
-        document.getElementById('home-panel').style.display='grid';
-        loadCalendar();
+        document.getElementById('home-panel').style.display='grid';loadCalendar();
       } else {
         main.style.alignItems='center';main.style.padding='48px';
-        if(panelId){
-          document.getElementById(panelId).style.display='block';
-          if(panelId==='eo-panel') updateEOStatus();
-          if(panelId==='krec-panel') renderKREC();
-        }
+        if(panelId){document.getElementById(panelId).style.display='block';if(panelId==='eo-panel')updateEOStatus();if(panelId==='krec-panel')renderKREC();}
       }
     }
   </script>
