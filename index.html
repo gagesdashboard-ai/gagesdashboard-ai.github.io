@@ -30,10 +30,9 @@
 
     main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px; background: #0D0D0D; min-height: 0; overflow-y: auto; }
 
-    /* ── Shared panel wrapper ── */
     .panel-page { display: none; width: 100%; max-width: 860px; flex-direction: column; gap: 24px; }
 
-    /* ── Widget grid (Home) ── */
+    /* Home widgets */
     #home-panel { display: none; width: 100%; height: 100%; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; gap: 16px; }
     .widget { background: #141414; border-radius: 8px; padding: 20px 24px; display: flex; flex-direction: column; }
     .widget-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: #444; margin-bottom: 12px; }
@@ -72,7 +71,7 @@
     .todo-delete { background: none; border: none; color: #333; cursor: pointer; font-size: 0.9rem; padding: 0 4px; transition: color 0.15s; }
     .todo-delete:hover { color: #888; }
 
-    /* ── Profile cards ── */
+    /* Profile cards */
     .card { width: 100%; max-width: 600px; }
     .card-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
     .card-title { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 32px; color: #fff; }
@@ -106,17 +105,16 @@
     .claims-note a { color: #666; text-decoration: none; }
     .claims-note a:hover { color: #aaa; }
 
-    /* ── Shared tracker styles (Deals, Listings, Pipeline) ── */
+    /* Tracker shared */
     .tracker-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .tracker-title { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; color: #fff; }
     .tracker-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 20px; }
+    .tracker-btns { display: flex; gap: 8px; }
     .add-btn { font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; background: #1a1a1a; border: 1px solid #2a2a2a; color: #888; padding: 8px 16px; border-radius: 4px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
     .add-btn:hover { color: #fff; border-color: #555; }
     .tracker-list { display: flex; flex-direction: column; gap: 10px; }
     .tracker-empty { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #333; padding: 32px 0; text-align: center; }
-
-    /* Add-form row */
-    .add-form { background: #111; border: 1px solid #222; border-radius: 8px; padding: 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-bottom: 16px; }
+    .add-form { background: #111; border: 1px solid #222; border-radius: 8px; padding: 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-bottom: 4px; }
     .add-form input, .add-form select { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4px; padding: 8px 12px; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #ccc; outline: none; min-width: 120px; flex: 1; }
     .add-form input::placeholder { color: #444; }
     .add-form input:focus, .add-form select:focus { border-color: #444; }
@@ -126,8 +124,6 @@
     .form-save:hover { color: #fff; border-color: #666; }
     .form-cancel { background: none; border: none; color: #444; padding: 8px 12px; font-family: 'Inter', sans-serif; font-size: 0.78rem; cursor: pointer; transition: color 0.15s; }
     .form-cancel:hover { color: #888; }
-
-    /* Tracker cards */
     .tracker-card { background: #111; border: 1px solid #1e1e1e; border-radius: 8px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .tracker-card:hover { border-color: #2a2a2a; }
     .tc-main { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
@@ -148,7 +144,22 @@
     .tc-delete { background: none; border: none; color: #2a2a2a; cursor: pointer; font-size: 1rem; padding: 4px; transition: color 0.15s; }
     .tc-delete:hover { color: #888; }
 
-    /* ── Proforma ── */
+    /* CSV Mapper */
+    .csv-mapper { background: #111; border: 1px solid #2a2a2a; border-radius: 8px; padding: 22px 24px; margin-bottom: 4px; }
+    .csv-mapper-title { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 10px; }
+    .csv-mapper-info { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #777; margin-bottom: 20px; line-height: 1.5; }
+    .csv-mapper-info strong { color: #aaa; }
+    .mapper-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+    .mapper-row { display: flex; flex-direction: column; gap: 6px; }
+    .mapper-label { font-family: 'Inter', sans-serif; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: #555; }
+    .mapper-select { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4px; padding: 8px 12px; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #ccc; outline: none; }
+    .mapper-select:focus { border-color: #444; }
+    .mapper-select option { background: #1a1a1a; }
+    .mapper-actions { display: flex; gap: 10px; align-items: center; }
+    .import-btn { background: #0e2018; border: 1px solid #2a5a3a; border-radius: 4px; color: #5ad4a0; padding: 9px 20px; font-family: 'Inter', sans-serif; font-size: 0.78rem; letter-spacing: 0.5px; cursor: pointer; transition: all 0.15s; }
+    .import-btn:hover { background: #0a2a1a; border-color: #5ad4a0; }
+
+    /* Proforma */
     .proforma-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
     .proforma-section { padding: 24px; }
     .proforma-section:first-child { border-right: 1px solid #1e1e1e; }
@@ -202,7 +213,7 @@
     </nav>
     <main id="main-panel">
 
-      <!-- HOME PANEL -->
+      <!-- HOME -->
       <div id="home-panel" style="display:none;">
         <div class="widget" id="widget-datetime">
           <div class="widget-label">Date &amp; Time</div>
@@ -234,7 +245,7 @@
         </div>
       </div>
 
-      <!-- E&O PANEL -->
+      <!-- E&O -->
       <div id="eo-panel" class="card" style="display:none;">
         <div class="card-label">Profile / Insurance</div>
         <div class="card-title">Errors &amp; Omissions Policy</div>
@@ -261,7 +272,7 @@
         </div>
       </div>
 
-      <!-- KREC PANEL -->
+      <!-- KREC -->
       <div id="krec-panel" class="card" style="display:none;">
         <div class="card-label">Profile / Licensing</div>
         <div class="card-title">KREC License</div>
@@ -276,12 +287,10 @@
         </div>
         <div class="field-label" style="margin-bottom:14px; letter-spacing:2.5px;">Upcoming Deadlines</div>
         <div class="deadline-grid" id="krec-deadlines"></div>
-        <div class="claims-note">
-          Kentucky Real Estate Commission &nbsp;·&nbsp; <a href="https://oop.ky.gov/DPLServices/Logout.aspx" target="_blank">Log in to KREC Portal →</a>
-        </div>
+        <div class="claims-note">Kentucky Real Estate Commission &nbsp;·&nbsp; <a href="https://oop.ky.gov/DPLServices/Logout.aspx" target="_blank">Log in to KREC Portal →</a></div>
       </div>
 
-      <!-- TREC PANEL -->
+      <!-- TREC -->
       <div id="trec-panel" class="card" style="display:none;">
         <div class="card-label">Profile / Licensing</div>
         <div class="card-title">TREC License</div>
@@ -296,23 +305,18 @@
         </div>
         <div class="field-label" style="margin-bottom:14px; letter-spacing:2.5px;">Upcoming Deadlines</div>
         <div class="deadline-grid" id="trec-deadlines"></div>
-        <div class="claims-note">
-          Tennessee Real Estate Commission &nbsp;·&nbsp; <a href="https://licensedprofessions.tn.gov/" target="_blank">Log in to TREC Portal →</a>
-        </div>
+        <div class="claims-note">Tennessee Real Estate Commission &nbsp;·&nbsp; <a href="https://licensedprofessions.tn.gov/" target="_blank">Log in to TREC Portal →</a></div>
       </div>
 
-      <!-- ACTIVE DEALS PANEL -->
+      <!-- ACTIVE DEALS -->
       <div id="deals-panel" class="panel-page">
         <div class="tracker-header">
-          <div>
-            <div class="tracker-label">Commercial</div>
-            <div class="tracker-title">Active Deals</div>
-          </div>
+          <div><div class="tracker-label">Commercial</div><div class="tracker-title">Active Deals</div></div>
           <button class="add-btn" onclick="toggleForm('deals-form')">+ Add Deal</button>
         </div>
         <div class="add-form" id="deals-form" style="display:none;">
           <input id="deal-address" placeholder="Property address" style="flex:2;" />
-          <input id="deal-price" placeholder="Price (e.g. 1,200,000)" />
+          <input id="deal-price" placeholder="Price" />
           <select id="deal-stage">
             <option value="loi">LOI</option>
             <option value="contract">Under Contract</option>
@@ -329,13 +333,10 @@
         <div class="tracker-list" id="deals-list"></div>
       </div>
 
-      <!-- PROFORMA PANEL -->
+      <!-- PROFORMA -->
       <div id="proforma-panel" class="panel-page">
         <div class="tracker-header">
-          <div>
-            <div class="tracker-label">Commercial</div>
-            <div class="tracker-title">Proforma</div>
-          </div>
+          <div><div class="tracker-label">Commercial</div><div class="tracker-title">Proforma</div></div>
         </div>
         <div style="background:#111; border:1px solid #1e1e1e; border-radius:8px; overflow:hidden;">
           <div class="proforma-grid">
@@ -363,15 +364,17 @@
         </div>
       </div>
 
-      <!-- ACTIVE LISTINGS PANEL -->
+      <!-- ACTIVE LISTINGS -->
       <div id="listings-panel" class="panel-page">
+        <input type="file" id="csv-file-input" accept=".csv,.txt" style="display:none" onchange="handleCSVFile(event)" />
         <div class="tracker-header">
-          <div>
-            <div class="tracker-label">Residential</div>
-            <div class="tracker-title">Active Listings</div>
+          <div><div class="tracker-label">Residential</div><div class="tracker-title">Active Listings</div></div>
+          <div class="tracker-btns">
+            <button class="add-btn" onclick="document.getElementById('csv-file-input').click()">↑ Import CSV</button>
+            <button class="add-btn" onclick="toggleForm('listings-form')">+ Add Listing</button>
           </div>
-          <button class="add-btn" onclick="toggleForm('listings-form')">+ Add Listing</button>
         </div>
+        <div id="csv-mapper" class="csv-mapper" style="display:none;"></div>
         <div class="add-form" id="listings-form" style="display:none;">
           <input id="lst-address" placeholder="Property address" style="flex:2;" />
           <input id="lst-price" placeholder="List price" />
@@ -389,13 +392,10 @@
         <div class="tracker-list" id="listings-list"></div>
       </div>
 
-      <!-- PIPELINE PANEL -->
+      <!-- PIPELINE -->
       <div id="pipeline-panel" class="panel-page">
         <div class="tracker-header">
-          <div>
-            <div class="tracker-label">Residential</div>
-            <div class="tracker-title">Pipeline</div>
-          </div>
+          <div><div class="tracker-label">Residential</div><div class="tracker-title">Pipeline</div></div>
           <button class="add-btn" onclick="toggleForm('pipeline-form')">+ Add Client</button>
         </div>
         <div class="add-form" id="pipeline-form" style="display:none;">
@@ -471,135 +471,122 @@
     /* ── Deadline helpers ── */
     function daysUntil(d){return Math.ceil((new Date(d)-new Date())/(1000*60*60*24));}
     function statusColor(d){return d>180?'green':d>60?'yellow':'red';}
-
-    function updateEOStatus(){
-      const diff=daysUntil('2028-04-01');document.getElementById('eo-days').textContent=diff+' days';
-      const dot=document.getElementById('eo-status-dot'),txt=document.getElementById('eo-status-text');
-      const c=statusColor(diff);dot.className='status-dot '+c;txt.className='status-text '+c;
-      txt.textContent=c==='green'?'Active — Coverage in good standing':c==='yellow'?'Expiring soon — Renew immediately':'Expired — Action required';
-    }
-    function renderKREC(){
-      const deadlines=[{name:'License Expiration',date:'2028-03-31',completed:false},{name:'Continuing Education',date:'2027-12-31',completed:false},{name:'Core Education',date:'2028-12-31',completed:false}];
-      document.getElementById('krec-deadlines').innerHTML=deadlines.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');
-    }
-    function renderTREC(){
-      const deadlines=[{name:'License Expiration',date:'2027-05-22',completed:false},{name:'Continuing Education',date:'2027-05-22',completed:false}];
-      document.getElementById('trec-deadlines').innerHTML=deadlines.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');
-    }
+    function updateEOStatus(){const diff=daysUntil('2028-04-01');document.getElementById('eo-days').textContent=diff+' days';const dot=document.getElementById('eo-status-dot'),txt=document.getElementById('eo-status-text');const c=statusColor(diff);dot.className='status-dot '+c;txt.className='status-text '+c;txt.textContent=c==='green'?'Active — Coverage in good standing':c==='yellow'?'Expiring soon — Renew immediately':'Expired — Action required';}
+    function renderKREC(){const deadlines=[{name:'License Expiration',date:'2028-03-31',completed:false},{name:'Continuing Education',date:'2027-12-31',completed:false},{name:'Core Education',date:'2028-12-31',completed:false}];document.getElementById('krec-deadlines').innerHTML=deadlines.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
+    function renderTREC(){const deadlines=[{name:'License Expiration',date:'2027-05-22',completed:false},{name:'Continuing Education',date:'2027-05-22',completed:false}];document.getElementById('trec-deadlines').innerHTML=deadlines.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
 
     /* ── Active Deals ── */
     let deals=JSON.parse(localStorage.getItem('deals')||'[]');
     const stageLabel={loi:'LOI',contract:'Under Contract',diligence:'Due Diligence',closed:'Closed'};
     function saveDeals(){localStorage.setItem('deals',JSON.stringify(deals));}
-    function renderDeals(){
-      const el=document.getElementById('deals-list');
-      if(!deals.length){el.innerHTML='<div class="tracker-empty">No active deals — add one above</div>';return;}
-      el.innerHTML=deals.map((d,i)=>{
-        const meta=[d.price?'$'+d.price:'',d.close?'Close '+d.close:'',d.notes].filter(Boolean).join(' · ');
-        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${d.address}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${d.stage}">${stageLabel[d.stage]}</span><button class="tc-delete" onclick="deleteDeal(${i})">✕</button></div></div>`;
-      }).join('');
-    }
-    function saveDeal(){
-      const addr=document.getElementById('deal-address').value.trim();if(!addr)return;
-      deals.push({address:addr,price:document.getElementById('deal-price').value.trim(),stage:document.getElementById('deal-stage').value,close:document.getElementById('deal-close').value,notes:document.getElementById('deal-notes').value.trim()});
-      saveDeals();renderDeals();toggleForm('deals-form');
-      ['deal-address','deal-price','deal-close','deal-notes'].forEach(id=>document.getElementById(id).value='');
-    }
+    function renderDeals(){const el=document.getElementById('deals-list');if(!deals.length){el.innerHTML='<div class="tracker-empty">No active deals — add one above</div>';return;}el.innerHTML=deals.map((d,i)=>{const meta=[d.price?'$'+d.price:'',d.close?'Close '+d.close:'',d.notes].filter(Boolean).join(' · ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${d.address}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${d.stage}">${stageLabel[d.stage]}</span><button class="tc-delete" onclick="deleteDeal(${i})">✕</button></div></div>`;}).join('');}
+    function saveDeal(){const addr=document.getElementById('deal-address').value.trim();if(!addr)return;deals.push({address:addr,price:document.getElementById('deal-price').value.trim(),stage:document.getElementById('deal-stage').value,close:document.getElementById('deal-close').value,notes:document.getElementById('deal-notes').value.trim()});saveDeals();renderDeals();toggleForm('deals-form');['deal-address','deal-price','deal-close','deal-notes'].forEach(id=>document.getElementById(id).value='');}
     function deleteDeal(i){deals.splice(i,1);saveDeals();renderDeals();}
 
     /* ── Proforma ── */
     function fmt(n){return n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});}
-    function calcProforma(){
-      const price=parseFloat(document.getElementById('pf-price').value)||0;
-      const downPct=(parseFloat(document.getElementById('pf-down').value)||25)/100;
-      const rate=(parseFloat(document.getElementById('pf-rate').value)||6.5)/100/12;
-      const term=(parseFloat(document.getElementById('pf-term').value)||25)*12;
-      const rent=parseFloat(document.getElementById('pf-rent').value)||0;
-      const vacPct=(parseFloat(document.getElementById('pf-vac').value)||5)/100;
-      const exp=parseFloat(document.getElementById('pf-exp').value)||0;
-      const loan=price*(1-downPct);
-      const monthlyPayment=rate>0?loan*(rate*Math.pow(1+rate,term))/(Math.pow(1+rate,term)-1):0;
-      const annualDebt=monthlyPayment*12;
-      const egi=rent*(1-vacPct);
-      const noi=egi-exp;
-      const capRate=price>0?(noi/price)*100:0;
-      const cashFlow=noi-annualDebt;
-      const equity=price*downPct;
-      const coc=equity>0?(cashFlow/equity)*100:0;
-      document.getElementById('pf-loan').textContent=loan>0?'$'+fmt(loan):'—';
-      document.getElementById('pf-debt').textContent=annualDebt>0?'$'+fmt(annualDebt):'—';
-      document.getElementById('pf-noi').textContent=noi!==0?'$'+fmt(noi):'—';
-      const capEl=document.getElementById('pf-cap');capEl.textContent=capRate>0?capRate.toFixed(2)+'%':'—';capEl.className='pf-value';
-      const cfEl=document.getElementById('pf-cf');cfEl.textContent=cashFlow!==0?'$'+fmt(cashFlow):'—';cfEl.className='pf-value '+(cashFlow>=0?'pos':'neg');
-      const cocEl=document.getElementById('pf-coc');cocEl.textContent=coc!==0?coc.toFixed(2)+'%':'—';cocEl.className='pf-value '+(coc>=0?'pos':'neg');
-    }
+    function calcProforma(){const price=parseFloat(document.getElementById('pf-price').value)||0;const downPct=(parseFloat(document.getElementById('pf-down').value)||25)/100;const rate=(parseFloat(document.getElementById('pf-rate').value)||6.5)/100/12;const term=(parseFloat(document.getElementById('pf-term').value)||25)*12;const rent=parseFloat(document.getElementById('pf-rent').value)||0;const vacPct=(parseFloat(document.getElementById('pf-vac').value)||5)/100;const exp=parseFloat(document.getElementById('pf-exp').value)||0;const loan=price*(1-downPct);const monthlyPayment=rate>0?loan*(rate*Math.pow(1+rate,term))/(Math.pow(1+rate,term)-1):0;const annualDebt=monthlyPayment*12;const egi=rent*(1-vacPct);const noi=egi-exp;const capRate=price>0?(noi/price)*100:0;const cashFlow=noi-annualDebt;const equity=price*downPct;const coc=equity>0?(cashFlow/equity)*100:0;document.getElementById('pf-loan').textContent=loan>0?'$'+fmt(loan):'—';document.getElementById('pf-debt').textContent=annualDebt>0?'$'+fmt(annualDebt):'—';document.getElementById('pf-noi').textContent=noi!==0?'$'+fmt(noi):'—';const capEl=document.getElementById('pf-cap');capEl.textContent=capRate>0?capRate.toFixed(2)+'%':'—';capEl.className='pf-value';const cfEl=document.getElementById('pf-cf');cfEl.textContent=cashFlow!==0?'$'+fmt(cashFlow):'—';cfEl.className='pf-value '+(cashFlow>=0?'pos':'neg');const cocEl=document.getElementById('pf-coc');cocEl.textContent=coc!==0?coc.toFixed(2)+'%':'—';cocEl.className='pf-value '+(coc>=0?'pos':'neg');}
 
     /* ── Active Listings ── */
     let listings=JSON.parse(localStorage.getItem('listings')||'[]');
     const lstLabel={active:'Active',pending:'Under Contract',sold:'Sold'};
     function saveListings(){localStorage.setItem('listings',JSON.stringify(listings));}
-    function renderListings(){
-      const el=document.getElementById('listings-list');
-      if(!listings.length){el.innerHTML='<div class="tracker-empty">No active listings — add one above</div>';return;}
-      el.innerHTML=listings.map((l,i)=>{
-        const dom=l.date?Math.floor((Date.now()-new Date(l.date))/(1000*60*60*24))+'d on market':'';
-        const meta=[l.price?'$'+l.price:'',dom].filter(Boolean).join(' · ');
-        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${l.address}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${l.stage}">${lstLabel[l.stage]}</span><button class="tc-delete" onclick="deleteListing(${i})">✕</button></div></div>`;
-      }).join('');
-    }
-    function saveListing(){
-      const addr=document.getElementById('lst-address').value.trim();if(!addr)return;
-      listings.push({address:addr,price:document.getElementById('lst-price').value.trim(),stage:document.getElementById('lst-stage').value,date:document.getElementById('lst-date').value});
-      saveListings();renderListings();toggleForm('listings-form');
-      ['lst-address','lst-price','lst-date'].forEach(id=>document.getElementById(id).value='');
-    }
+    function renderListings(){const el=document.getElementById('listings-list');if(!listings.length){el.innerHTML='<div class="tracker-empty">No listings yet — add manually or import a CSV from Realtracs / Paragon</div>';return;}el.innerHTML=listings.map((l,i)=>{const dom=l.date?Math.floor((Date.now()-new Date(l.date))/(1000*60*60*24))+'d on market':'';const meta=[l.price?'$'+l.price:'',dom].filter(Boolean).join(' · ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${l.address}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${l.stage}">${lstLabel[l.stage]}</span><button class="tc-delete" onclick="deleteListing(${i})">✕</button></div></div>`;}).join('');}
+    function saveListing(){const addr=document.getElementById('lst-address').value.trim();if(!addr)return;listings.push({address:addr,price:document.getElementById('lst-price').value.trim(),stage:document.getElementById('lst-stage').value,date:document.getElementById('lst-date').value});saveListings();renderListings();toggleForm('listings-form');['lst-address','lst-price','lst-date'].forEach(id=>document.getElementById(id).value='');}
     function deleteListing(i){listings.splice(i,1);saveListings();renderListings();}
+
+    /* ── CSV Import ── */
+    let csvParsed={headers:[],rows:[]};
+
+    function parseCSVRow(line){const result=[];let cur='',inQ=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'){if(inQ&&line[i+1]==='"'){cur+='"';i++;}else{inQ=!inQ;}}else if(c===','&&!inQ){result.push(cur.trim());cur='';}else{cur+=c;}}result.push(cur.trim());return result;}
+
+    function parseCSV(text){const lines=text.trim().split(/\r?\n/).filter(l=>l.trim());const headers=parseCSVRow(lines[0]);const rows=lines.slice(1).map(l=>parseCSVRow(l)).filter(r=>r.some(c=>c));return{headers,rows};}
+
+    function autoDetect(headers,keywords){const h=headers.map(x=>x.toLowerCase());for(const kw of keywords){const idx=h.findIndex(col=>col.includes(kw));if(idx!==-1)return idx;}return -1;}
+
+    function handleCSVFile(e){
+      const file=e.target.files[0];if(!file)return;
+      const reader=new FileReader();
+      reader.onload=evt=>{
+        csvParsed=parseCSV(evt.target.result);
+        showCSVMapper(file.name);
+      };
+      reader.readAsText(file);
+      e.target.value='';
+    }
+
+    function showCSVMapper(filename){
+      const {headers,rows}=csvParsed;
+      const addrIdx=autoDetect(headers,['address','street addr','full address','property address','street','prop addr']);
+      const priceIdx=autoDetect(headers,['list price','listing price','price','asking','lp']);
+      const statusIdx=autoDetect(headers,['status','mls status','listing status','prop status','list status']);
+      const dateIdx=autoDetect(headers,['list date','listing date','date listed','list dt','listed date','orig list']);
+
+      const skipOpt='<option value="">— skip —</option>';
+      function sel(id,detected){return `<select class="mapper-select" id="${id}">${skipOpt}${headers.map((h,i)=>`<option value="${i}"${i===detected?' selected':''}>${h}</option>`).join('')}</select>`;}
+
+      document.getElementById('csv-mapper').innerHTML=`
+        <div class="csv-mapper-title">Map Columns</div>
+        <div class="csv-mapper-info"><strong>${rows.length} rows</strong> detected from <strong>${filename}</strong>. Columns auto-detected where possible — adjust if needed.</div>
+        <div class="mapper-rows">
+          <div class="mapper-row"><div class="mapper-label">Address *</div>${sel('map-addr',addrIdx)}</div>
+          <div class="mapper-row"><div class="mapper-label">List Price</div>${sel('map-price',priceIdx)}</div>
+          <div class="mapper-row"><div class="mapper-label">Status</div>${sel('map-status',statusIdx)}</div>
+          <div class="mapper-row"><div class="mapper-label">List Date</div>${sel('map-date',dateIdx)}</div>
+        </div>
+        <div class="mapper-actions">
+          <button class="import-btn" onclick="importCSV()">↓ Import ${rows.length} Listings</button>
+          <button class="form-cancel" onclick="closeCSVMapper()">Cancel</button>
+        </div>`;
+      document.getElementById('csv-mapper').style.display='block';
+    }
+
+    function closeCSVMapper(){document.getElementById('csv-mapper').style.display='none';csvParsed={headers:[],rows:[]};}
+
+    function normalizeStatus(val){const v=(val||'').toLowerCase();if(v.includes('contract')||v.includes('pending')||v.includes(' uc')||v==='uc')return'pending';if(v.includes('sold')||v.includes('closed'))return'sold';return'active';}
+
+    function importCSV(){
+      const addrCol=document.getElementById('map-addr').value;
+      const priceCol=document.getElementById('map-price').value;
+      const statusCol=document.getElementById('map-status').value;
+      const dateCol=document.getElementById('map-date').value;
+      if(addrCol===''){alert('Please select an Address column.');return;}
+      let added=0;
+      csvParsed.rows.forEach(row=>{
+        const addr=(row[parseInt(addrCol)]||'').trim();if(!addr)return;
+        listings.push({
+          address:addr,
+          price:priceCol!==''?(row[parseInt(priceCol)]||'').replace(/[$,\s]/g,''):'',
+          stage:statusCol!==''?normalizeStatus(row[parseInt(statusCol)]):'active',
+          date:dateCol!==''?(row[parseInt(dateCol)]||'').trim():''
+        });
+        added++;
+      });
+      saveListings();renderListings();closeCSVMapper();
+      const toast=document.createElement('div');
+      toast.style.cssText='position:fixed;bottom:24px;right:24px;background:#0a2a1a;border:1px solid #5ad4a0;color:#5ad4a0;font-family:Inter,sans-serif;font-size:0.78rem;padding:10px 20px;border-radius:6px;z-index:1000;letter-spacing:0.5px;';
+      toast.textContent='✓ '+added+' listing'+(added!==1?'s':'')+' imported';
+      document.body.appendChild(toast);setTimeout(()=>toast.remove(),3000);
+    }
 
     /* ── Pipeline ── */
     let pipeline=JSON.parse(localStorage.getItem('pipeline')||'[]');
     const pipeStageLabel={lead:'Lead',active:'Active',contract:'Under Contract',closed:'Closed'};
     function savePipelineData(){localStorage.setItem('pipeline',JSON.stringify(pipeline));}
-    function renderPipeline(){
-      const el=document.getElementById('pipeline-list');
-      if(!pipeline.length){el.innerHTML='<div class="tracker-empty">No clients in pipeline — add one above</div>';return;}
-      el.innerHTML=pipeline.map((p,i)=>{
-        const meta=[p.property,p.next?'Next: '+p.next:''].filter(Boolean).join(' · ');
-        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${p.name}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${p.type}">${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</span><span class="stage-badge stage-${p.stage}">${pipeStageLabel[p.stage]}</span><button class="tc-delete" onclick="deletePipeline(${i})">✕</button></div></div>`;
-      }).join('');
-    }
-    function savePipeline(){
-      const name=document.getElementById('pipe-name').value.trim();if(!name)return;
-      pipeline.push({name,type:document.getElementById('pipe-type').value,property:document.getElementById('pipe-property').value.trim(),stage:document.getElementById('pipe-stage').value,next:document.getElementById('pipe-next').value.trim()});
-      savePipelineData();renderPipeline();toggleForm('pipeline-form');
-      ['pipe-name','pipe-property','pipe-next'].forEach(id=>document.getElementById(id).value='');
-    }
+    function renderPipeline(){const el=document.getElementById('pipeline-list');if(!pipeline.length){el.innerHTML='<div class="tracker-empty">No clients in pipeline — add one above</div>';return;}el.innerHTML=pipeline.map((p,i)=>{const meta=[p.property,p.next?'Next: '+p.next:''].filter(Boolean).join(' · ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${p.name}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${p.type}">${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</span><span class="stage-badge stage-${p.stage}">${pipeStageLabel[p.stage]}</span><button class="tc-delete" onclick="deletePipeline(${i})">✕</button></div></div>`;}).join('');}
+    function savePipeline(){const name=document.getElementById('pipe-name').value.trim();if(!name)return;pipeline.push({name,type:document.getElementById('pipe-type').value,property:document.getElementById('pipe-property').value.trim(),stage:document.getElementById('pipe-stage').value,next:document.getElementById('pipe-next').value.trim()});savePipelineData();renderPipeline();toggleForm('pipeline-form');['pipe-name','pipe-property','pipe-next'].forEach(id=>document.getElementById(id).value='');}
     function deletePipeline(i){pipeline.splice(i,1);savePipelineData();renderPipeline();}
 
-    /* ── Shared UI helpers ── */
+    /* ── Shared UI ── */
     function toggleForm(id){const f=document.getElementById(id);f.style.display=f.style.display==='none'?'flex':'none';}
-
     function toggleDropdown(e,id){e.preventDefault();document.getElementById(id).classList.toggle('open');e.currentTarget.classList.toggle('active');}
-
     function showPanel(e,panelId){
       e.preventDefault();
-      document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');
+      document.querySelectorAll('#main-panel > div:not(#csv-file-input)').forEach(el=>el.style.display='none');
       const main=document.getElementById('main-panel');
-      if(panelId==='home-panel'){
-        main.style.alignItems='stretch';main.style.padding='24px';
-        document.getElementById('home-panel').style.display='grid';loadCalendar();
-      } else if(['deals-panel','proforma-panel','listings-panel','pipeline-panel'].includes(panelId)){
-        main.style.alignItems='flex-start';main.style.padding='40px';
-        document.getElementById(panelId).style.display='flex';
-        if(panelId==='deals-panel')renderDeals();
-        if(panelId==='listings-panel')renderListings();
-        if(panelId==='pipeline-panel')renderPipeline();
-      } else {
-        main.style.alignItems='center';main.style.padding='48px';
-        document.getElementById(panelId).style.display='block';
-        if(panelId==='eo-panel')updateEOStatus();
-        if(panelId==='krec-panel')renderKREC();
-        if(panelId==='trec-panel')renderTREC();
-      }
+      if(panelId==='home-panel'){main.style.alignItems='stretch';main.style.padding='24px';document.getElementById('home-panel').style.display='grid';loadCalendar();}
+      else if(['deals-panel','proforma-panel','listings-panel','pipeline-panel'].includes(panelId)){main.style.alignItems='flex-start';main.style.padding='40px';document.getElementById(panelId).style.display='flex';if(panelId==='deals-panel')renderDeals();if(panelId==='listings-panel')renderListings();if(panelId==='pipeline-panel')renderPipeline();}
+      else{main.style.alignItems='center';main.style.padding='48px';document.getElementById(panelId).style.display='block';if(panelId==='eo-panel')updateEOStatus();if(panelId==='krec-panel')renderKREC();if(panelId==='trec-panel')renderTREC();}
     }
   </script>
 </body>
