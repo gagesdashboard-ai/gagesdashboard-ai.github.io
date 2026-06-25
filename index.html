@@ -30,7 +30,10 @@
 
     main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px; background: #0D0D0D; min-height: 0; overflow-y: auto; }
 
-    /* Widget grid */
+    /* ── Shared panel wrapper ── */
+    .panel-page { display: none; width: 100%; max-width: 860px; flex-direction: column; gap: 24px; }
+
+    /* ── Widget grid (Home) ── */
     #home-panel { display: none; width: 100%; height: 100%; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; gap: 16px; }
     .widget { background: #141414; border-radius: 8px; padding: 20px 24px; display: flex; flex-direction: column; }
     .widget-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: #444; margin-bottom: 12px; }
@@ -38,7 +41,6 @@
     .widget-header .widget-label { margin-bottom: 0; }
     .cal-refresh { background: none; border: none; color: #444; cursor: pointer; font-size: 0.75rem; font-family: 'Inter', sans-serif; letter-spacing: 1px; transition: color 0.15s; padding: 0; }
     .cal-refresh:hover { color: #aaa; }
-
     #widget-datetime .time { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 600; color: #fff; line-height: 1; }
     #widget-datetime .date { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 300; color: #666; margin-top: 6px; letter-spacing: 1px; }
     #widget-weather .weather-main { display: flex; align-items: center; gap: 12px; }
@@ -70,6 +72,7 @@
     .todo-delete { background: none; border: none; color: #333; cursor: pointer; font-size: 0.9rem; padding: 0 4px; transition: color 0.15s; }
     .todo-delete:hover { color: #888; }
 
+    /* ── Profile cards ── */
     .card { width: 100%; max-width: 600px; }
     .card-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
     .card-title { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 32px; color: #fff; }
@@ -102,6 +105,63 @@
     .claims-note { margin-top: 32px; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #444; line-height: 1.7; }
     .claims-note a { color: #666; text-decoration: none; }
     .claims-note a:hover { color: #aaa; }
+
+    /* ── Shared tracker styles (Deals, Listings, Pipeline) ── */
+    .tracker-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .tracker-title { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; color: #fff; }
+    .tracker-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 20px; }
+    .add-btn { font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; background: #1a1a1a; border: 1px solid #2a2a2a; color: #888; padding: 8px 16px; border-radius: 4px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+    .add-btn:hover { color: #fff; border-color: #555; }
+    .tracker-list { display: flex; flex-direction: column; gap: 10px; }
+    .tracker-empty { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #333; padding: 32px 0; text-align: center; }
+
+    /* Add-form row */
+    .add-form { background: #111; border: 1px solid #222; border-radius: 8px; padding: 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-bottom: 16px; }
+    .add-form input, .add-form select { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4px; padding: 8px 12px; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #ccc; outline: none; min-width: 120px; flex: 1; }
+    .add-form input::placeholder { color: #444; }
+    .add-form input:focus, .add-form select:focus { border-color: #444; }
+    .add-form select option { background: #1a1a1a; }
+    .form-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .form-save { background: #1e1e1e; border: 1px solid #3a3a3a; border-radius: 4px; color: #ccc; padding: 8px 16px; font-family: 'Inter', sans-serif; font-size: 0.78rem; cursor: pointer; transition: color 0.15s; }
+    .form-save:hover { color: #fff; border-color: #666; }
+    .form-cancel { background: none; border: none; color: #444; padding: 8px 12px; font-family: 'Inter', sans-serif; font-size: 0.78rem; cursor: pointer; transition: color 0.15s; }
+    .form-cancel:hover { color: #888; }
+
+    /* Tracker cards */
+    .tracker-card { background: #111; border: 1px solid #1e1e1e; border-radius: 8px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .tracker-card:hover { border-color: #2a2a2a; }
+    .tc-main { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+    .tc-name { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 500; color: #ddd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tc-meta { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #555; }
+    .tc-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .stage-badge { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+    .stage-loi        { background: #1a2a3a; color: #5a9fd4; }
+    .stage-contract   { background: #2a2a10; color: #d4c45a; }
+    .stage-diligence  { background: #2a1a0a; color: #d48b5a; }
+    .stage-closed     { background: #0a2a1a; color: #5ad4a0; }
+    .stage-active     { background: #1a2a3a; color: #5a9fd4; }
+    .stage-pending    { background: #2a2a10; color: #d4c45a; }
+    .stage-sold       { background: #0a2a1a; color: #5ad4a0; }
+    .stage-lead       { background: #1e1e1e; color: #666; }
+    .stage-buyer      { background: #1a2535; color: #5a9fd4; }
+    .stage-seller     { background: #251a35; color: #9f5ad4; }
+    .tc-delete { background: none; border: none; color: #2a2a2a; cursor: pointer; font-size: 1rem; padding: 4px; transition: color 0.15s; }
+    .tc-delete:hover { color: #888; }
+
+    /* ── Proforma ── */
+    .proforma-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .proforma-section { padding: 24px; }
+    .proforma-section:first-child { border-right: 1px solid #1e1e1e; }
+    .proforma-section-title { font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: #444; margin-bottom: 20px; }
+    .pf-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #141414; }
+    .pf-row:last-child { border-bottom: none; }
+    .pf-label { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #666; }
+    .pf-input { background: #1a1a1a; border: 1px solid #222; border-radius: 4px; padding: 6px 10px; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #ccc; outline: none; width: 130px; text-align: right; }
+    .pf-input:focus { border-color: #444; }
+    .pf-value { font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 500; color: #fff; text-align: right; }
+    .pf-value.pos { color: #4CAF7D; }
+    .pf-value.neg { color: #E05252; }
+    .pf-divider { border: none; border-top: 1px solid #1e1e1e; margin: 4px 0; }
   </style>
 </head>
 <body>
@@ -126,12 +186,16 @@
       <div class="nav-item">
         <a href="#" onclick="toggleDropdown(event,'commercial-dropdown')">Commercial</a>
         <div class="dropdown" id="commercial-dropdown">
+          <a href="#" onclick="showPanel(event,'deals-panel')">Active Deals</a>
+          <a href="#" onclick="showPanel(event,'proforma-panel')">Proforma</a>
           <a href="https://product.costar.com/home" target="_blank">CoStar</a>
         </div>
       </div>
       <div class="nav-item">
         <a href="#" onclick="toggleDropdown(event,'residential-dropdown')">Residential</a>
         <div class="dropdown" id="residential-dropdown">
+          <a href="#" onclick="showPanel(event,'listings-panel')">Active Listings</a>
+          <a href="#" onclick="showPanel(event,'pipeline-panel')">Pipeline</a>
           <a href="https://www.realtracs.com" target="_blank">Realtracs</a>
         </div>
       </div>
@@ -237,18 +301,140 @@
         </div>
       </div>
 
+      <!-- ACTIVE DEALS PANEL -->
+      <div id="deals-panel" class="panel-page">
+        <div class="tracker-header">
+          <div>
+            <div class="tracker-label">Commercial</div>
+            <div class="tracker-title">Active Deals</div>
+          </div>
+          <button class="add-btn" onclick="toggleForm('deals-form')">+ Add Deal</button>
+        </div>
+        <div class="add-form" id="deals-form" style="display:none;">
+          <input id="deal-address" placeholder="Property address" style="flex:2;" />
+          <input id="deal-price" placeholder="Price (e.g. 1,200,000)" />
+          <select id="deal-stage">
+            <option value="loi">LOI</option>
+            <option value="contract">Under Contract</option>
+            <option value="diligence">Due Diligence</option>
+            <option value="closed">Closed</option>
+          </select>
+          <input id="deal-close" type="date" title="Target close date" />
+          <input id="deal-notes" placeholder="Notes" style="flex:2;" />
+          <div class="form-actions">
+            <button class="form-save" onclick="saveDeal()">Save</button>
+            <button class="form-cancel" onclick="toggleForm('deals-form')">Cancel</button>
+          </div>
+        </div>
+        <div class="tracker-list" id="deals-list"></div>
+      </div>
+
+      <!-- PROFORMA PANEL -->
+      <div id="proforma-panel" class="panel-page">
+        <div class="tracker-header">
+          <div>
+            <div class="tracker-label">Commercial</div>
+            <div class="tracker-title">Proforma</div>
+          </div>
+        </div>
+        <div style="background:#111; border:1px solid #1e1e1e; border-radius:8px; overflow:hidden;">
+          <div class="proforma-grid">
+            <div class="proforma-section">
+              <div class="proforma-section-title">Acquisition</div>
+              <div class="pf-row"><span class="pf-label">Purchase Price</span><input class="pf-input" id="pf-price" placeholder="0" oninput="calcProforma()" /></div>
+              <div class="pf-row"><span class="pf-label">Down Payment %</span><input class="pf-input" id="pf-down" placeholder="25" oninput="calcProforma()" /></div>
+              <div class="pf-row"><span class="pf-label">Loan Amount</span><span class="pf-value" id="pf-loan">—</span></div>
+              <div class="pf-row"><span class="pf-label">Interest Rate %</span><input class="pf-input" id="pf-rate" placeholder="6.5" oninput="calcProforma()" /></div>
+              <div class="pf-row"><span class="pf-label">Loan Term (yrs)</span><input class="pf-input" id="pf-term" placeholder="25" oninput="calcProforma()" /></div>
+              <div class="pf-row"><span class="pf-label">Annual Debt Service</span><span class="pf-value" id="pf-debt">—</span></div>
+            </div>
+            <div class="proforma-section">
+              <div class="proforma-section-title">Income &amp; Returns</div>
+              <div class="pf-row"><span class="pf-label">Gross Annual Rent</span><input class="pf-input" id="pf-rent" placeholder="0" oninput="calcProforma()" /></div>
+              <div class="pf-row"><span class="pf-label">Vacancy %</span><input class="pf-input" id="pf-vac" placeholder="5" oninput="calcProforma()" /></div>
+              <div class="pf-row"><span class="pf-label">Annual Expenses</span><input class="pf-input" id="pf-exp" placeholder="0" oninput="calcProforma()" /></div>
+              <div class="pf-row"><span class="pf-label">NOI</span><span class="pf-value" id="pf-noi">—</span></div>
+              <hr class="pf-divider" />
+              <div class="pf-row"><span class="pf-label">Cap Rate</span><span class="pf-value" id="pf-cap">—</span></div>
+              <div class="pf-row"><span class="pf-label">Annual Cash Flow</span><span class="pf-value" id="pf-cf">—</span></div>
+              <div class="pf-row"><span class="pf-label">Cash-on-Cash Return</span><span class="pf-value" id="pf-coc">—</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVE LISTINGS PANEL -->
+      <div id="listings-panel" class="panel-page">
+        <div class="tracker-header">
+          <div>
+            <div class="tracker-label">Residential</div>
+            <div class="tracker-title">Active Listings</div>
+          </div>
+          <button class="add-btn" onclick="toggleForm('listings-form')">+ Add Listing</button>
+        </div>
+        <div class="add-form" id="listings-form" style="display:none;">
+          <input id="lst-address" placeholder="Property address" style="flex:2;" />
+          <input id="lst-price" placeholder="List price" />
+          <select id="lst-stage">
+            <option value="active">Active</option>
+            <option value="pending">Under Contract</option>
+            <option value="sold">Sold</option>
+          </select>
+          <input id="lst-date" type="date" title="List date" />
+          <div class="form-actions">
+            <button class="form-save" onclick="saveListing()">Save</button>
+            <button class="form-cancel" onclick="toggleForm('listings-form')">Cancel</button>
+          </div>
+        </div>
+        <div class="tracker-list" id="listings-list"></div>
+      </div>
+
+      <!-- PIPELINE PANEL -->
+      <div id="pipeline-panel" class="panel-page">
+        <div class="tracker-header">
+          <div>
+            <div class="tracker-label">Residential</div>
+            <div class="tracker-title">Pipeline</div>
+          </div>
+          <button class="add-btn" onclick="toggleForm('pipeline-form')">+ Add Client</button>
+        </div>
+        <div class="add-form" id="pipeline-form" style="display:none;">
+          <input id="pipe-name" placeholder="Client name" />
+          <select id="pipe-type">
+            <option value="buyer">Buyer</option>
+            <option value="seller">Seller</option>
+          </select>
+          <input id="pipe-property" placeholder="Property / target area" style="flex:2;" />
+          <select id="pipe-stage">
+            <option value="lead">Lead</option>
+            <option value="active">Active</option>
+            <option value="contract">Under Contract</option>
+            <option value="closed">Closed</option>
+          </select>
+          <input id="pipe-next" placeholder="Next action" style="flex:2;" />
+          <div class="form-actions">
+            <button class="form-save" onclick="savePipeline()">Save</button>
+            <button class="form-cancel" onclick="toggleForm('pipeline-form')">Cancel</button>
+          </div>
+        </div>
+        <div class="tracker-list" id="pipeline-list"></div>
+      </div>
+
     </main>
   </div>
 
   <script>
+    /* ── Clock ── */
     function updateClock(){const now=new Date();const h=now.getHours(),m=now.getMinutes();document.getElementById('clock').textContent=(h%12||12)+':'+String(m).padStart(2,'0')+' '+(h>=12?'PM':'AM');const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];const months=['January','February','March','April','May','June','July','August','September','October','November','December'];document.getElementById('datestr').textContent=days[now.getDay()]+', '+months[now.getMonth()]+' '+now.getDate()+', '+now.getFullYear();}
     updateClock();setInterval(updateClock,1000);
 
+    /* ── Weather ── */
     function weatherIcon(c){return c===0?'☀️':c<=3?'⛅':c<=48?'🌫️':c<=55?'🌦️':c<=65?'🌧️':c<=77?'❄️':c<=82?'🌧️':'⛈️';}
     function weatherDesc(c){return c===0?'Clear sky':c===1?'Mainly clear':c===2?'Partly cloudy':c===3?'Overcast':c<=48?'Foggy':c<=55?'Drizzle':c<=65?'Rainy':c<=77?'Snowy':c<=82?'Rain showers':'Thunderstorm';}
     fetch('https://api.open-meteo.com/v1/forecast?latitude=36.1627&longitude=-86.7816&current=temperature_2m,weathercode&temperature_unit=fahrenheit')
       .then(r=>r.json()).then(d=>{document.getElementById('weather-temp').textContent=Math.round(d.current.temperature_2m)+'°F';document.getElementById('weather-icon').textContent=weatherIcon(d.current.weathercode);document.getElementById('weather-condition').textContent=weatherDesc(d.current.weathercode);}).catch(()=>{document.getElementById('weather-condition').textContent='Unavailable';});
 
+    /* ── Calendar ── */
     const ICS_URL='https://outlook.office365.com/owa/calendar/12181659029f4cf7806875d56986eb19@shepherdgroupre.com/86fc5440fc8a4049bf0e02a753ba57c57529967293964519218/calendar.ics';
     function parseICSDate(str){if(!str)return null;const s=str.replace('Z','').replace(/[:-]/g,'');if(s.length===8)return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8));return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8),+s.slice(9,11)||0,+s.slice(11,13)||0);}
     function fmtTime(d){if(!d||isNaN(d))return'All day';const h=d.getHours(),m=d.getMinutes();return(h%12||12)+(m?':'+String(m).padStart(2,'0'):'')+(h>=12?'pm':'am');}
@@ -272,6 +458,7 @@
         }).catch(()=>{document.getElementById('cal-events').innerHTML='<span class="cal-empty">Could not load calendar</span>';});
     }
 
+    /* ── To-Do ── */
     let todos=JSON.parse(localStorage.getItem('todos')||'[]');
     function saveTodos(){localStorage.setItem('todos',JSON.stringify(todos));}
     function renderTodos(){const list=document.getElementById('todo-list');list.innerHTML='';todos.forEach((t,i)=>{const li=document.createElement('li');li.className='todo-item';li.innerHTML=`<input type="checkbox" class="todo-checkbox" ${t.done?'checked':''} onchange="toggleTodo(${i})"/><span class="todo-text ${t.done?'done':''}">${t.text}</span><button class="todo-delete" onclick="deleteTodo(${i})">✕</button>`;list.appendChild(li);});}
@@ -281,43 +468,118 @@
     document.getElementById('todo-input').addEventListener('keydown',e=>{if(e.key==='Enter')addTodo();});
     renderTodos();
 
+    /* ── Deadline helpers ── */
     function daysUntil(d){return Math.ceil((new Date(d)-new Date())/(1000*60*60*24));}
     function statusColor(d){return d>180?'green':d>60?'yellow':'red';}
 
     function updateEOStatus(){
-      const diff=daysUntil('2028-04-01');
-      document.getElementById('eo-days').textContent=diff+' days';
+      const diff=daysUntil('2028-04-01');document.getElementById('eo-days').textContent=diff+' days';
       const dot=document.getElementById('eo-status-dot'),txt=document.getElementById('eo-status-text');
       const c=statusColor(diff);dot.className='status-dot '+c;txt.className='status-text '+c;
       txt.textContent=c==='green'?'Active — Coverage in good standing':c==='yellow'?'Expiring soon — Renew immediately':'Expired — Action required';
     }
-
     function renderKREC(){
-      const deadlines=[
-        {name:'License Expiration',   date:'2028-03-31', completed:false},
-        {name:'Continuing Education', date:'2027-12-31', completed:false},
-        {name:'Core Education',       date:'2028-12-31', completed:false},
-      ];
-      document.getElementById('krec-deadlines').innerHTML=deadlines.map(d=>{
-        const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);
-        const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-        return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;
-      }).join('');
+      const deadlines=[{name:'License Expiration',date:'2028-03-31',completed:false},{name:'Continuing Education',date:'2027-12-31',completed:false},{name:'Core Education',date:'2028-12-31',completed:false}];
+      document.getElementById('krec-deadlines').innerHTML=deadlines.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');
+    }
+    function renderTREC(){
+      const deadlines=[{name:'License Expiration',date:'2027-05-22',completed:false},{name:'Continuing Education',date:'2027-05-22',completed:false}];
+      document.getElementById('trec-deadlines').innerHTML=deadlines.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');
     }
 
-    function renderTREC(){
-      const deadlines=[
-        {name:'License Expiration',   date:'2027-05-22', completed:false},
-        {name:'Continuing Education', date:'2027-05-22', completed:false},
-      ];
-      document.getElementById('trec-deadlines').innerHTML=deadlines.map(d=>{
-        const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);
-        const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-        return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;
+    /* ── Active Deals ── */
+    let deals=JSON.parse(localStorage.getItem('deals')||'[]');
+    const stageLabel={loi:'LOI',contract:'Under Contract',diligence:'Due Diligence',closed:'Closed'};
+    function saveDeals(){localStorage.setItem('deals',JSON.stringify(deals));}
+    function renderDeals(){
+      const el=document.getElementById('deals-list');
+      if(!deals.length){el.innerHTML='<div class="tracker-empty">No active deals — add one above</div>';return;}
+      el.innerHTML=deals.map((d,i)=>{
+        const meta=[d.price?'$'+d.price:'',d.close?'Close '+d.close:'',d.notes].filter(Boolean).join(' · ');
+        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${d.address}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${d.stage}">${stageLabel[d.stage]}</span><button class="tc-delete" onclick="deleteDeal(${i})">✕</button></div></div>`;
       }).join('');
     }
+    function saveDeal(){
+      const addr=document.getElementById('deal-address').value.trim();if(!addr)return;
+      deals.push({address:addr,price:document.getElementById('deal-price').value.trim(),stage:document.getElementById('deal-stage').value,close:document.getElementById('deal-close').value,notes:document.getElementById('deal-notes').value.trim()});
+      saveDeals();renderDeals();toggleForm('deals-form');
+      ['deal-address','deal-price','deal-close','deal-notes'].forEach(id=>document.getElementById(id).value='');
+    }
+    function deleteDeal(i){deals.splice(i,1);saveDeals();renderDeals();}
+
+    /* ── Proforma ── */
+    function fmt(n){return n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});}
+    function calcProforma(){
+      const price=parseFloat(document.getElementById('pf-price').value)||0;
+      const downPct=(parseFloat(document.getElementById('pf-down').value)||25)/100;
+      const rate=(parseFloat(document.getElementById('pf-rate').value)||6.5)/100/12;
+      const term=(parseFloat(document.getElementById('pf-term').value)||25)*12;
+      const rent=parseFloat(document.getElementById('pf-rent').value)||0;
+      const vacPct=(parseFloat(document.getElementById('pf-vac').value)||5)/100;
+      const exp=parseFloat(document.getElementById('pf-exp').value)||0;
+      const loan=price*(1-downPct);
+      const monthlyPayment=rate>0?loan*(rate*Math.pow(1+rate,term))/(Math.pow(1+rate,term)-1):0;
+      const annualDebt=monthlyPayment*12;
+      const egi=rent*(1-vacPct);
+      const noi=egi-exp;
+      const capRate=price>0?(noi/price)*100:0;
+      const cashFlow=noi-annualDebt;
+      const equity=price*downPct;
+      const coc=equity>0?(cashFlow/equity)*100:0;
+      document.getElementById('pf-loan').textContent=loan>0?'$'+fmt(loan):'—';
+      document.getElementById('pf-debt').textContent=annualDebt>0?'$'+fmt(annualDebt):'—';
+      document.getElementById('pf-noi').textContent=noi!==0?'$'+fmt(noi):'—';
+      const capEl=document.getElementById('pf-cap');capEl.textContent=capRate>0?capRate.toFixed(2)+'%':'—';capEl.className='pf-value';
+      const cfEl=document.getElementById('pf-cf');cfEl.textContent=cashFlow!==0?'$'+fmt(cashFlow):'—';cfEl.className='pf-value '+(cashFlow>=0?'pos':'neg');
+      const cocEl=document.getElementById('pf-coc');cocEl.textContent=coc!==0?coc.toFixed(2)+'%':'—';cocEl.className='pf-value '+(coc>=0?'pos':'neg');
+    }
+
+    /* ── Active Listings ── */
+    let listings=JSON.parse(localStorage.getItem('listings')||'[]');
+    const lstLabel={active:'Active',pending:'Under Contract',sold:'Sold'};
+    function saveListings(){localStorage.setItem('listings',JSON.stringify(listings));}
+    function renderListings(){
+      const el=document.getElementById('listings-list');
+      if(!listings.length){el.innerHTML='<div class="tracker-empty">No active listings — add one above</div>';return;}
+      el.innerHTML=listings.map((l,i)=>{
+        const dom=l.date?Math.floor((Date.now()-new Date(l.date))/(1000*60*60*24))+'d on market':'';
+        const meta=[l.price?'$'+l.price:'',dom].filter(Boolean).join(' · ');
+        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${l.address}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${l.stage}">${lstLabel[l.stage]}</span><button class="tc-delete" onclick="deleteListing(${i})">✕</button></div></div>`;
+      }).join('');
+    }
+    function saveListing(){
+      const addr=document.getElementById('lst-address').value.trim();if(!addr)return;
+      listings.push({address:addr,price:document.getElementById('lst-price').value.trim(),stage:document.getElementById('lst-stage').value,date:document.getElementById('lst-date').value});
+      saveListings();renderListings();toggleForm('listings-form');
+      ['lst-address','lst-price','lst-date'].forEach(id=>document.getElementById(id).value='');
+    }
+    function deleteListing(i){listings.splice(i,1);saveListings();renderListings();}
+
+    /* ── Pipeline ── */
+    let pipeline=JSON.parse(localStorage.getItem('pipeline')||'[]');
+    const pipeStageLabel={lead:'Lead',active:'Active',contract:'Under Contract',closed:'Closed'};
+    function savePipelineData(){localStorage.setItem('pipeline',JSON.stringify(pipeline));}
+    function renderPipeline(){
+      const el=document.getElementById('pipeline-list');
+      if(!pipeline.length){el.innerHTML='<div class="tracker-empty">No clients in pipeline — add one above</div>';return;}
+      el.innerHTML=pipeline.map((p,i)=>{
+        const meta=[p.property,p.next?'Next: '+p.next:''].filter(Boolean).join(' · ');
+        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${p.name}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${p.type}">${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</span><span class="stage-badge stage-${p.stage}">${pipeStageLabel[p.stage]}</span><button class="tc-delete" onclick="deletePipeline(${i})">✕</button></div></div>`;
+      }).join('');
+    }
+    function savePipeline(){
+      const name=document.getElementById('pipe-name').value.trim();if(!name)return;
+      pipeline.push({name,type:document.getElementById('pipe-type').value,property:document.getElementById('pipe-property').value.trim(),stage:document.getElementById('pipe-stage').value,next:document.getElementById('pipe-next').value.trim()});
+      savePipelineData();renderPipeline();toggleForm('pipeline-form');
+      ['pipe-name','pipe-property','pipe-next'].forEach(id=>document.getElementById(id).value='');
+    }
+    function deletePipeline(i){pipeline.splice(i,1);savePipelineData();renderPipeline();}
+
+    /* ── Shared UI helpers ── */
+    function toggleForm(id){const f=document.getElementById(id);f.style.display=f.style.display==='none'?'flex':'none';}
 
     function toggleDropdown(e,id){e.preventDefault();document.getElementById(id).classList.toggle('open');e.currentTarget.classList.toggle('active');}
+
     function showPanel(e,panelId){
       e.preventDefault();
       document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');
@@ -325,9 +587,18 @@
       if(panelId==='home-panel'){
         main.style.alignItems='stretch';main.style.padding='24px';
         document.getElementById('home-panel').style.display='grid';loadCalendar();
+      } else if(['deals-panel','proforma-panel','listings-panel','pipeline-panel'].includes(panelId)){
+        main.style.alignItems='flex-start';main.style.padding='40px';
+        document.getElementById(panelId).style.display='flex';
+        if(panelId==='deals-panel')renderDeals();
+        if(panelId==='listings-panel')renderListings();
+        if(panelId==='pipeline-panel')renderPipeline();
       } else {
         main.style.alignItems='center';main.style.padding='48px';
-        if(panelId){document.getElementById(panelId).style.display='block';if(panelId==='eo-panel')updateEOStatus();if(panelId==='krec-panel')renderKREC();if(panelId==='trec-panel')renderTREC();}
+        document.getElementById(panelId).style.display='block';
+        if(panelId==='eo-panel')updateEOStatus();
+        if(panelId==='krec-panel')renderKREC();
+        if(panelId==='trec-panel')renderTREC();
       }
     }
   </script>
