@@ -213,6 +213,7 @@
           <a href="#" onclick="showPanel(event,'listings-panel')">Active Listings</a>
           <a href="#" onclick="showPanel(event,'pipeline-panel')">Pipeline</a>
           <a href="https://www.realtracs.com" target="_blank">Realtracs</a>
+          <a href="https://rask-kma.paragonrels.com/ParagonLS/Default.mvc/Login#1,1" target="_blank">RASK</a>
         </div>
       </div>
     </nav>
@@ -436,15 +437,12 @@
     const ICS_URL='https://outlook.office365.com/owa/calendar/12181659029f4cf7806875d56986eb19@shepherdgroupre.com/86fc5440fc8a4049bf0e02a753ba57c57529967293964519218/calendar.ics';
     const CAL_DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const CAL_MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-
     function parseICSDate(str){if(!str)return null;const s=str.replace('Z','').replace(/[:-]/g,'');if(s.length===8)return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8));return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8),+s.slice(9,11)||0,+s.slice(11,13)||0);}
     function fmtTime(d){if(!d||isNaN(d))return'All day';const h=d.getHours(),m=d.getMinutes();return(h%12||12)+(m?':'+String(m).padStart(2,'0'):'')+(h>=12?'pm':'am');}
     function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
-
     function loadCalendar(){
       document.getElementById('cal-events').innerHTML='<span class="cal-loading">Loading...</span>';
-      const bustUrl=ICS_URL+'?_='+Date.now();
-      fetch('https://corsproxy.io/?'+encodeURIComponent(bustUrl),{cache:'no-store'})
+      fetch('https://corsproxy.io/?'+encodeURIComponent(ICS_URL+'?_='+Date.now()),{cache:'no-store'})
         .then(r=>r.text()).then(text=>{
           text=text.replace(/\r\n[ \t]/g,'').replace(/\r/g,'');
           const events=[];
@@ -453,24 +451,12 @@
             const startRaw=get('DTSTART');const start=parseICSDate(startRaw);
             if(start)events.push({summary:get('SUMMARY').replace(/\\,/g,',').replace(/\\n/g,' '),location:get('LOCATION').replace(/\\,/g,','),start,allDay:startRaw.length===8});
           });
-
           const now=new Date();
-          // Build 7-day buckets
           const buckets=[];
-          for(let i=0;i<7;i++){
-            const day=new Date(now);day.setDate(now.getDate()+i);day.setHours(0,0,0,0);
-            const dayEvents=events.filter(e=>sameDay(e.start,day)).sort((a,b)=>a.start-b.start);
-            if(dayEvents.length) buckets.push({day,events:dayEvents,isToday:i===0});
-          }
-
+          for(let i=0;i<7;i++){const day=new Date(now);day.setDate(now.getDate()+i);day.setHours(0,0,0,0);const dayEvents=events.filter(e=>sameDay(e.start,day)).sort((a,b)=>a.start-b.start);if(dayEvents.length)buckets.push({day,events:dayEvents,isToday:i===0});}
           const container=document.getElementById('cal-events');
           if(!buckets.length){container.innerHTML='<span class="cal-empty">No events in the next 7 days</span>';return;}
-
-          container.innerHTML=buckets.map(b=>{
-            const label=b.isToday?'Today':(CAL_DAYS[b.day.getDay()]+' · '+CAL_MONTHS[b.day.getMonth()]+' '+b.day.getDate());
-            const evHTML=b.events.map(e=>`<div class="cal-event"><div class="cal-event-bar"></div><div class="cal-event-time">${fmtTime(e.start)}</div><div><div class="cal-event-title">${e.summary}</div>${e.location?`<div class="cal-event-loc">${e.location}</div>`:''}</div></div>`).join('');
-            return `<div class="cal-day-header${b.isToday?' today':''}">${label}</div>${evHTML}`;
-          }).join('');
+          container.innerHTML=buckets.map(b=>{const label=b.isToday?'Today':(CAL_DAYS[b.day.getDay()]+' · '+CAL_MONTHS[b.day.getMonth()]+' '+b.day.getDate());const evHTML=b.events.map(e=>`<div class="cal-event"><div class="cal-event-bar"></div><div class="cal-event-time">${fmtTime(e.start)}</div><div><div class="cal-event-title">${e.summary}</div>${e.location?`<div class="cal-event-loc">${e.location}</div>`:''}</div></div>`).join('');return `<div class="cal-day-header${b.isToday?' today':''}">${label}</div>${evHTML}`;}).join('');
         }).catch(()=>{document.getElementById('cal-events').innerHTML='<span class="cal-empty">Could not load calendar</span>';});
     }
 
@@ -496,9 +482,7 @@
     function renderKREC(){const dl=[{name:'License Expiration',date:'2028-03-31',completed:false},{name:'Continuing Education',date:'2027-12-31',completed:false},{name:'Core Education',date:'2028-12-31',completed:false}];document.getElementById('krec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
     function renderTREC(){const dl=[{name:'License Expiration',date:'2027-05-22',completed:false},{name:'Continuing Education',date:'2027-05-22',completed:false}];document.getElementById('trec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
 
-    /* ─────────────────────────────────────────────────────────
-       PDF SEED INJECTION — v1 (2026-06-25)
-    ───────────────────────────────────────────────────────── */
+    /* ── PDF Seed ── */
     const LISTING_SEED_VERSION='v1';
     const LISTING_SEED=[
       {address:'321 Marley Street, Scottsville, KY 42164',price:'280,000',stage:'active',date:'2026-06-25',beds:'3',baths:'2',sqft:'1,404',mls:'RA20263777',source:'pdf'},
