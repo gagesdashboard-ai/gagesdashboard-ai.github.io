@@ -338,14 +338,14 @@
           <div class="widget-label">Nashville Weather</div>
           <div class="weather-main">
             <div class="weather-icon" id="weather-icon">--</div>
-            <div class="temp" id="weather-temp">--°</div>
+            <div class="temp" id="weather-temp">--&deg;</div>
           </div>
           <div class="condition" id="weather-condition">Loading...</div>
         </div>
         <div class="widget" id="widget-calendar">
           <div class="widget-header">
             <div class="widget-label">Upcoming Schedule</div>
-            <button class="cal-refresh" onclick="loadCalendar()">↻ Refresh</button>
+            <button class="cal-refresh" onclick="loadCalendar()">&#x21BB; Refresh</button>
           </div>
           <div id="cal-events"><span class="cal-loading">Loading calendar...</span></div>
         </div>
@@ -373,7 +373,7 @@
           <div><div class="field-label">Carrier</div><div class="field-value">Continental Casualty Co. (CNA)</div></div>
           <div><div class="field-label">Producer</div><div class="field-value">Rice Insurance (RISC)</div></div>
           <div><div class="field-label">Policy Number</div><div class="field-value highlight">26 EO 0033KY</div></div>
-          <div><div class="field-label">License</div><div class="field-value">KY: 293113–S</div></div>
+          <div><div class="field-label">License</div><div class="field-value">KY: 293113&ndash;S</div></div>
           <div><div class="field-label">Effective Date</div><div class="field-value">April 1, 2026</div></div>
           <div><div class="field-label">Expiration Date</div><div class="field-value highlight">April 1, 2028</div></div>
           <div><div class="field-label">Per Claim Limit</div><div class="field-value">$100,000</div></div>
@@ -381,7 +381,7 @@
           <div><div class="field-label">Deductible</div><div class="field-value">$0</div></div>
           <div><div class="field-label">Days Remaining</div><div class="field-value highlight" id="eo-days"></div></div>
         </div>
-        <div class="claims-note">To report a claim contact RISC in writing within 90 days.<br />Email: <a href="mailto:claims@risceo.com">claims@risceo.com</a> &nbsp;·&nbsp; Phone: <a href="tel:18006377319">(800) 637-7319</a></div>
+        <div class="claims-note">To report a claim contact RISC in writing within 90 days.<br />Email: <a href="mailto:claims@risceo.com">claims@risceo.com</a> &nbsp;&middot;&nbsp; Phone: <a href="tel:18006377319">(800) 637-7319</a></div>
       </div>
 
       <!-- KREC -->
@@ -399,7 +399,7 @@
         </div>
         <div class="field-label" style="margin-bottom:14px; letter-spacing:2.5px;">Upcoming Deadlines</div>
         <div class="deadline-grid" id="krec-deadlines"></div>
-        <div class="claims-note">Kentucky Real Estate Commission &nbsp;·&nbsp; <a href="https://oop.ky.gov/DPLServices/Logout.aspx" target="_blank">Log in to KREC Portal &#x2192;</a></div>
+        <div class="claims-note">Kentucky Real Estate Commission &nbsp;&middot;&nbsp; <a href="https://oop.ky.gov/DPLServices/Logout.aspx" target="_blank">Log in to KREC Portal &rarr;</a></div>
       </div>
 
       <!-- TREC -->
@@ -417,7 +417,7 @@
         </div>
         <div class="field-label" style="margin-bottom:14px; letter-spacing:2.5px;">Upcoming Deadlines</div>
         <div class="deadline-grid" id="trec-deadlines"></div>
-        <div class="claims-note">Tennessee Real Estate Commission &nbsp;·&nbsp; <a href="https://licensedprofessions.tn.gov/" target="_blank">Log in to TREC Portal &#x2192;</a></div>
+        <div class="claims-note">Tennessee Real Estate Commission &nbsp;&middot;&nbsp; <a href="https://licensedprofessions.tn.gov/" target="_blank">Log in to TREC Portal &rarr;</a></div>
       </div>
 
       <!-- ACTIVE DEALS -->
@@ -456,21 +456,21 @@
               <div class="proforma-section-title">Acquisition</div>
               <div class="pf-row"><span class="pf-label">Purchase Price</span><input class="pf-input" id="pf-price" placeholder="0" oninput="calcProforma()" /></div>
               <div class="pf-row"><span class="pf-label">Down Payment %</span><input class="pf-input" id="pf-down" placeholder="25" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">Loan Amount</span><span class="pf-value" id="pf-loan">&#x2014;</span></div>
+              <div class="pf-row"><span class="pf-label">Loan Amount</span><span class="pf-value" id="pf-loan">&mdash;</span></div>
               <div class="pf-row"><span class="pf-label">Interest Rate %</span><input class="pf-input" id="pf-rate" placeholder="6.5" oninput="calcProforma()" /></div>
               <div class="pf-row"><span class="pf-label">Loan Term (yrs)</span><input class="pf-input" id="pf-term" placeholder="25" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">Annual Debt Service</span><span class="pf-value" id="pf-debt">&#x2014;</span></div>
+              <div class="pf-row"><span class="pf-label">Annual Debt Service</span><span class="pf-value" id="pf-debt">&mdash;</span></div>
             </div>
             <div class="proforma-section">
               <div class="proforma-section-title">Income &amp; Returns</div>
               <div class="pf-row"><span class="pf-label">Gross Annual Rent</span><input class="pf-input" id="pf-rent" placeholder="0" oninput="calcProforma()" /></div>
               <div class="pf-row"><span class="pf-label">Vacancy %</span><input class="pf-input" id="pf-vac" placeholder="5" oninput="calcProforma()" /></div>
               <div class="pf-row"><span class="pf-label">Annual Expenses</span><input class="pf-input" id="pf-exp" placeholder="0" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">NOI</span><span class="pf-value" id="pf-noi">&#x2014;</span></div>
+              <div class="pf-row"><span class="pf-label">NOI</span><span class="pf-value" id="pf-noi">&mdash;</span></div>
               <hr class="pf-divider" />
-              <div class="pf-row"><span class="pf-label">Cap Rate</span><span class="pf-value" id="pf-cap">&#x2014;</span></div>
-              <div class="pf-row"><span class="pf-label">Annual Cash Flow</span><span class="pf-value" id="pf-cf">&#x2014;</span></div>
-              <div class="pf-row"><span class="pf-label">Cash-on-Cash Return</span><span class="pf-value" id="pf-coc">&#x2014;</span></div>
+              <div class="pf-row"><span class="pf-label">Cap Rate</span><span class="pf-value" id="pf-cap">&mdash;</span></div>
+              <div class="pf-row"><span class="pf-label">Annual Cash Flow</span><span class="pf-value" id="pf-cf">&mdash;</span></div>
+              <div class="pf-row"><span class="pf-label">Cash-on-Cash Return</span><span class="pf-value" id="pf-coc">&mdash;</span></div>
             </div>
           </div>
         </div>
@@ -587,10 +587,10 @@
     updateClock();setInterval(updateClock,1000);
 
     /* ── Weather ── */
-    function weatherIcon(c){return c===0?'&#x2600;&#xFE0F;':c<=3?'&#x26C5;':c<=48?'&#x1F32B;&#xFE0F;':c<=55?'&#x1F326;&#xFE0F;':c<=65?'&#x1F327;&#xFE0F;':c<=77?'&#x2744;&#xFE0F;':c<=82?'&#x1F327;&#xFE0F;':'&#x26C8;&#xFE0F;';}
+    function weatherIcon(c){return c===0?'☀️':c<=3?'⛅':c<=48?'🌫️':c<=55?'🌦️':c<=65?'🌧️':c<=77?'❄️':c<=82?'🌧️':'⛈️';}
     function weatherDesc(c){return c===0?'Clear sky':c===1?'Mainly clear':c===2?'Partly cloudy':c===3?'Overcast':c<=48?'Foggy':c<=55?'Drizzle':c<=65?'Rainy':c<=77?'Snowy':c<=82?'Rain showers':'Thunderstorm';}
     fetch('https://api.open-meteo.com/v1/forecast?latitude=36.1627&longitude=-86.7816&current=temperature_2m,weathercode&temperature_unit=fahrenheit')
-      .then(r=>r.json()).then(d=>{document.getElementById('weather-temp').textContent=Math.round(d.current.temperature_2m)+'&#xB0;F';document.getElementById('weather-icon').innerHTML=weatherIcon(d.current.weathercode);document.getElementById('weather-condition').textContent=weatherDesc(d.current.weathercode);}).catch(()=>{document.getElementById('weather-condition').textContent='Unavailable';});
+      .then(r=>r.json()).then(d=>{document.getElementById('weather-temp').innerHTML=Math.round(d.current.temperature_2m)+'&deg;F';document.getElementById('weather-icon').textContent=weatherIcon(d.current.weathercode);document.getElementById('weather-condition').textContent=weatherDesc(d.current.weathercode);}).catch(()=>{document.getElementById('weather-condition').textContent='Unavailable';});
 
     /* ── Calendar (7-day) ── */
     const ICS_URL='https://outlook.office365.com/owa/calendar/12181659029f4cf7806875d56986eb19@shepherdgroupre.com/86fc5440fc8a4049bf0e02a753ba57c57529967293964519218/calendar.ics';
@@ -637,9 +637,9 @@
     /* ── Deadline helpers ── */
     function daysUntil(d){return Math.ceil((new Date(d)-new Date())/(1000*60*60*24));}
     function statusColor(d){return d>180?'green':d>60?'yellow':'red';}
-    function updateEOStatus(){const diff=daysUntil('2028-04-01');document.getElementById('eo-days').textContent=diff+' days';const dot=document.getElementById('eo-status-dot'),txt=document.getElementById('eo-status-text');const c=statusColor(diff);dot.className='status-dot '+c;txt.className='status-text '+c;txt.textContent=c==='green'?'Active &#x2014; Coverage in good standing':c==='yellow'?'Expiring soon &#x2014; Renew immediately':'Expired &#x2014; Action required';}
-    function renderKREC(){const dl=[{name:'License Expiration',date:'2028-03-31',completed:false},{name:'Continuing Education',date:'2027-12-31',completed:false},{name:'Core Education',date:'2028-12-31',completed:false}];document.getElementById('krec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'&#x2014;':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
-    function renderTREC(){const dl=[{name:'License Expiration',date:'2027-05-22',completed:false},{name:'Continuing Education',date:'2027-05-22',completed:false}];document.getElementById('trec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'&#x2014;':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
+    function updateEOStatus(){const diff=daysUntil('2028-04-01');document.getElementById('eo-days').textContent=diff+' days';const dot=document.getElementById('eo-status-dot'),txt=document.getElementById('eo-status-text');const c=statusColor(diff);dot.className='status-dot '+c;txt.className='status-text '+c;txt.innerHTML=c==='green'?'Active &mdash; Coverage in good standing':c==='yellow'?'Expiring soon &mdash; Renew immediately':'Expired &mdash; Action required';}
+    function renderKREC(){const dl=[{name:'License Expiration',date:'2028-03-31',completed:false},{name:'Continuing Education',date:'2027-12-31',completed:false},{name:'Core Education',date:'2028-12-31',completed:false}];document.getElementById('krec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'&mdash;':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
+    function renderTREC(){const dl=[{name:'License Expiration',date:'2027-05-22',completed:false},{name:'Continuing Education',date:'2027-05-22',completed:false}];document.getElementById('trec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'&mdash;':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
 
     /* ── PDF Seed ── */
     const LISTING_SEED_VERSION='v1';
@@ -665,21 +665,21 @@
     const stageLabel={loi:'LOI',contract:'Under Contract',diligence:'Due Diligence',closed:'Closed'};
     function saveDeals(){localStorage.setItem('deals',JSON.stringify(deals));}
     let editDealIdx=-1;
-    function renderDeals(){const el=document.getElementById('deals-list');if(!deals.length){el.innerHTML='<div class="tracker-empty">No active deals &#x2014; add one above</div>';return;}el.innerHTML=deals.map((d,i)=>{if(i===editDealIdx){return `<div class="edit-card"><input class="edit-input" id="ed-addr" value="${esc(d.address)}" style="flex:2;min-width:180px;" /><input class="edit-input" id="ed-price" value="${esc(d.price||'')}" placeholder="Price" style="width:110px;" /><select class="edit-select" id="ed-stage"><option value="loi" ${d.stage==='loi'?'selected':''}>LOI</option><option value="contract" ${d.stage==='contract'?'selected':''}>Under Contract</option><option value="diligence" ${d.stage==='diligence'?'selected':''}>Due Diligence</option><option value="closed" ${d.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ed-close" type="date" value="${d.close||''}" style="width:140px;" /><input class="edit-input" id="ed-notes" value="${esc(d.notes||'')}" placeholder="Notes" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="saveDealEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('deal')">Cancel</button></div></div>`;}const meta=[d.price?'$'+d.price:'',d.close?'Close '+d.close:'',d.notes].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(d.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${d.stage}">${stageLabel[d.stage]}</span><button class="tc-edit" onclick="editDealIdx=${i};renderDeals()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deleteDeal(${i})">&#x2715;</button></div></div>`;}).join('');}
+    function renderDeals(){const el=document.getElementById('deals-list');if(!deals.length){el.innerHTML='<div class="tracker-empty">No active deals &mdash; add one above</div>';return;}el.innerHTML=deals.map((d,i)=>{if(i===editDealIdx){return `<div class="edit-card"><input class="edit-input" id="ed-addr" value="${esc(d.address)}" style="flex:2;min-width:180px;" /><input class="edit-input" id="ed-price" value="${esc(d.price||'')}" placeholder="Price" style="width:110px;" /><select class="edit-select" id="ed-stage"><option value="loi" ${d.stage==='loi'?'selected':''}>LOI</option><option value="contract" ${d.stage==='contract'?'selected':''}>Under Contract</option><option value="diligence" ${d.stage==='diligence'?'selected':''}>Due Diligence</option><option value="closed" ${d.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ed-close" type="date" value="${d.close||''}" style="width:140px;" /><input class="edit-input" id="ed-notes" value="${esc(d.notes||'')}" placeholder="Notes" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="saveDealEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('deal')">Cancel</button></div></div>`;}const meta=[d.price?'$'+d.price:'',d.close?'Close '+d.close:'',d.notes].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(d.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${d.stage}">${stageLabel[d.stage]}</span><button class="tc-edit" onclick="editDealIdx=${i};renderDeals()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deleteDeal(${i})">&#x2715;</button></div></div>`;}).join('');}
     function saveDealEdit(i){deals[i]={...deals[i],address:document.getElementById('ed-addr').value.trim(),price:document.getElementById('ed-price').value.trim(),stage:document.getElementById('ed-stage').value,close:document.getElementById('ed-close').value,notes:document.getElementById('ed-notes').value.trim()};editDealIdx=-1;saveDeals();renderDeals();}
     function saveDeal(){const addr=document.getElementById('deal-address').value.trim();if(!addr)return;deals.push({address:addr,price:document.getElementById('deal-price').value.trim(),stage:document.getElementById('deal-stage').value,close:document.getElementById('deal-close').value,notes:document.getElementById('deal-notes').value.trim()});saveDeals();renderDeals();toggleForm('deals-form');['deal-address','deal-price','deal-close','deal-notes'].forEach(id=>document.getElementById(id).value='');}
     function deleteDeal(i){deals.splice(i,1);saveDeals();renderDeals();}
 
     /* ── Proforma ── */
     function fmt(n){return n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});}
-    function calcProforma(){const price=parseFloat(document.getElementById('pf-price').value)||0;const downPct=(parseFloat(document.getElementById('pf-down').value)||25)/100;const rate=(parseFloat(document.getElementById('pf-rate').value)||6.5)/100/12;const term=(parseFloat(document.getElementById('pf-term').value)||25)*12;const rent=parseFloat(document.getElementById('pf-rent').value)||0;const vacPct=(parseFloat(document.getElementById('pf-vac').value)||5)/100;const exp=parseFloat(document.getElementById('pf-exp').value)||0;const loan=price*(1-downPct);const mp=rate>0?loan*(rate*Math.pow(1+rate,term))/(Math.pow(1+rate,term)-1):0;const annualDebt=mp*12;const egi=rent*(1-vacPct);const noi=egi-exp;const capRate=price>0?(noi/price)*100:0;const cashFlow=noi-annualDebt;const equity=price*downPct;const coc=equity>0?(cashFlow/equity)*100:0;document.getElementById('pf-loan').textContent=loan>0?'$'+fmt(loan):'&#x2014;';document.getElementById('pf-debt').textContent=annualDebt>0?'$'+fmt(annualDebt):'&#x2014;';document.getElementById('pf-noi').textContent=noi!==0?'$'+fmt(noi):'&#x2014;';const capEl=document.getElementById('pf-cap');capEl.textContent=capRate>0?capRate.toFixed(2)+'%':'&#x2014;';capEl.className='pf-value';const cfEl=document.getElementById('pf-cf');cfEl.textContent=cashFlow!==0?'$'+fmt(cashFlow):'&#x2014;';cfEl.className='pf-value '+(cashFlow>=0?'pos':'neg');const cocEl=document.getElementById('pf-coc');cocEl.textContent=coc!==0?coc.toFixed(2)+'%':'&#x2014;';cocEl.className='pf-value '+(coc>=0?'pos':'neg');}
+    function calcProforma(){const price=parseFloat(document.getElementById('pf-price').value)||0;const downPct=(parseFloat(document.getElementById('pf-down').value)||25)/100;const rate=(parseFloat(document.getElementById('pf-rate').value)||6.5)/100/12;const term=(parseFloat(document.getElementById('pf-term').value)||25)*12;const rent=parseFloat(document.getElementById('pf-rent').value)||0;const vacPct=(parseFloat(document.getElementById('pf-vac').value)||5)/100;const exp=parseFloat(document.getElementById('pf-exp').value)||0;const loan=price*(1-downPct);const mp=rate>0?loan*(rate*Math.pow(1+rate,term))/(Math.pow(1+rate,term)-1):0;const annualDebt=mp*12;const egi=rent*(1-vacPct);const noi=egi-exp;const capRate=price>0?(noi/price)*100:0;const cashFlow=noi-annualDebt;const equity=price*downPct;const coc=equity>0?(cashFlow/equity)*100:0;document.getElementById('pf-loan').innerHTML=loan>0?'$'+fmt(loan):'&mdash;';document.getElementById('pf-debt').innerHTML=annualDebt>0?'$'+fmt(annualDebt):'&mdash;';document.getElementById('pf-noi').innerHTML=noi!==0?'$'+fmt(noi):'&mdash;';const capEl=document.getElementById('pf-cap');capEl.innerHTML=capRate>0?capRate.toFixed(2)+'%':'&mdash;';capEl.className='pf-value';const cfEl=document.getElementById('pf-cf');cfEl.innerHTML=cashFlow!==0?'$'+fmt(cashFlow):'&mdash;';cfEl.className='pf-value '+(cashFlow>=0?'pos':'neg');const cocEl=document.getElementById('pf-coc');cocEl.innerHTML=coc!==0?coc.toFixed(2)+'%':'&mdash;';cocEl.className='pf-value '+(coc>=0?'pos':'neg');}
 
     /* ── Pipeline ── */
     let pipeline=JSON.parse(localStorage.getItem('pipeline')||'[]');
     const pipeStageLabel={lead:'Lead',active:'Active',contract:'Under Contract',closed:'Closed'};
     function savePipelineData(){localStorage.setItem('pipeline',JSON.stringify(pipeline));}
     let editPipeIdx=-1;
-    function renderPipeline(){const el=document.getElementById('pipeline-list');if(!pipeline.length){el.innerHTML='<div class="tracker-empty">No clients in pipeline &#x2014; add one above</div>';return;}el.innerHTML=pipeline.map((p,i)=>{if(i===editPipeIdx){return `<div class="edit-card"><input class="edit-input" id="ep-name" value="${esc(p.name)}" placeholder="Client name" style="min-width:120px;" /><select class="edit-select" id="ep-type"><option value="buyer" ${p.type==='buyer'?'selected':''}>Buyer</option><option value="seller" ${p.type==='seller'?'selected':''}>Seller</option></select><input class="edit-input" id="ep-prop" value="${esc(p.property||'')}" placeholder="Property / area" style="flex:2;" /><select class="edit-select" id="ep-stage"><option value="lead" ${p.stage==='lead'?'selected':''}>Lead</option><option value="active" ${p.stage==='active'?'selected':''}>Active</option><option value="contract" ${p.stage==='contract'?'selected':''}>Under Contract</option><option value="closed" ${p.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ep-next" value="${esc(p.next||'')}" placeholder="Next action" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="savePipeEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('pipe')">Cancel</button></div></div>`;}const meta=[p.property,p.next?'Next: '+p.next:''].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(p.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${p.type}">${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</span><span class="stage-badge stage-${p.stage}">${pipeStageLabel[p.stage]}</span><button class="tc-edit" onclick="editPipeIdx=${i};renderPipeline()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deletePipeline(${i})">&#x2715;</button></div></div>`;}).join('');}
+    function renderPipeline(){const el=document.getElementById('pipeline-list');if(!pipeline.length){el.innerHTML='<div class="tracker-empty">No clients in pipeline &mdash; add one above</div>';return;}el.innerHTML=pipeline.map((p,i)=>{if(i===editPipeIdx){return `<div class="edit-card"><input class="edit-input" id="ep-name" value="${esc(p.name)}" placeholder="Client name" style="min-width:120px;" /><select class="edit-select" id="ep-type"><option value="buyer" ${p.type==='buyer'?'selected':''}>Buyer</option><option value="seller" ${p.type==='seller'?'selected':''}>Seller</option></select><input class="edit-input" id="ep-prop" value="${esc(p.property||'')}" placeholder="Property / area" style="flex:2;" /><select class="edit-select" id="ep-stage"><option value="lead" ${p.stage==='lead'?'selected':''}>Lead</option><option value="active" ${p.stage==='active'?'selected':''}>Active</option><option value="contract" ${p.stage==='contract'?'selected':''}>Under Contract</option><option value="closed" ${p.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ep-next" value="${esc(p.next||'')}" placeholder="Next action" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="savePipeEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('pipe')">Cancel</button></div></div>`;}const meta=[p.property,p.next?'Next: '+p.next:''].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(p.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${p.type}">${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</span><span class="stage-badge stage-${p.stage}">${pipeStageLabel[p.stage]}</span><button class="tc-edit" onclick="editPipeIdx=${i};renderPipeline()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deletePipeline(${i})">&#x2715;</button></div></div>`;}).join('');}
     function savePipeEdit(i){pipeline[i]={...pipeline[i],name:document.getElementById('ep-name').value.trim(),type:document.getElementById('ep-type').value,property:document.getElementById('ep-prop').value.trim(),stage:document.getElementById('ep-stage').value,next:document.getElementById('ep-next').value.trim()};editPipeIdx=-1;savePipelineData();renderPipeline();}
     function savePipeline(){const name=document.getElementById('pipe-name').value.trim();if(!name)return;pipeline.push({name,type:document.getElementById('pipe-type').value,property:document.getElementById('pipe-property').value.trim(),stage:document.getElementById('pipe-stage').value,next:document.getElementById('pipe-next').value.trim()});savePipelineData();renderPipeline();toggleForm('pipeline-form');['pipe-name','pipe-property','pipe-next'].forEach(id=>document.getElementById(id).value='');}
     function deletePipeline(i){pipeline.splice(i,1);savePipelineData();renderPipeline();}
@@ -704,7 +704,7 @@
       });
       document.getElementById('contacts-stats').innerHTML=`<div class="cstat"><div class="cstat-num">${contacts.length}</div><div class="cstat-label">Total Contacts</div></div><div class="cstat"><div class="cstat-num ${over?'red':''}">${over}</div><div class="cstat-label">Overdue</div></div><div class="cstat"><div class="cstat-num ${soon?'yellow':''}">${soon}</div><div class="cstat-label">Due This Week</div></div><div class="cstat"><div class="cstat-num">${ok}</div><div class="cstat-label">On Track</div></div>`;
       renderCoffeeMeetings();
-      if(!contacts.length){document.getElementById('contacts-followup-list').innerHTML='<div class="tracker-empty">No contacts yet &#x2014; add them via the categories in the dropdown</div>';return;}
+      if(!contacts.length){document.getElementById('contacts-followup-list').innerHTML='<div class="tracker-empty">No contacts yet &mdash; add them via the categories in the dropdown</div>';return;}
       const sorted=contacts.map((c,i)=>{if(!c.lastContact)return{c,i,diff:-9999};const days=Math.floor((now-new Date(c.lastContact))/86400000);return{c,i,diff:(c.followUpDays||defaultFU(c.type))-days};}).sort((a,b)=>a.diff-b.diff);
       const overdueL=sorted.filter(x=>x.diff<0),soonL=sorted.filter(x=>x.diff>=0&&x.diff<=7),okL=sorted.filter(x=>x.diff>7);
       let h='';
@@ -733,7 +733,7 @@
       document.getElementById('ctype-followup').placeholder='Follow-up days (default: '+defaultFU(type)+')';
       const filtered=contacts.map((c,i)=>({c,i})).filter(({c})=>c.type===type);
       const el=document.getElementById('contacts-type-list');
-      if(!filtered.length){el.innerHTML='<div class="tracker-empty">No contacts yet &#x2014; add one above</div>';return;}
+      if(!filtered.length){el.innerHTML='<div class="tracker-empty">No contacts yet &mdash; add one above</div>';return;}
       const now=new Date();now.setHours(0,0,0,0);
       el.innerHTML=filtered.map(({c,i})=>{
         if(i===editConIdx){return `<div class="edit-card"><input class="edit-input" id="ec-name" value="${esc(c.name)}" placeholder="Name" style="flex:1;min-width:120px;" /><input class="edit-input" id="ec-phone" value="${esc(c.phone||'')}" placeholder="Phone" style="width:140px;" /><input class="edit-input" id="ec-email" value="${esc(c.email||'')}" placeholder="Email" style="flex:1;" /><input class="edit-input" id="ec-fu" value="${c.followUpDays||''}" placeholder="Follow-up days" type="number" style="width:110px;" /><div class="edit-actions"><button class="form-save" onclick="saveConEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('con')">Cancel</button></div></div>`;}
@@ -768,7 +768,7 @@
       log.innerHTML=Object.values(weeks).map(({start,entries})=>{
         const isCurrent=start.getTime()===nowWS;
         const end=new Date(start);end.setDate(start.getDate()+6);
-        const label=isCurrent?'This Week':start.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' &#x2013; '+end.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+        const label=isCurrent?'This Week':start.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' &ndash; '+end.toLocaleDateString('en-US',{month:'short',day:'numeric'});
         const rows=entries.map(m=>{const ds=new Date(m.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});return `<div class="coffee-entry"><div style="flex:1;"><div class="coffee-entry-name">${esc(m.name)}</div><div class="coffee-entry-meta">${ds}${m.notes?' &middot; '+esc(m.notes):''}</div></div><button class="tc-delete" onclick="deleteCoffeeMeeting(${m.i})">&#x2715;</button></div>`;}).join('');
         return `<div class="coffee-week-label">${label}</div><div class="coffee-week-box">${rows}</div>`;
       }).join('');
