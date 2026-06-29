@@ -15,6 +15,12 @@
     header h1 { font-size: 2.2rem; font-weight: 700; letter-spacing: 1.5px; color: #ffffff; }
     header .subtitle { font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: #666; margin-top: 6px; }
     .logo { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); height: 96px; width: auto; }
+    .hamburger { display: none; position: absolute; left: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: #888; border-radius: 2px; transition: background 0.2s; }
+    .hamburger:hover span { background: #fff; }
+
+    .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 99; }
+    .nav-overlay.open { display: block; }
 
     .layout { display: flex; flex: 1; min-height: 0; }
 
@@ -117,7 +123,7 @@
     .tracker-title { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; color: #fff; }
     .tracker-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 20px; }
     .tracker-btns { display: flex; gap: 8px; }
-    .add-btn { font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; background: #1a1a1a; border: 1px solid #2a2a2a; color: #888; padding: 8px 16px; border-radius: 4px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+    .add-btn { font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; background: #1a1a1a; border: 1px solid #2a2a2a; color: #888; padding: 8px 16px; border-radius: 4px; cursor: pointer; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
     .add-btn:hover { color: #fff; border-color: #555; }
     .tracker-list { display: flex; flex-direction: column; gap: 10px; }
     .tracker-empty { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #333; padding: 32px 0; text-align: center; }
@@ -178,10 +184,65 @@
     .pf-value.pos { color: #4CAF7D; }
     .pf-value.neg { color: #E05252; }
     .pf-divider { border: none; border-top: 1px solid #1e1e1e; margin: 4px 0; }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      header { padding: 20px 16px; }
+      header h1 { font-size: 1.4rem; letter-spacing: 1px; }
+      header .subtitle { font-size: 0.6rem; letter-spacing: 2.5px; }
+      .logo { height: 52px; right: 16px; }
+      .hamburger { display: flex; }
+
+      nav {
+        position: fixed;
+        top: 0; left: -100%;
+        width: 260px; height: 100vh;
+        background: #111;
+        border-right: 1px solid #1e1e1e;
+        z-index: 100;
+        padding: 80px 0 40px;
+        justify-content: flex-start;
+        gap: 0;
+        transition: left 0.28s ease;
+        overflow-y: auto;
+      }
+      nav.nav-open { left: 0; }
+      nav a { padding: 16px 24px; text-align: left; font-size: 1.05rem; }
+      .dropdown a { text-align: left; padding: 10px 36px; }
+
+      .layout { flex-direction: column; }
+      main { padding: 16px; align-items: flex-start; }
+
+      #home-panel { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
+      #widget-calendar { grid-column: 1; grid-row: auto; min-height: 200px; }
+      #widget-todo { grid-column: 1; grid-row: auto; }
+
+      .card { max-width: 100%; }
+      .fields { grid-template-columns: 1fr; gap: 20px; }
+
+      .proforma-grid { grid-template-columns: 1fr; }
+      .proforma-section:first-child { border-right: none; border-bottom: 1px solid #1e1e1e; }
+      .pf-input { width: 100px; }
+
+      .tracker-card { flex-wrap: wrap; gap: 10px; }
+      .tc-right { width: 100%; justify-content: flex-start; }
+      .tc-name { white-space: normal; }
+
+      .panel-page { max-width: 100%; }
+      .add-form { padding: 14px; }
+      .add-form input, .add-form select { min-width: 0; }
+
+      main[style*="padding: 40px"] { padding: 20px !important; }
+      main[style*="padding: 48px"] { padding: 20px !important; }
+    }
   </style>
 </head>
 <body>
+  <div class="nav-overlay" id="nav-overlay" onclick="closeNav()"></div>
   <header>
+    <button class="hamburger" id="hamburger" onclick="openNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
     <div class="header-text">
       <h1>Gage Burd</h1>
       <div class="subtitle">Real Estate Dashboard</div>
@@ -189,7 +250,7 @@
     <img class="logo" src="https://www.shepherdgroupre.com/wp-content/uploads/sites/2492/2025/07/Logo-with-bottom-padding.png" alt="Shepherd Group" />
   </header>
   <div class="layout">
-    <nav>
+    <nav id="main-nav">
       <a href="#" onclick="showPanel(event,'home-panel')">Home</a>
       <div class="nav-item">
         <a href="#" onclick="toggleDropdown(event,'profile-dropdown')">Profile</a>
@@ -525,18 +586,24 @@
     function savePipeline(){const name=document.getElementById('pipe-name').value.trim();if(!name)return;pipeline.push({name,type:document.getElementById('pipe-type').value,property:document.getElementById('pipe-property').value.trim(),stage:document.getElementById('pipe-stage').value,next:document.getElementById('pipe-next').value.trim()});savePipelineData();renderPipeline();toggleForm('pipeline-form');['pipe-name','pipe-property','pipe-next'].forEach(id=>document.getElementById(id).value='');}
     function deletePipeline(i){pipeline.splice(i,1);savePipelineData();renderPipeline();}
 
+    /* ── Mobile Nav ── */
+    function openNav(){document.getElementById('main-nav').classList.add('nav-open');document.getElementById('nav-overlay').classList.add('open');}
+    function closeNav(){document.getElementById('main-nav').classList.remove('nav-open');document.getElementById('nav-overlay').classList.remove('open');}
+
     /* ── Helpers ── */
     function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
     function cancelEdit(t){if(t==='lst'){editLstIdx=-1;renderListings();}else if(t==='deal'){editDealIdx=-1;renderDeals();}else{editPipeIdx=-1;renderPipeline();}}
     function toggleForm(id){const f=document.getElementById(id);f.style.display=f.style.display==='none'?'flex':'none';}
     function toggleDropdown(e,id){e.preventDefault();document.getElementById(id).classList.toggle('open');e.currentTarget.classList.toggle('active');}
+    function isMobile(){return window.innerWidth<=768;}
     function showPanel(e,panelId){
       e.preventDefault();
+      if(isMobile())closeNav();
       document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');
       const main=document.getElementById('main-panel');
-      if(panelId==='home-panel'){main.style.alignItems='stretch';main.style.padding='24px';document.getElementById('home-panel').style.display='grid';loadCalendar();}
-      else if(['deals-panel','proforma-panel','listings-panel','pipeline-panel'].includes(panelId)){main.style.alignItems='flex-start';main.style.padding='40px';document.getElementById(panelId).style.display='flex';if(panelId==='deals-panel')renderDeals();if(panelId==='listings-panel')renderListings();if(panelId==='pipeline-panel')renderPipeline();}
-      else{main.style.alignItems='center';main.style.padding='48px';document.getElementById(panelId).style.display='block';if(panelId==='eo-panel')updateEOStatus();if(panelId==='krec-panel')renderKREC();if(panelId==='trec-panel')renderTREC();}
+      if(panelId==='home-panel'){main.style.alignItems='stretch';main.style.padding=isMobile()?'12px':'24px';document.getElementById('home-panel').style.display='grid';loadCalendar();}
+      else if(['deals-panel','proforma-panel','listings-panel','pipeline-panel'].includes(panelId)){main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById(panelId).style.display='flex';if(panelId==='deals-panel')renderDeals();if(panelId==='listings-panel')renderListings();if(panelId==='pipeline-panel')renderPipeline();}
+      else{main.style.alignItems=isMobile()?'flex-start':'center';main.style.padding=isMobile()?'16px':'48px';document.getElementById(panelId).style.display='block';if(panelId==='eo-panel')updateEOStatus();if(panelId==='krec-panel')renderKREC();if(panelId==='trec-panel')renderTREC();}
     }
   </script>
 </body>
