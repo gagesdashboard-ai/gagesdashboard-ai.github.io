@@ -47,6 +47,9 @@
     #widget-weather .condition { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #666; margin-top: 4px; }
     #widget-weather .weather-icon { font-size: 1.8rem; }
     #widget-calendar { grid-column: 1; grid-row: 2; min-height: 320px; overflow-y: auto; }
+    .cal-day-header { font-family: 'Inter', sans-serif; font-size: 0.62rem; letter-spacing: 2.5px; text-transform: uppercase; color: #555; padding: 14px 0 6px; border-top: 1px solid #1a1a1a; margin-top: 2px; }
+    .cal-day-header:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+    .cal-day-header.today { color: #4A6FA5; }
     .cal-empty { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #444; margin-top: 8px; }
     .cal-event { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #1e1e1e; align-items: flex-start; }
     .cal-event:last-child { border-bottom: none; }
@@ -232,7 +235,7 @@
         </div>
         <div class="widget" id="widget-calendar">
           <div class="widget-header">
-            <div class="widget-label">Today's Schedule</div>
+            <div class="widget-label">Upcoming Schedule</div>
             <button class="cal-refresh" onclick="loadCalendar()">↻ Refresh</button>
           </div>
           <div id="cal-events"><span class="cal-loading">Loading calendar...</span></div>
@@ -429,10 +432,15 @@
     fetch('https://api.open-meteo.com/v1/forecast?latitude=36.1627&longitude=-86.7816&current=temperature_2m,weathercode&temperature_unit=fahrenheit')
       .then(r=>r.json()).then(d=>{document.getElementById('weather-temp').textContent=Math.round(d.current.temperature_2m)+'°F';document.getElementById('weather-icon').textContent=weatherIcon(d.current.weathercode);document.getElementById('weather-condition').textContent=weatherDesc(d.current.weathercode);}).catch(()=>{document.getElementById('weather-condition').textContent='Unavailable';});
 
-    /* ── Calendar ── */
+    /* ── Calendar (7-day) ── */
     const ICS_URL='https://outlook.office365.com/owa/calendar/12181659029f4cf7806875d56986eb19@shepherdgroupre.com/86fc5440fc8a4049bf0e02a753ba57c57529967293964519218/calendar.ics';
+    const CAL_DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const CAL_MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
     function parseICSDate(str){if(!str)return null;const s=str.replace('Z','').replace(/[:-]/g,'');if(s.length===8)return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8));return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8),+s.slice(9,11)||0,+s.slice(11,13)||0);}
     function fmtTime(d){if(!d||isNaN(d))return'All day';const h=d.getHours(),m=d.getMinutes();return(h%12||12)+(m?':'+String(m).padStart(2,'0'):'')+(h>=12?'pm':'am');}
+    function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
+
     function loadCalendar(){
       document.getElementById('cal-events').innerHTML='<span class="cal-loading">Loading...</span>';
       const bustUrl=ICS_URL+'?_='+Date.now();
@@ -443,67 +451,42 @@
           text.split('BEGIN:VEVENT').slice(1).forEach(block=>{
             const get=k=>{const m=block.match(new RegExp(k+'(?:;[^:]*)?:(.+)'));return m?m[1].trim():'';};
             const startRaw=get('DTSTART');const start=parseICSDate(startRaw);
-            if(start)events.push({summary:get('SUMMARY').replace(/\\,/g,',').replace(/\\n/g,' '),location:get('LOCATION').replace(/\\,/g,','),start,end:parseICSDate(get('DTEND')),allDay:startRaw.length===8});
+            if(start)events.push({summary:get('SUMMARY').replace(/\\,/g,',').replace(/\\n/g,' '),location:get('LOCATION').replace(/\\,/g,','),start,allDay:startRaw.length===8});
           });
+
           const now=new Date();
-          const todayEvents=events.filter(e=>{const s=e.start;return s.getFullYear()===now.getFullYear()&&s.getMonth()===now.getMonth()&&s.getDate()===now.getDate();}).sort((a,b)=>a.start-b.start);
+          // Build 7-day buckets
+          const buckets=[];
+          for(let i=0;i<7;i++){
+            const day=new Date(now);day.setDate(now.getDate()+i);day.setHours(0,0,0,0);
+            const dayEvents=events.filter(e=>sameDay(e.start,day)).sort((a,b)=>a.start-b.start);
+            if(dayEvents.length) buckets.push({day,events:dayEvents,isToday:i===0});
+          }
+
           const container=document.getElementById('cal-events');
-          if(!todayEvents.length){container.innerHTML='<span class="cal-empty">No events today</span>';return;}
-          container.innerHTML=todayEvents.map(e=>`<div class="cal-event"><div class="cal-event-bar"></div><div class="cal-event-time">${fmtTime(e.start)}</div><div><div class="cal-event-title">${e.summary}</div>${e.location?`<div class="cal-event-loc">${e.location}</div>`:''}</div></div>`).join('');
+          if(!buckets.length){container.innerHTML='<span class="cal-empty">No events in the next 7 days</span>';return;}
+
+          container.innerHTML=buckets.map(b=>{
+            const label=b.isToday?'Today':(CAL_DAYS[b.day.getDay()]+' · '+CAL_MONTHS[b.day.getMonth()]+' '+b.day.getDate());
+            const evHTML=b.events.map(e=>`<div class="cal-event"><div class="cal-event-bar"></div><div class="cal-event-time">${fmtTime(e.start)}</div><div><div class="cal-event-title">${e.summary}</div>${e.location?`<div class="cal-event-loc">${e.location}</div>`:''}</div></div>`).join('');
+            return `<div class="cal-day-header${b.isToday?' today':''}">${label}</div>${evHTML}`;
+          }).join('');
         }).catch(()=>{document.getElementById('cal-events').innerHTML='<span class="cal-empty">Could not load calendar</span>';});
     }
 
     /* ── To-Do (Daily + Weekly) ── */
-    let todosDaily = JSON.parse(localStorage.getItem('todos_daily') || '[]');
-    let todosWeekly = JSON.parse(localStorage.getItem('todos_weekly') || '[]');
-    let todoMode = 'daily';
-
-    // Migrate old single 'todos' key into daily
-    (function migrateTodos(){
-      const old = localStorage.getItem('todos');
-      if (old && !localStorage.getItem('todos_daily')) {
-        todosDaily = JSON.parse(old);
-        localStorage.setItem('todos_daily', old);
-        localStorage.removeItem('todos');
-      }
-    })();
-
-    function curTodos(){ return todoMode === 'daily' ? todosDaily : todosWeekly; }
-    function saveTodos(){ localStorage.setItem(todoMode === 'daily' ? 'todos_daily' : 'todos_weekly', JSON.stringify(curTodos())); }
-
-    function switchTodoTab(mode){
-      todoMode = mode;
-      document.getElementById('tab-daily').classList.toggle('active', mode === 'daily');
-      document.getElementById('tab-weekly').classList.toggle('active', mode === 'weekly');
-      renderTodos();
-    }
-
-    function renderTodos(){
-      const list = document.getElementById('todo-list');
-      const todos = curTodos();
-      list.innerHTML = '';
-      todos.forEach((t, i) => {
-        const li = document.createElement('li');
-        li.className = 'todo-item';
-        li.innerHTML = `<input type="checkbox" class="todo-checkbox" ${t.done ? 'checked' : ''} onchange="toggleTodo(${i})"/><span class="todo-text ${t.done ? 'done' : ''}">${t.text}</span><button class="todo-delete" onclick="deleteTodo(${i})">✕</button>`;
-        list.appendChild(li);
-      });
-    }
-
-    function addTodo(){
-      const inp = document.getElementById('todo-input');
-      const t = inp.value.trim();
-      if (!t) return;
-      curTodos().push({text: t, done: false});
-      saveTodos();
-      renderTodos();
-      inp.value = '';
-    }
-
-    function toggleTodo(i){ curTodos()[i].done = !curTodos()[i].done; saveTodos(); renderTodos(); }
-    function deleteTodo(i){ curTodos().splice(i, 1); saveTodos(); renderTodos(); }
-
-    document.getElementById('todo-input').addEventListener('keydown', e => { if (e.key === 'Enter') addTodo(); });
+    let todosDaily=JSON.parse(localStorage.getItem('todos_daily')||'[]');
+    let todosWeekly=JSON.parse(localStorage.getItem('todos_weekly')||'[]');
+    let todoMode='daily';
+    (function migrateTodos(){const old=localStorage.getItem('todos');if(old&&!localStorage.getItem('todos_daily')){todosDaily=JSON.parse(old);localStorage.setItem('todos_daily',old);localStorage.removeItem('todos');}})();
+    function curTodos(){return todoMode==='daily'?todosDaily:todosWeekly;}
+    function saveTodos(){localStorage.setItem(todoMode==='daily'?'todos_daily':'todos_weekly',JSON.stringify(curTodos()));}
+    function switchTodoTab(mode){todoMode=mode;document.getElementById('tab-daily').classList.toggle('active',mode==='daily');document.getElementById('tab-weekly').classList.toggle('active',mode==='weekly');renderTodos();}
+    function renderTodos(){const list=document.getElementById('todo-list');const todos=curTodos();list.innerHTML='';todos.forEach((t,i)=>{const li=document.createElement('li');li.className='todo-item';li.innerHTML=`<input type="checkbox" class="todo-checkbox" ${t.done?'checked':''} onchange="toggleTodo(${i})"/><span class="todo-text ${t.done?'done':''}">${t.text}</span><button class="todo-delete" onclick="deleteTodo(${i})">✕</button>`;list.appendChild(li);});}
+    function addTodo(){const inp=document.getElementById('todo-input');const t=inp.value.trim();if(!t)return;curTodos().push({text:t,done:false});saveTodos();renderTodos();inp.value='';}
+    function toggleTodo(i){curTodos()[i].done=!curTodos()[i].done;saveTodos();renderTodos();}
+    function deleteTodo(i){curTodos().splice(i,1);saveTodos();renderTodos();}
+    document.getElementById('todo-input').addEventListener('keydown',e=>{if(e.key==='Enter')addTodo();});
     renderTodos();
 
     /* ── Deadline helpers ── */
@@ -516,55 +499,20 @@
     /* ─────────────────────────────────────────────────────────
        PDF SEED INJECTION — v1 (2026-06-25)
     ───────────────────────────────────────────────────────── */
-    const LISTING_SEED_VERSION = 'v1';
-    const LISTING_SEED = [
-      {address:'321 Marley Street, Scottsville, KY 42164', price:'280,000', stage:'active', date:'2026-06-25', beds:'3', baths:'2', sqft:'1,404', mls:'RA20263777', source:'pdf'},
-      {address:'2158 Summit Ave, Nashville, TN 37218', price:'889,000', stage:'active', date:'2025-11-14', beds:'4', baths:'4', sqft:'2,835', mls:'3211605', source:'pdf'},
-      {address:"1282 Clarence O'Dell Road, Bowling Green, KY 42101", price:'285,999', stage:'pending', date:'2026-05-01', close:'2026-07-06', beds:'3', baths:'2', sqft:'1,767', mls:'RA20262503', source:'pdf'},
+    const LISTING_SEED_VERSION='v1';
+    const LISTING_SEED=[
+      {address:'321 Marley Street, Scottsville, KY 42164',price:'280,000',stage:'active',date:'2026-06-25',beds:'3',baths:'2',sqft:'1,404',mls:'RA20263777',source:'pdf'},
+      {address:'2158 Summit Ave, Nashville, TN 37218',price:'889,000',stage:'active',date:'2025-11-14',beds:'4',baths:'4',sqft:'2,835',mls:'3211605',source:'pdf'},
+      {address:"1282 Clarence O'Dell Road, Bowling Green, KY 42101",price:'285,999',stage:'pending',date:'2026-05-01',close:'2026-07-06',beds:'3',baths:'2',sqft:'1,767',mls:'RA20262503',source:'pdf'},
     ];
 
     /* ── Active Listings ── */
-    let listings = JSON.parse(localStorage.getItem('listings') || '[]');
-
-    (function seedListings() {
-      if (localStorage.getItem('lstSeedVer') !== LISTING_SEED_VERSION && LISTING_SEED.length) {
-        const existing = new Set(listings.map(l => l.address.trim().toLowerCase()));
-        LISTING_SEED.forEach(l => { if (!existing.has(l.address.trim().toLowerCase())) listings.push(l); });
-        localStorage.setItem('listings', JSON.stringify(listings));
-        localStorage.setItem('lstSeedVer', LISTING_SEED_VERSION);
-      }
-    })();
-
-    const lstLabel = {active:'Active', pending:'Under Contract', sold:'Sold'};
+    let listings=JSON.parse(localStorage.getItem('listings')||'[]');
+    (function seedListings(){if(localStorage.getItem('lstSeedVer')!==LISTING_SEED_VERSION&&LISTING_SEED.length){const existing=new Set(listings.map(l=>l.address.trim().toLowerCase()));LISTING_SEED.forEach(l=>{if(!existing.has(l.address.trim().toLowerCase()))listings.push(l);});localStorage.setItem('listings',JSON.stringify(listings));localStorage.setItem('lstSeedVer',LISTING_SEED_VERSION);}})();
+    const lstLabel={active:'Active',pending:'Under Contract',sold:'Sold'};
     function saveListings(){localStorage.setItem('listings',JSON.stringify(listings));}
-    let editLstIdx = -1;
-
-    function renderListings(){
-      const el=document.getElementById('listings-list');
-      if(!listings.length){el.innerHTML='<div class="tracker-empty">Send me a PDF of your listings and I\'ll load them directly</div>';return;}
-      el.innerHTML=listings.map((l,i)=>{
-        if(i===editLstIdx){
-          return `<div class="edit-card">
-            <input class="edit-input" id="el-addr" value="${esc(l.address)}" style="flex:2;min-width:180px;" />
-            <input class="edit-input" id="el-price" value="${esc(l.price||'')}" placeholder="Price" style="width:110px;" />
-            <select class="edit-select" id="el-stage">
-              <option value="active" ${l.stage==='active'?'selected':''}>Active</option>
-              <option value="pending" ${l.stage==='pending'?'selected':''}>Under Contract</option>
-              <option value="sold" ${l.stage==='sold'?'selected':''}>Sold</option>
-            </select>
-            <input class="edit-input" id="el-date" type="date" value="${l.date||''}" style="width:140px;" />
-            <div class="edit-actions">
-              <button class="form-save" onclick="saveLstEdit(${i})">Save</button>
-              <button class="form-cancel" onclick="cancelEdit('lst')">Cancel</button>
-            </div>
-          </div>`;
-        }
-        const dom=l.date?Math.floor((Date.now()-new Date(l.date))/(1000*60*60*24))+'d on market':'';
-        const closeNote=l.close?' · Closing '+l.close:'';
-        const meta=[l.price?'$'+l.price:'',dom+closeNote,l.beds?l.beds+'bd/'+l.baths+'ba':'',l.sqft?l.sqft+' sqft':''].filter(Boolean).join(' · ');
-        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(l.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${l.stage}">${lstLabel[l.stage]}</span><button class="tc-edit" onclick="editLstIdx=${i};renderListings()" title="Edit">✎</button><button class="tc-delete" onclick="deleteListing(${i})">✕</button></div></div>`;
-      }).join('');
-    }
+    let editLstIdx=-1;
+    function renderListings(){const el=document.getElementById('listings-list');if(!listings.length){el.innerHTML='<div class="tracker-empty">Send me a PDF of your listings and I\'ll load them directly</div>';return;}el.innerHTML=listings.map((l,i)=>{if(i===editLstIdx){return `<div class="edit-card"><input class="edit-input" id="el-addr" value="${esc(l.address)}" style="flex:2;min-width:180px;" /><input class="edit-input" id="el-price" value="${esc(l.price||'')}" placeholder="Price" style="width:110px;" /><select class="edit-select" id="el-stage"><option value="active" ${l.stage==='active'?'selected':''}>Active</option><option value="pending" ${l.stage==='pending'?'selected':''}>Under Contract</option><option value="sold" ${l.stage==='sold'?'selected':''}>Sold</option></select><input class="edit-input" id="el-date" type="date" value="${l.date||''}" style="width:140px;" /><div class="edit-actions"><button class="form-save" onclick="saveLstEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('lst')">Cancel</button></div></div>`;}const dom=l.date?Math.floor((Date.now()-new Date(l.date))/(1000*60*60*24))+'d on market':'';const closeNote=l.close?' · Closing '+l.close:'';const meta=[l.price?'$'+l.price:'',dom+closeNote,l.beds?l.beds+'bd/'+l.baths+'ba':'',l.sqft?l.sqft+' sqft':''].filter(Boolean).join(' · ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(l.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${l.stage}">${lstLabel[l.stage]}</span><button class="tc-edit" onclick="editLstIdx=${i};renderListings()" title="Edit">✎</button><button class="tc-delete" onclick="deleteListing(${i})">✕</button></div></div>`;}).join('');}
     function saveLstEdit(i){listings[i]={...listings[i],address:document.getElementById('el-addr').value.trim(),price:document.getElementById('el-price').value.trim(),stage:document.getElementById('el-stage').value,date:document.getElementById('el-date').value};editLstIdx=-1;saveListings();renderListings();}
     function saveListing(){const addr=document.getElementById('lst-address').value.trim();if(!addr)return;listings.push({address:addr,price:document.getElementById('lst-price').value.trim(),stage:document.getElementById('lst-stage').value,date:document.getElementById('lst-date').value,source:'manual'});saveListings();renderListings();toggleForm('listings-form');['lst-address','lst-price','lst-date'].forEach(id=>document.getElementById(id).value='');}
     function deleteListing(i){listings.splice(i,1);saveListings();renderListings();}
@@ -574,33 +522,7 @@
     const stageLabel={loi:'LOI',contract:'Under Contract',diligence:'Due Diligence',closed:'Closed'};
     function saveDeals(){localStorage.setItem('deals',JSON.stringify(deals));}
     let editDealIdx=-1;
-
-    function renderDeals(){
-      const el=document.getElementById('deals-list');
-      if(!deals.length){el.innerHTML='<div class="tracker-empty">No active deals — add one above</div>';return;}
-      el.innerHTML=deals.map((d,i)=>{
-        if(i===editDealIdx){
-          return `<div class="edit-card">
-            <input class="edit-input" id="ed-addr" value="${esc(d.address)}" style="flex:2;min-width:180px;" />
-            <input class="edit-input" id="ed-price" value="${esc(d.price||'')}" placeholder="Price" style="width:110px;" />
-            <select class="edit-select" id="ed-stage">
-              <option value="loi" ${d.stage==='loi'?'selected':''}>LOI</option>
-              <option value="contract" ${d.stage==='contract'?'selected':''}>Under Contract</option>
-              <option value="diligence" ${d.stage==='diligence'?'selected':''}>Due Diligence</option>
-              <option value="closed" ${d.stage==='closed'?'selected':''}>Closed</option>
-            </select>
-            <input class="edit-input" id="ed-close" type="date" value="${d.close||''}" style="width:140px;" />
-            <input class="edit-input" id="ed-notes" value="${esc(d.notes||'')}" placeholder="Notes" style="flex:1;" />
-            <div class="edit-actions">
-              <button class="form-save" onclick="saveDealEdit(${i})">Save</button>
-              <button class="form-cancel" onclick="cancelEdit('deal')">Cancel</button>
-            </div>
-          </div>`;
-        }
-        const meta=[d.price?'$'+d.price:'',d.close?'Close '+d.close:'',d.notes].filter(Boolean).join(' · ');
-        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(d.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${d.stage}">${stageLabel[d.stage]}</span><button class="tc-edit" onclick="editDealIdx=${i};renderDeals()" title="Edit">✎</button><button class="tc-delete" onclick="deleteDeal(${i})">✕</button></div></div>`;
-      }).join('');
-    }
+    function renderDeals(){const el=document.getElementById('deals-list');if(!deals.length){el.innerHTML='<div class="tracker-empty">No active deals — add one above</div>';return;}el.innerHTML=deals.map((d,i)=>{if(i===editDealIdx){return `<div class="edit-card"><input class="edit-input" id="ed-addr" value="${esc(d.address)}" style="flex:2;min-width:180px;" /><input class="edit-input" id="ed-price" value="${esc(d.price||'')}" placeholder="Price" style="width:110px;" /><select class="edit-select" id="ed-stage"><option value="loi" ${d.stage==='loi'?'selected':''}>LOI</option><option value="contract" ${d.stage==='contract'?'selected':''}>Under Contract</option><option value="diligence" ${d.stage==='diligence'?'selected':''}>Due Diligence</option><option value="closed" ${d.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ed-close" type="date" value="${d.close||''}" style="width:140px;" /><input class="edit-input" id="ed-notes" value="${esc(d.notes||'')}" placeholder="Notes" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="saveDealEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('deal')">Cancel</button></div></div>`;}const meta=[d.price?'$'+d.price:'',d.close?'Close '+d.close:'',d.notes].filter(Boolean).join(' · ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(d.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${d.stage}">${stageLabel[d.stage]}</span><button class="tc-edit" onclick="editDealIdx=${i};renderDeals()" title="Edit">✎</button><button class="tc-delete" onclick="deleteDeal(${i})">✕</button></div></div>`;}).join('');}
     function saveDealEdit(i){deals[i]={...deals[i],address:document.getElementById('ed-addr').value.trim(),price:document.getElementById('ed-price').value.trim(),stage:document.getElementById('ed-stage').value,close:document.getElementById('ed-close').value,notes:document.getElementById('ed-notes').value.trim()};editDealIdx=-1;saveDeals();renderDeals();}
     function saveDeal(){const addr=document.getElementById('deal-address').value.trim();if(!addr)return;deals.push({address:addr,price:document.getElementById('deal-price').value.trim(),stage:document.getElementById('deal-stage').value,close:document.getElementById('deal-close').value,notes:document.getElementById('deal-notes').value.trim()});saveDeals();renderDeals();toggleForm('deals-form');['deal-address','deal-price','deal-close','deal-notes'].forEach(id=>document.getElementById(id).value='');}
     function deleteDeal(i){deals.splice(i,1);saveDeals();renderDeals();}
@@ -614,36 +536,7 @@
     const pipeStageLabel={lead:'Lead',active:'Active',contract:'Under Contract',closed:'Closed'};
     function savePipelineData(){localStorage.setItem('pipeline',JSON.stringify(pipeline));}
     let editPipeIdx=-1;
-
-    function renderPipeline(){
-      const el=document.getElementById('pipeline-list');
-      if(!pipeline.length){el.innerHTML='<div class="tracker-empty">No clients in pipeline — add one above</div>';return;}
-      el.innerHTML=pipeline.map((p,i)=>{
-        if(i===editPipeIdx){
-          return `<div class="edit-card">
-            <input class="edit-input" id="ep-name" value="${esc(p.name)}" placeholder="Client name" style="min-width:120px;" />
-            <select class="edit-select" id="ep-type">
-              <option value="buyer" ${p.type==='buyer'?'selected':''}>Buyer</option>
-              <option value="seller" ${p.type==='seller'?'selected':''}>Seller</option>
-            </select>
-            <input class="edit-input" id="ep-prop" value="${esc(p.property||'')}" placeholder="Property / area" style="flex:2;" />
-            <select class="edit-select" id="ep-stage">
-              <option value="lead" ${p.stage==='lead'?'selected':''}>Lead</option>
-              <option value="active" ${p.stage==='active'?'selected':''}>Active</option>
-              <option value="contract" ${p.stage==='contract'?'selected':''}>Under Contract</option>
-              <option value="closed" ${p.stage==='closed'?'selected':''}>Closed</option>
-            </select>
-            <input class="edit-input" id="ep-next" value="${esc(p.next||'')}" placeholder="Next action" style="flex:1;" />
-            <div class="edit-actions">
-              <button class="form-save" onclick="savePipeEdit(${i})">Save</button>
-              <button class="form-cancel" onclick="cancelEdit('pipe')">Cancel</button>
-            </div>
-          </div>`;
-        }
-        const meta=[p.property,p.next?'Next: '+p.next:''].filter(Boolean).join(' · ');
-        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(p.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${p.type}">${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</span><span class="stage-badge stage-${p.stage}">${pipeStageLabel[p.stage]}</span><button class="tc-edit" onclick="editPipeIdx=${i};renderPipeline()" title="Edit">✎</button><button class="tc-delete" onclick="deletePipeline(${i})">✕</button></div></div>`;
-      }).join('');
-    }
+    function renderPipeline(){const el=document.getElementById('pipeline-list');if(!pipeline.length){el.innerHTML='<div class="tracker-empty">No clients in pipeline — add one above</div>';return;}el.innerHTML=pipeline.map((p,i)=>{if(i===editPipeIdx){return `<div class="edit-card"><input class="edit-input" id="ep-name" value="${esc(p.name)}" placeholder="Client name" style="min-width:120px;" /><select class="edit-select" id="ep-type"><option value="buyer" ${p.type==='buyer'?'selected':''}>Buyer</option><option value="seller" ${p.type==='seller'?'selected':''}>Seller</option></select><input class="edit-input" id="ep-prop" value="${esc(p.property||'')}" placeholder="Property / area" style="flex:2;" /><select class="edit-select" id="ep-stage"><option value="lead" ${p.stage==='lead'?'selected':''}>Lead</option><option value="active" ${p.stage==='active'?'selected':''}>Active</option><option value="contract" ${p.stage==='contract'?'selected':''}>Under Contract</option><option value="closed" ${p.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ep-next" value="${esc(p.next||'')}" placeholder="Next action" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="savePipeEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('pipe')">Cancel</button></div></div>`;}const meta=[p.property,p.next?'Next: '+p.next:''].filter(Boolean).join(' · ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(p.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${p.type}">${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</span><span class="stage-badge stage-${p.stage}">${pipeStageLabel[p.stage]}</span><button class="tc-edit" onclick="editPipeIdx=${i};renderPipeline()" title="Edit">✎</button><button class="tc-delete" onclick="deletePipeline(${i})">✕</button></div></div>`;}).join('');}
     function savePipeEdit(i){pipeline[i]={...pipeline[i],name:document.getElementById('ep-name').value.trim(),type:document.getElementById('ep-type').value,property:document.getElementById('ep-prop').value.trim(),stage:document.getElementById('ep-stage').value,next:document.getElementById('ep-next').value.trim()};editPipeIdx=-1;savePipelineData();renderPipeline();}
     function savePipeline(){const name=document.getElementById('pipe-name').value.trim();if(!name)return;pipeline.push({name,type:document.getElementById('pipe-type').value,property:document.getElementById('pipe-property').value.trim(),stage:document.getElementById('pipe-stage').value,next:document.getElementById('pipe-next').value.trim()});savePipelineData();renderPipeline();toggleForm('pipeline-form');['pipe-name','pipe-property','pipe-next'].forEach(id=>document.getElementById(id).value='');}
     function deletePipeline(i){pipeline.splice(i,1);savePipelineData();renderPipeline();}
