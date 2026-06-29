@@ -185,6 +185,26 @@
     .pf-value.neg { color: #E05252; }
     .pf-divider { border: none; border-top: 1px solid #1e1e1e; margin: 4px 0; }
 
+    /* ── Contacts CRM ── */
+    .contacts-stats { display: flex; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+    .cstat { background: #111; border: 1px solid #1e1e1e; border-radius: 8px; padding: 16px 20px; flex: 1; min-width: 110px; display: flex; flex-direction: column; gap: 4px; }
+    .cstat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 600; color: #fff; line-height: 1; }
+    .cstat-num.red { color: #E05252; }
+    .cstat-num.yellow { color: #E5A428; }
+    .cstat-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 2.5px; text-transform: uppercase; color: #444; }
+    .followup-section-header { font-family: 'Inter', sans-serif; font-size: 0.62rem; letter-spacing: 2.5px; text-transform: uppercase; color: #555; padding: 16px 0 8px; border-top: 1px solid #1a1a1a; margin-top: 4px; }
+    .followup-section-header:first-child { border-top: none; padding-top: 0; }
+    .followup-card { background: #111; border: 1px solid #1e1e1e; border-radius: 8px; padding: 14px 18px; display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+    .followup-card:hover { border-color: #2a2a2a; }
+    .fc-name { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 500; color: #ddd; }
+    .fc-meta { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #555; margin-top: 3px; }
+    .fc-days { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500; margin-left: auto; white-space: nowrap; padding-right: 12px; flex-shrink: 0; }
+    .fc-days.overdue { color: #E05252; }
+    .fc-days.soon { color: #E5A428; }
+    .fc-days.ok { color: #4CAF7D; }
+    .log-btn { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4px; color: #555; padding: 6px 12px; font-family: 'Inter', sans-serif; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: color 0.15s, border-color 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .log-btn:hover { color: #4CAF7D; border-color: #4CAF7D; }
+
     /* ── Mobile ── */
     @media (max-width: 768px) {
       header { padding: 20px 16px; }
@@ -232,6 +252,9 @@
       .add-form { padding: 14px; }
       .add-form input, .add-form select { min-width: 0; }
 
+      .followup-card { flex-wrap: wrap; gap: 8px; }
+      .fc-days { margin-left: 0; padding-right: 0; }
+
       main[style*="padding: 40px"] { padding: 20px !important; }
       main[style*="padding: 48px"] { padding: 20px !important; }
     }
@@ -277,7 +300,15 @@
           <a href="https://rask-kma.paragonrels.com/ParagonLS/Default.mvc/Login#1,1" target="_blank">RASK</a>
         </div>
       </div>
-      <a href="#" onclick="showPanel(event,'contacts-panel')">Contacts</a>
+      <div class="nav-item">
+        <a href="#" onclick="showContactsHome(event)">Contacts</a>
+        <div class="dropdown" id="contacts-dropdown">
+          <a href="#" onclick="showContactType(event,'agent')">Agents / Brokers</a>
+          <a href="#" onclick="showContactType(event,'seller')">Sellers</a>
+          <a href="#" onclick="showContactType(event,'buyer')">Buyers</a>
+          <a href="#" onclick="showContactType(event,'professional')">RE Professionals</a>
+        </div>
+      </div>
     </nav>
     <main id="main-panel">
 
@@ -481,22 +512,32 @@
         <div class="tracker-list" id="pipeline-list"></div>
       </div>
 
-      <!-- CONTACTS -->
+      <!-- CONTACTS OVERVIEW -->
       <div id="contacts-panel" class="panel-page">
-        <div class="tracker-header">
-          <div><div class="tracker-label">Directory</div><div class="tracker-title">Contacts</div></div>
-          <button class="add-btn" onclick="toggleForm('contacts-form')">+ Add Contact</button>
+        <div class="tracker-header" style="margin-bottom:20px;">
+          <div><div class="tracker-label">Networking CRM</div><div class="tracker-title">Contacts Overview</div></div>
         </div>
-        <div class="add-form" id="contacts-form" style="display:none;">
-          <input id="con-name" placeholder="Name" style="flex:1;" />
-          <input id="con-phone" placeholder="Phone" style="width:140px;" />
-          <input id="con-email" placeholder="Email" style="flex:1;" />
+        <div class="contacts-stats" id="contacts-stats"></div>
+        <div id="contacts-followup-list"></div>
+      </div>
+
+      <!-- CONTACTS TYPE LIST -->
+      <div id="contacts-type-panel" class="panel-page">
+        <div class="tracker-header">
+          <div><div class="tracker-label" id="ctype-label">Contacts</div><div class="tracker-title" id="ctype-title"></div></div>
+          <button class="add-btn" onclick="toggleForm('contacts-type-form')">+ Add Contact</button>
+        </div>
+        <div class="add-form" id="contacts-type-form" style="display:none;">
+          <input id="ctype-name" placeholder="Name" style="flex:1;" />
+          <input id="ctype-phone" placeholder="Phone" style="width:140px;" />
+          <input id="ctype-email" placeholder="Email" style="flex:1;" />
+          <input id="ctype-followup" placeholder="Follow-up days" type="number" style="width:130px;" />
           <div class="form-actions">
-            <button class="form-save" onclick="saveContact()">Save</button>
-            <button class="form-cancel" onclick="toggleForm('contacts-form')">Cancel</button>
+            <button class="form-save" onclick="saveContactType()">Save</button>
+            <button class="form-cancel" onclick="toggleForm('contacts-type-form')">Cancel</button>
           </div>
         </div>
-        <div class="tracker-list" id="contacts-list"></div>
+        <div class="tracker-list" id="contacts-type-list"></div>
       </div>
 
     </main>
@@ -605,14 +646,70 @@
     function savePipeline(){const name=document.getElementById('pipe-name').value.trim();if(!name)return;pipeline.push({name,type:document.getElementById('pipe-type').value,property:document.getElementById('pipe-property').value.trim(),stage:document.getElementById('pipe-stage').value,next:document.getElementById('pipe-next').value.trim()});savePipelineData();renderPipeline();toggleForm('pipeline-form');['pipe-name','pipe-property','pipe-next'].forEach(id=>document.getElementById(id).value='');}
     function deletePipeline(i){pipeline.splice(i,1);savePipelineData();renderPipeline();}
 
-    /* ── Contacts ── */
+    /* ── Contacts CRM ── */
     let contacts=JSON.parse(localStorage.getItem('contacts')||'[]');
+    contacts=contacts.map(c=>({type:'agent',followUpDays:null,lastContact:null,...c}));
     function saveContacts(){localStorage.setItem('contacts',JSON.stringify(contacts));}
     let editConIdx=-1;
-    function renderContacts(){const el=document.getElementById('contacts-list');if(!contacts.length){el.innerHTML='<div class="tracker-empty">No contacts yet — add one above</div>';return;}el.innerHTML=contacts.map((c,i)=>{if(i===editConIdx){return `<div class="edit-card"><input class="edit-input" id="ec-name" value="${esc(c.name)}" placeholder="Name" style="flex:1;min-width:120px;" /><input class="edit-input" id="ec-phone" value="${esc(c.phone||'')}" placeholder="Phone" style="width:140px;" /><input class="edit-input" id="ec-email" value="${esc(c.email||'')}" placeholder="Email" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="saveConEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('con')">Cancel</button></div></div>`;}const meta=[c.phone,c.email].filter(Boolean).join(' · ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(c.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><button class="tc-edit" onclick="editConIdx=${i};renderContacts()" title="Edit">✎</button><button class="tc-delete" onclick="deleteContact(${i})">✕</button></div></div>`;}).join('');}
-    function saveConEdit(i){contacts[i]={...contacts[i],name:document.getElementById('ec-name').value.trim(),phone:document.getElementById('ec-phone').value.trim(),email:document.getElementById('ec-email').value.trim()};editConIdx=-1;saveContacts();renderContacts();}
-    function saveContact(){const name=document.getElementById('con-name').value.trim();if(!name)return;contacts.push({name,phone:document.getElementById('con-phone').value.trim(),email:document.getElementById('con-email').value.trim()});saveContacts();renderContacts();toggleForm('contacts-form');['con-name','con-phone','con-email'].forEach(id=>document.getElementById(id).value='');}
-    function deleteContact(i){contacts.splice(i,1);saveContacts();renderContacts();}
+    let currentContactType='agent';
+    const ctypeLabel={agent:'Agents / Brokers',seller:'Sellers',buyer:'Buyers',professional:'RE Professionals'};
+    function defaultFU(t){return t==='buyer'?14:t==='agent'?30:t==='professional'?45:60;}
+
+    function renderContactsOverview(){
+      const now=new Date();now.setHours(0,0,0,0);
+      let over=0,soon=0,ok=0;
+      contacts.forEach(c=>{
+        if(!c.lastContact){over++;return;}
+        const days=Math.floor((now-new Date(c.lastContact))/86400000);
+        const diff=(c.followUpDays||defaultFU(c.type))-days;
+        if(diff<0)over++;else if(diff<=7)soon++;else ok++;
+      });
+      document.getElementById('contacts-stats').innerHTML=`<div class="cstat"><div class="cstat-num">${contacts.length}</div><div class="cstat-label">Total Contacts</div></div><div class="cstat"><div class="cstat-num ${over?'red':''}">${over}</div><div class="cstat-label">Overdue</div></div><div class="cstat"><div class="cstat-num ${soon?'yellow':''}">${soon}</div><div class="cstat-label">Due This Week</div></div><div class="cstat"><div class="cstat-num">${ok}</div><div class="cstat-label">On Track</div></div>`;
+      if(!contacts.length){document.getElementById('contacts-followup-list').innerHTML='<div class="tracker-empty">No contacts yet — add them via the categories in the dropdown</div>';return;}
+      const sorted=contacts.map((c,i)=>{if(!c.lastContact)return{c,i,diff:-9999};const days=Math.floor((now-new Date(c.lastContact))/86400000);return{c,i,diff:(c.followUpDays||defaultFU(c.type))-days};}).sort((a,b)=>a.diff-b.diff);
+      const overdueL=sorted.filter(x=>x.diff<0),soonL=sorted.filter(x=>x.diff>=0&&x.diff<=7),okL=sorted.filter(x=>x.diff>7);
+      let h='';
+      if(overdueL.length)h+=`<div class="followup-section-header">Overdue</div>`+overdueL.map(x=>fuCard(x)).join('');
+      if(soonL.length)h+=`<div class="followup-section-header">Due This Week</div>`+soonL.map(x=>fuCard(x)).join('');
+      if(okL.length)h+=`<div class="followup-section-header">On Track</div>`+okL.map(x=>fuCard(x)).join('');
+      document.getElementById('contacts-followup-list').innerHTML=h;
+    }
+    function fuCard({c,i,diff}){
+      const tl=ctypeLabel[c.type]||c.type||'';
+      let dt,dc;
+      if(!c.lastContact){dt='Never contacted';dc='overdue';}
+      else if(diff<0){dt=Math.abs(diff)+'d overdue';dc='overdue';}
+      else if(diff===0){dt='Due today';dc='soon';}
+      else if(diff<=7){dt='Due in '+diff+'d';dc='soon';}
+      else{dt=diff+'d until follow-up';dc='ok';}
+      const contact=c.phone||c.email||'';
+      return `<div class="followup-card"><div style="flex:1;min-width:0;"><div class="fc-name">${esc(c.name)}</div><div class="fc-meta">${tl}${contact?' · '+esc(contact):''}</div></div><div class="fc-days ${dc}">${dt}</div><button class="log-btn" onclick="logContact(${i})">✓ Logged</button></div>`;
+    }
+    function logContact(i){contacts[i].lastContact=new Date().toISOString().slice(0,10);saveContacts();renderContactsOverview();}
+
+    function renderContactsByType(){
+      const type=currentContactType;
+      document.getElementById('ctype-label').textContent='Contacts';
+      document.getElementById('ctype-title').textContent=ctypeLabel[type];
+      document.getElementById('ctype-followup').placeholder='Follow-up days (default: '+defaultFU(type)+')';
+      const filtered=contacts.map((c,i)=>({c,i})).filter(({c})=>c.type===type);
+      const el=document.getElementById('contacts-type-list');
+      if(!filtered.length){el.innerHTML='<div class="tracker-empty">No contacts yet — add one above</div>';return;}
+      const now=new Date();now.setHours(0,0,0,0);
+      el.innerHTML=filtered.map(({c,i})=>{
+        if(i===editConIdx){return `<div class="edit-card"><input class="edit-input" id="ec-name" value="${esc(c.name)}" placeholder="Name" style="flex:1;min-width:120px;" /><input class="edit-input" id="ec-phone" value="${esc(c.phone||'')}" placeholder="Phone" style="width:140px;" /><input class="edit-input" id="ec-email" value="${esc(c.email||'')}" placeholder="Email" style="flex:1;" /><input class="edit-input" id="ec-fu" value="${c.followUpDays||''}" placeholder="Follow-up days" type="number" style="width:110px;" /><div class="edit-actions"><button class="form-save" onclick="saveConEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('con')">Cancel</button></div></div>`;}
+        let daysText='Never contacted';
+        if(c.lastContact){const days=Math.floor((now-new Date(c.lastContact))/86400000);const diff=(c.followUpDays||defaultFU(c.type))-days;daysText=diff<0?Math.abs(diff)+'d overdue':diff+'d until follow-up';}
+        const meta=[c.phone,c.email,daysText].filter(Boolean).join(' · ');
+        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(c.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><button class="log-btn" onclick="logContactType(${i})">✓ Log</button><button class="tc-edit" onclick="editConIdx=${i};renderContactsByType()" title="Edit">✎</button><button class="tc-delete" onclick="deleteContact(${i})">✕</button></div></div>`;
+      }).join('');
+    }
+    function logContactType(i){contacts[i].lastContact=new Date().toISOString().slice(0,10);saveContacts();renderContactsByType();}
+    function saveConEdit(i){contacts[i]={...contacts[i],name:document.getElementById('ec-name').value.trim(),phone:document.getElementById('ec-phone').value.trim(),email:document.getElementById('ec-email').value.trim(),followUpDays:parseInt(document.getElementById('ec-fu').value)||null};editConIdx=-1;saveContacts();renderContactsByType();}
+    function saveContactType(){const name=document.getElementById('ctype-name').value.trim();if(!name)return;contacts.push({name,type:currentContactType,phone:document.getElementById('ctype-phone').value.trim(),email:document.getElementById('ctype-email').value.trim(),followUpDays:parseInt(document.getElementById('ctype-followup').value)||null,lastContact:null});saveContacts();renderContactsByType();toggleForm('contacts-type-form');['ctype-name','ctype-phone','ctype-email','ctype-followup'].forEach(id=>document.getElementById(id).value='');}
+    function deleteContact(i){contacts.splice(i,1);saveContacts();renderContactsByType();}
+    function showContactsHome(e){e.preventDefault();if(isMobile())closeNav();document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');const main=document.getElementById('main-panel');main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById('contacts-panel').style.display='flex';renderContactsOverview();document.getElementById('contacts-dropdown').classList.toggle('open');}
+    function showContactType(e,type){e.preventDefault();if(isMobile())closeNav();currentContactType=type;editConIdx=-1;document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');const main=document.getElementById('main-panel');main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById('contacts-type-panel').style.display='flex';renderContactsByType();}
 
     /* ── Mobile Nav ── */
     function openNav(){document.getElementById('main-nav').classList.add('nav-open');document.getElementById('nav-overlay').classList.add('open');}
@@ -620,7 +717,7 @@
 
     /* ── Helpers ── */
     function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
-    function cancelEdit(t){if(t==='lst'){editLstIdx=-1;renderListings();}else if(t==='deal'){editDealIdx=-1;renderDeals();}else if(t==='con'){editConIdx=-1;renderContacts();}else{editPipeIdx=-1;renderPipeline();}}
+    function cancelEdit(t){if(t==='lst'){editLstIdx=-1;renderListings();}else if(t==='deal'){editDealIdx=-1;renderDeals();}else if(t==='con'){editConIdx=-1;renderContactsByType();}else{editPipeIdx=-1;renderPipeline();}}
     function toggleForm(id){const f=document.getElementById(id);f.style.display=f.style.display==='none'?'flex':'none';}
     function toggleDropdown(e,id){e.preventDefault();document.getElementById(id).classList.toggle('open');e.currentTarget.classList.toggle('active');}
     function isMobile(){return window.innerWidth<=768;}
@@ -630,7 +727,7 @@
       document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');
       const main=document.getElementById('main-panel');
       if(panelId==='home-panel'){main.style.alignItems='stretch';main.style.padding=isMobile()?'12px':'24px';document.getElementById('home-panel').style.display='grid';loadCalendar();}
-      else if(['deals-panel','proforma-panel','listings-panel','pipeline-panel','contacts-panel'].includes(panelId)){main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById(panelId).style.display='flex';if(panelId==='deals-panel')renderDeals();if(panelId==='listings-panel')renderListings();if(panelId==='pipeline-panel')renderPipeline();if(panelId==='contacts-panel')renderContacts();}
+      else if(['deals-panel','proforma-panel','listings-panel','pipeline-panel'].includes(panelId)){main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById(panelId).style.display='flex';if(panelId==='deals-panel')renderDeals();if(panelId==='listings-panel')renderListings();if(panelId==='pipeline-panel')renderPipeline();}
       else{main.style.alignItems=isMobile()?'flex-start':'center';main.style.padding=isMobile()?'16px':'48px';document.getElementById(panelId).style.display='block';if(panelId==='eo-panel')updateEOStatus();if(panelId==='krec-panel')renderKREC();if(panelId==='trec-panel')renderTREC();}
     }
   </script>
