@@ -277,6 +277,7 @@
           <a href="https://rask-kma.paragonrels.com/ParagonLS/Default.mvc/Login#1,1" target="_blank">RASK</a>
         </div>
       </div>
+      <a href="#" onclick="showPanel(event,'contacts-panel')">Contacts</a>
     </nav>
     <main id="main-panel">
 
@@ -480,6 +481,24 @@
         <div class="tracker-list" id="pipeline-list"></div>
       </div>
 
+      <!-- CONTACTS -->
+      <div id="contacts-panel" class="panel-page">
+        <div class="tracker-header">
+          <div><div class="tracker-label">Directory</div><div class="tracker-title">Contacts</div></div>
+          <button class="add-btn" onclick="toggleForm('contacts-form')">+ Add Contact</button>
+        </div>
+        <div class="add-form" id="contacts-form" style="display:none;">
+          <input id="con-name" placeholder="Name" style="flex:1;" />
+          <input id="con-phone" placeholder="Phone" style="width:140px;" />
+          <input id="con-email" placeholder="Email" style="flex:1;" />
+          <div class="form-actions">
+            <button class="form-save" onclick="saveContact()">Save</button>
+            <button class="form-cancel" onclick="toggleForm('contacts-form')">Cancel</button>
+          </div>
+        </div>
+        <div class="tracker-list" id="contacts-list"></div>
+      </div>
+
     </main>
   </div>
 
@@ -586,13 +605,22 @@
     function savePipeline(){const name=document.getElementById('pipe-name').value.trim();if(!name)return;pipeline.push({name,type:document.getElementById('pipe-type').value,property:document.getElementById('pipe-property').value.trim(),stage:document.getElementById('pipe-stage').value,next:document.getElementById('pipe-next').value.trim()});savePipelineData();renderPipeline();toggleForm('pipeline-form');['pipe-name','pipe-property','pipe-next'].forEach(id=>document.getElementById(id).value='');}
     function deletePipeline(i){pipeline.splice(i,1);savePipelineData();renderPipeline();}
 
+    /* ── Contacts ── */
+    let contacts=JSON.parse(localStorage.getItem('contacts')||'[]');
+    function saveContacts(){localStorage.setItem('contacts',JSON.stringify(contacts));}
+    let editConIdx=-1;
+    function renderContacts(){const el=document.getElementById('contacts-list');if(!contacts.length){el.innerHTML='<div class="tracker-empty">No contacts yet — add one above</div>';return;}el.innerHTML=contacts.map((c,i)=>{if(i===editConIdx){return `<div class="edit-card"><input class="edit-input" id="ec-name" value="${esc(c.name)}" placeholder="Name" style="flex:1;min-width:120px;" /><input class="edit-input" id="ec-phone" value="${esc(c.phone||'')}" placeholder="Phone" style="width:140px;" /><input class="edit-input" id="ec-email" value="${esc(c.email||'')}" placeholder="Email" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="saveConEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('con')">Cancel</button></div></div>`;}const meta=[c.phone,c.email].filter(Boolean).join(' · ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(c.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><button class="tc-edit" onclick="editConIdx=${i};renderContacts()" title="Edit">✎</button><button class="tc-delete" onclick="deleteContact(${i})">✕</button></div></div>`;}).join('');}
+    function saveConEdit(i){contacts[i]={...contacts[i],name:document.getElementById('ec-name').value.trim(),phone:document.getElementById('ec-phone').value.trim(),email:document.getElementById('ec-email').value.trim()};editConIdx=-1;saveContacts();renderContacts();}
+    function saveContact(){const name=document.getElementById('con-name').value.trim();if(!name)return;contacts.push({name,phone:document.getElementById('con-phone').value.trim(),email:document.getElementById('con-email').value.trim()});saveContacts();renderContacts();toggleForm('contacts-form');['con-name','con-phone','con-email'].forEach(id=>document.getElementById(id).value='');}
+    function deleteContact(i){contacts.splice(i,1);saveContacts();renderContacts();}
+
     /* ── Mobile Nav ── */
     function openNav(){document.getElementById('main-nav').classList.add('nav-open');document.getElementById('nav-overlay').classList.add('open');}
     function closeNav(){document.getElementById('main-nav').classList.remove('nav-open');document.getElementById('nav-overlay').classList.remove('open');}
 
     /* ── Helpers ── */
     function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
-    function cancelEdit(t){if(t==='lst'){editLstIdx=-1;renderListings();}else if(t==='deal'){editDealIdx=-1;renderDeals();}else{editPipeIdx=-1;renderPipeline();}}
+    function cancelEdit(t){if(t==='lst'){editLstIdx=-1;renderListings();}else if(t==='deal'){editDealIdx=-1;renderDeals();}else if(t==='con'){editConIdx=-1;renderContacts();}else{editPipeIdx=-1;renderPipeline();}}
     function toggleForm(id){const f=document.getElementById(id);f.style.display=f.style.display==='none'?'flex':'none';}
     function toggleDropdown(e,id){e.preventDefault();document.getElementById(id).classList.toggle('open');e.currentTarget.classList.toggle('active');}
     function isMobile(){return window.innerWidth<=768;}
@@ -602,7 +630,7 @@
       document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');
       const main=document.getElementById('main-panel');
       if(panelId==='home-panel'){main.style.alignItems='stretch';main.style.padding=isMobile()?'12px':'24px';document.getElementById('home-panel').style.display='grid';loadCalendar();}
-      else if(['deals-panel','proforma-panel','listings-panel','pipeline-panel'].includes(panelId)){main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById(panelId).style.display='flex';if(panelId==='deals-panel')renderDeals();if(panelId==='listings-panel')renderListings();if(panelId==='pipeline-panel')renderPipeline();}
+      else if(['deals-panel','proforma-panel','listings-panel','pipeline-panel','contacts-panel'].includes(panelId)){main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById(panelId).style.display='flex';if(panelId==='deals-panel')renderDeals();if(panelId==='listings-panel')renderListings();if(panelId==='pipeline-panel')renderPipeline();if(panelId==='contacts-panel')renderContacts();}
       else{main.style.alignItems=isMobile()?'flex-start':'center';main.style.padding=isMobile()?'16px':'48px';document.getElementById(panelId).style.display='block';if(panelId==='eo-panel')updateEOStatus();if(panelId==='krec-panel')renderKREC();if(panelId==='trec-panel')renderTREC();}
     }
   </script>
