@@ -205,6 +205,22 @@
     .log-btn { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4px; color: #555; padding: 6px 12px; font-family: 'Inter', sans-serif; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: color 0.15s, border-color 0.15s; white-space: nowrap; flex-shrink: 0; }
     .log-btn:hover { color: #4CAF7D; border-color: #4CAF7D; }
 
+    /* ── Coffee Meetings ── */
+    .coffee-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
+    .coffee-section-label { font-family: 'Inter', sans-serif; font-size: 0.62rem; letter-spacing: 2.5px; text-transform: uppercase; color: #555; margin-bottom: 8px; border-top: 1px solid #1a1a1a; padding-top: 16px; }
+    .coffee-progress-row { display: flex; align-items: center; gap: 10px; }
+    .coffee-pips { display: flex; gap: 6px; }
+    .coffee-pip { width: 26px; height: 5px; border-radius: 3px; background: #1e1e1e; transition: background 0.2s; }
+    .coffee-pip.filled { background: #4CAF7D; }
+    .coffee-count { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #555; }
+    .coffee-count .cn { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: #fff; }
+    .coffee-week-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 2.5px; text-transform: uppercase; color: #444; padding: 10px 0 6px; }
+    .coffee-week-box { background: #111; border: 1px solid #1e1e1e; border-radius: 8px; padding: 2px 16px; margin-bottom: 10px; }
+    .coffee-entry { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #1a1a1a; }
+    .coffee-entry:last-child { border-bottom: none; }
+    .coffee-entry-name { font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #ddd; font-weight: 500; }
+    .coffee-entry-meta { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #555; margin-top: 2px; }
+
     /* ── Mobile ── */
     @media (max-width: 768px) {
       header { padding: 20px 16px; }
@@ -255,8 +271,7 @@
       .followup-card { flex-wrap: wrap; gap: 8px; }
       .fc-days { margin-left: 0; padding-right: 0; }
 
-      main[style*="padding: 40px"] { padding: 20px !important; }
-      main[style*="padding: 48px"] { padding: 20px !important; }
+      .coffee-header { flex-wrap: wrap; gap: 8px; }
     }
   </style>
 </head>
@@ -379,12 +394,12 @@
           <div><div class="field-label">License Number</div><div class="field-value highlight">293113</div></div>
           <div><div class="field-label">Status</div><div class="field-value highlight" style="color:#4CAF7D;">Active</div></div>
           <div><div class="field-label">Issue Date</div><div class="field-value">July 10, 2024</div></div>
-          <div><div class="field-label">Post-Licensing Education</div><div class="field-value highlight" style="color:#4CAF7D;">✓ Completed June 18, 2026</div></div>
+          <div><div class="field-label">Post-Licensing Education</div><div class="field-value highlight" style="color:#4CAF7D;">&#x2713; Completed June 18, 2026</div></div>
           <div><div class="field-label">Affiliated Broker</div><div class="field-value">BHG Realty</div></div>
         </div>
         <div class="field-label" style="margin-bottom:14px; letter-spacing:2.5px;">Upcoming Deadlines</div>
         <div class="deadline-grid" id="krec-deadlines"></div>
-        <div class="claims-note">Kentucky Real Estate Commission &nbsp;·&nbsp; <a href="https://oop.ky.gov/DPLServices/Logout.aspx" target="_blank">Log in to KREC Portal →</a></div>
+        <div class="claims-note">Kentucky Real Estate Commission &nbsp;·&nbsp; <a href="https://oop.ky.gov/DPLServices/Logout.aspx" target="_blank">Log in to KREC Portal &#x2192;</a></div>
       </div>
 
       <!-- TREC -->
@@ -402,7 +417,7 @@
         </div>
         <div class="field-label" style="margin-bottom:14px; letter-spacing:2.5px;">Upcoming Deadlines</div>
         <div class="deadline-grid" id="trec-deadlines"></div>
-        <div class="claims-note">Tennessee Real Estate Commission &nbsp;·&nbsp; <a href="https://licensedprofessions.tn.gov/" target="_blank">Log in to TREC Portal →</a></div>
+        <div class="claims-note">Tennessee Real Estate Commission &nbsp;·&nbsp; <a href="https://licensedprofessions.tn.gov/" target="_blank">Log in to TREC Portal &#x2192;</a></div>
       </div>
 
       <!-- ACTIVE DEALS -->
@@ -441,21 +456,21 @@
               <div class="proforma-section-title">Acquisition</div>
               <div class="pf-row"><span class="pf-label">Purchase Price</span><input class="pf-input" id="pf-price" placeholder="0" oninput="calcProforma()" /></div>
               <div class="pf-row"><span class="pf-label">Down Payment %</span><input class="pf-input" id="pf-down" placeholder="25" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">Loan Amount</span><span class="pf-value" id="pf-loan">—</span></div>
+              <div class="pf-row"><span class="pf-label">Loan Amount</span><span class="pf-value" id="pf-loan">&#x2014;</span></div>
               <div class="pf-row"><span class="pf-label">Interest Rate %</span><input class="pf-input" id="pf-rate" placeholder="6.5" oninput="calcProforma()" /></div>
               <div class="pf-row"><span class="pf-label">Loan Term (yrs)</span><input class="pf-input" id="pf-term" placeholder="25" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">Annual Debt Service</span><span class="pf-value" id="pf-debt">—</span></div>
+              <div class="pf-row"><span class="pf-label">Annual Debt Service</span><span class="pf-value" id="pf-debt">&#x2014;</span></div>
             </div>
             <div class="proforma-section">
               <div class="proforma-section-title">Income &amp; Returns</div>
               <div class="pf-row"><span class="pf-label">Gross Annual Rent</span><input class="pf-input" id="pf-rent" placeholder="0" oninput="calcProforma()" /></div>
               <div class="pf-row"><span class="pf-label">Vacancy %</span><input class="pf-input" id="pf-vac" placeholder="5" oninput="calcProforma()" /></div>
               <div class="pf-row"><span class="pf-label">Annual Expenses</span><input class="pf-input" id="pf-exp" placeholder="0" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">NOI</span><span class="pf-value" id="pf-noi">—</span></div>
+              <div class="pf-row"><span class="pf-label">NOI</span><span class="pf-value" id="pf-noi">&#x2014;</span></div>
               <hr class="pf-divider" />
-              <div class="pf-row"><span class="pf-label">Cap Rate</span><span class="pf-value" id="pf-cap">—</span></div>
-              <div class="pf-row"><span class="pf-label">Annual Cash Flow</span><span class="pf-value" id="pf-cf">—</span></div>
-              <div class="pf-row"><span class="pf-label">Cash-on-Cash Return</span><span class="pf-value" id="pf-coc">—</span></div>
+              <div class="pf-row"><span class="pf-label">Cap Rate</span><span class="pf-value" id="pf-cap">&#x2014;</span></div>
+              <div class="pf-row"><span class="pf-label">Annual Cash Flow</span><span class="pf-value" id="pf-cf">&#x2014;</span></div>
+              <div class="pf-row"><span class="pf-label">Cash-on-Cash Return</span><span class="pf-value" id="pf-coc">&#x2014;</span></div>
             </div>
           </div>
         </div>
@@ -518,6 +533,29 @@
           <div><div class="tracker-label">Networking CRM</div><div class="tracker-title">Contacts Overview</div></div>
         </div>
         <div class="contacts-stats" id="contacts-stats"></div>
+
+        <!-- Coffee Meetings -->
+        <div id="coffee-section" style="margin-top:8px;">
+          <div class="coffee-header">
+            <div>
+              <div class="coffee-section-label">Coffee Meetings</div>
+              <div id="coffee-progress"></div>
+            </div>
+            <button class="add-btn" onclick="toggleCoffeeForm()">+ Log Meeting</button>
+          </div>
+          <div class="add-form" id="coffee-form" style="display:none;">
+            <input id="cf-name" placeholder="Name" style="flex:1;" />
+            <input id="cf-date" type="date" style="width:150px;" />
+            <input id="cf-notes" placeholder="Notes (optional)" style="flex:2;" />
+            <div class="form-actions">
+              <button class="form-save" onclick="saveCoffeeMeeting()">Save</button>
+              <button class="form-cancel" onclick="toggleForm('coffee-form')">Cancel</button>
+            </div>
+          </div>
+          <div id="coffee-log"></div>
+        </div>
+
+        <div class="followup-section-header" style="margin-top:20px;">Follow-Up Reminders</div>
         <div id="contacts-followup-list"></div>
       </div>
 
@@ -549,10 +587,10 @@
     updateClock();setInterval(updateClock,1000);
 
     /* ── Weather ── */
-    function weatherIcon(c){return c===0?'☀️':c<=3?'⛅':c<=48?'🌫️':c<=55?'🌦️':c<=65?'🌧️':c<=77?'❄️':c<=82?'🌧️':'⛈️';}
+    function weatherIcon(c){return c===0?'&#x2600;&#xFE0F;':c<=3?'&#x26C5;':c<=48?'&#x1F32B;&#xFE0F;':c<=55?'&#x1F326;&#xFE0F;':c<=65?'&#x1F327;&#xFE0F;':c<=77?'&#x2744;&#xFE0F;':c<=82?'&#x1F327;&#xFE0F;':'&#x26C8;&#xFE0F;';}
     function weatherDesc(c){return c===0?'Clear sky':c===1?'Mainly clear':c===2?'Partly cloudy':c===3?'Overcast':c<=48?'Foggy':c<=55?'Drizzle':c<=65?'Rainy':c<=77?'Snowy':c<=82?'Rain showers':'Thunderstorm';}
     fetch('https://api.open-meteo.com/v1/forecast?latitude=36.1627&longitude=-86.7816&current=temperature_2m,weathercode&temperature_unit=fahrenheit')
-      .then(r=>r.json()).then(d=>{document.getElementById('weather-temp').textContent=Math.round(d.current.temperature_2m)+'°F';document.getElementById('weather-icon').textContent=weatherIcon(d.current.weathercode);document.getElementById('weather-condition').textContent=weatherDesc(d.current.weathercode);}).catch(()=>{document.getElementById('weather-condition').textContent='Unavailable';});
+      .then(r=>r.json()).then(d=>{document.getElementById('weather-temp').textContent=Math.round(d.current.temperature_2m)+'&#xB0;F';document.getElementById('weather-icon').innerHTML=weatherIcon(d.current.weathercode);document.getElementById('weather-condition').textContent=weatherDesc(d.current.weathercode);}).catch(()=>{document.getElementById('weather-condition').textContent='Unavailable';});
 
     /* ── Calendar (7-day) ── */
     const ICS_URL='https://outlook.office365.com/owa/calendar/12181659029f4cf7806875d56986eb19@shepherdgroupre.com/86fc5440fc8a4049bf0e02a753ba57c57529967293964519218/calendar.ics';
@@ -577,7 +615,7 @@
           for(let i=0;i<7;i++){const day=new Date(now);day.setDate(now.getDate()+i);day.setHours(0,0,0,0);const dayEvents=events.filter(e=>sameDay(e.start,day)).sort((a,b)=>a.start-b.start);if(dayEvents.length)buckets.push({day,events:dayEvents,isToday:i===0});}
           const container=document.getElementById('cal-events');
           if(!buckets.length){container.innerHTML='<span class="cal-empty">No events in the next 7 days</span>';return;}
-          container.innerHTML=buckets.map(b=>{const label=b.isToday?'Today':(CAL_DAYS[b.day.getDay()]+' · '+CAL_MONTHS[b.day.getMonth()]+' '+b.day.getDate());const evHTML=b.events.map(e=>`<div class="cal-event"><div class="cal-event-bar"></div><div class="cal-event-time">${fmtTime(e.start)}</div><div><div class="cal-event-title">${e.summary}</div>${e.location?`<div class="cal-event-loc">${e.location}</div>`:''}</div></div>`).join('');return `<div class="cal-day-header${b.isToday?' today':''}">${label}</div>${evHTML}`;}).join('');
+          container.innerHTML=buckets.map(b=>{const label=b.isToday?'Today':(CAL_DAYS[b.day.getDay()]+' &middot; '+CAL_MONTHS[b.day.getMonth()]+' '+b.day.getDate());const evHTML=b.events.map(e=>`<div class="cal-event"><div class="cal-event-bar"></div><div class="cal-event-time">${fmtTime(e.start)}</div><div><div class="cal-event-title">${e.summary}</div>${e.location?`<div class="cal-event-loc">${e.location}</div>`:''}</div></div>`).join('');return `<div class="cal-day-header${b.isToday?' today':''}">${label}</div>${evHTML}`;}).join('');
         }).catch(()=>{document.getElementById('cal-events').innerHTML='<span class="cal-empty">Could not load calendar</span>';});
     }
 
@@ -589,7 +627,7 @@
     function curTodos(){return todoMode==='daily'?todosDaily:todosWeekly;}
     function saveTodos(){localStorage.setItem(todoMode==='daily'?'todos_daily':'todos_weekly',JSON.stringify(curTodos()));}
     function switchTodoTab(mode){todoMode=mode;document.getElementById('tab-daily').classList.toggle('active',mode==='daily');document.getElementById('tab-weekly').classList.toggle('active',mode==='weekly');renderTodos();}
-    function renderTodos(){const list=document.getElementById('todo-list');const todos=curTodos();list.innerHTML='';todos.forEach((t,i)=>{const li=document.createElement('li');li.className='todo-item';li.innerHTML=`<input type="checkbox" class="todo-checkbox" ${t.done?'checked':''} onchange="toggleTodo(${i})"/><span class="todo-text ${t.done?'done':''}">${t.text}</span><button class="todo-delete" onclick="deleteTodo(${i})">✕</button>`;list.appendChild(li);});}
+    function renderTodos(){const list=document.getElementById('todo-list');const todos=curTodos();list.innerHTML='';todos.forEach((t,i)=>{const li=document.createElement('li');li.className='todo-item';li.innerHTML=`<input type="checkbox" class="todo-checkbox" ${t.done?'checked':''} onchange="toggleTodo(${i})"/><span class="todo-text ${t.done?'done':''}">${t.text}</span><button class="todo-delete" onclick="deleteTodo(${i})">&#x2715;</button>`;list.appendChild(li);});}
     function addTodo(){const inp=document.getElementById('todo-input');const t=inp.value.trim();if(!t)return;curTodos().push({text:t,done:false});saveTodos();renderTodos();inp.value='';}
     function toggleTodo(i){curTodos()[i].done=!curTodos()[i].done;saveTodos();renderTodos();}
     function deleteTodo(i){curTodos().splice(i,1);saveTodos();renderTodos();}
@@ -599,9 +637,9 @@
     /* ── Deadline helpers ── */
     function daysUntil(d){return Math.ceil((new Date(d)-new Date())/(1000*60*60*24));}
     function statusColor(d){return d>180?'green':d>60?'yellow':'red';}
-    function updateEOStatus(){const diff=daysUntil('2028-04-01');document.getElementById('eo-days').textContent=diff+' days';const dot=document.getElementById('eo-status-dot'),txt=document.getElementById('eo-status-text');const c=statusColor(diff);dot.className='status-dot '+c;txt.className='status-text '+c;txt.textContent=c==='green'?'Active — Coverage in good standing':c==='yellow'?'Expiring soon — Renew immediately':'Expired — Action required';}
-    function renderKREC(){const dl=[{name:'License Expiration',date:'2028-03-31',completed:false},{name:'Continuing Education',date:'2027-12-31',completed:false},{name:'Core Education',date:'2028-12-31',completed:false}];document.getElementById('krec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
-    function renderTREC(){const dl=[{name:'License Expiration',date:'2027-05-22',completed:false},{name:'Continuing Education',date:'2027-05-22',completed:false}];document.getElementById('trec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'—':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
+    function updateEOStatus(){const diff=daysUntil('2028-04-01');document.getElementById('eo-days').textContent=diff+' days';const dot=document.getElementById('eo-status-dot'),txt=document.getElementById('eo-status-text');const c=statusColor(diff);dot.className='status-dot '+c;txt.className='status-text '+c;txt.textContent=c==='green'?'Active &#x2014; Coverage in good standing':c==='yellow'?'Expiring soon &#x2014; Renew immediately':'Expired &#x2014; Action required';}
+    function renderKREC(){const dl=[{name:'License Expiration',date:'2028-03-31',completed:false},{name:'Continuing Education',date:'2027-12-31',completed:false},{name:'Core Education',date:'2028-12-31',completed:false}];document.getElementById('krec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'&#x2014;':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
+    function renderTREC(){const dl=[{name:'License Expiration',date:'2027-05-22',completed:false},{name:'Continuing Education',date:'2027-05-22',completed:false}];document.getElementById('trec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'&#x2014;':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
 
     /* ── PDF Seed ── */
     const LISTING_SEED_VERSION='v1';
@@ -617,7 +655,7 @@
     const lstLabel={active:'Active',pending:'Under Contract',sold:'Sold'};
     function saveListings(){localStorage.setItem('listings',JSON.stringify(listings));}
     let editLstIdx=-1;
-    function renderListings(){const el=document.getElementById('listings-list');if(!listings.length){el.innerHTML='<div class="tracker-empty">Send me a PDF of your listings and I\'ll load them directly</div>';return;}el.innerHTML=listings.map((l,i)=>{if(i===editLstIdx){return `<div class="edit-card"><input class="edit-input" id="el-addr" value="${esc(l.address)}" style="flex:2;min-width:180px;" /><input class="edit-input" id="el-price" value="${esc(l.price||'')}" placeholder="Price" style="width:110px;" /><select class="edit-select" id="el-stage"><option value="active" ${l.stage==='active'?'selected':''}>Active</option><option value="pending" ${l.stage==='pending'?'selected':''}>Under Contract</option><option value="sold" ${l.stage==='sold'?'selected':''}>Sold</option></select><input class="edit-input" id="el-date" type="date" value="${l.date||''}" style="width:140px;" /><div class="edit-actions"><button class="form-save" onclick="saveLstEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('lst')">Cancel</button></div></div>`;}const dom=l.date?Math.floor((Date.now()-new Date(l.date))/(1000*60*60*24))+'d on market':'';const closeNote=l.close?' · Closing '+l.close:'';const meta=[l.price?'$'+l.price:'',dom+closeNote,l.beds?l.beds+'bd/'+l.baths+'ba':'',l.sqft?l.sqft+' sqft':''].filter(Boolean).join(' · ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(l.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${l.stage}">${lstLabel[l.stage]}</span><button class="tc-edit" onclick="editLstIdx=${i};renderListings()" title="Edit">✎</button><button class="tc-delete" onclick="deleteListing(${i})">✕</button></div></div>`;}).join('');}
+    function renderListings(){const el=document.getElementById('listings-list');if(!listings.length){el.innerHTML='<div class="tracker-empty">Send me a PDF of your listings and I\'ll load them directly</div>';return;}el.innerHTML=listings.map((l,i)=>{if(i===editLstIdx){return `<div class="edit-card"><input class="edit-input" id="el-addr" value="${esc(l.address)}" style="flex:2;min-width:180px;" /><input class="edit-input" id="el-price" value="${esc(l.price||'')}" placeholder="Price" style="width:110px;" /><select class="edit-select" id="el-stage"><option value="active" ${l.stage==='active'?'selected':''}>Active</option><option value="pending" ${l.stage==='pending'?'selected':''}>Under Contract</option><option value="sold" ${l.stage==='sold'?'selected':''}>Sold</option></select><input class="edit-input" id="el-date" type="date" value="${l.date||''}" style="width:140px;" /><div class="edit-actions"><button class="form-save" onclick="saveLstEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('lst')">Cancel</button></div></div>`;}const dom=l.date?Math.floor((Date.now()-new Date(l.date))/(1000*60*60*24))+'d on market':'';const closeNote=l.close?' &middot; Closing '+l.close:'';const meta=[l.price?'$'+l.price:'',dom+closeNote,l.beds?l.beds+'bd/'+l.baths+'ba':'',l.sqft?l.sqft+' sqft':''].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(l.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${l.stage}">${lstLabel[l.stage]}</span><button class="tc-edit" onclick="editLstIdx=${i};renderListings()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deleteListing(${i})">&#x2715;</button></div></div>`;}).join('');}
     function saveLstEdit(i){listings[i]={...listings[i],address:document.getElementById('el-addr').value.trim(),price:document.getElementById('el-price').value.trim(),stage:document.getElementById('el-stage').value,date:document.getElementById('el-date').value};editLstIdx=-1;saveListings();renderListings();}
     function saveListing(){const addr=document.getElementById('lst-address').value.trim();if(!addr)return;listings.push({address:addr,price:document.getElementById('lst-price').value.trim(),stage:document.getElementById('lst-stage').value,date:document.getElementById('lst-date').value,source:'manual'});saveListings();renderListings();toggleForm('listings-form');['lst-address','lst-price','lst-date'].forEach(id=>document.getElementById(id).value='');}
     function deleteListing(i){listings.splice(i,1);saveListings();renderListings();}
@@ -627,21 +665,21 @@
     const stageLabel={loi:'LOI',contract:'Under Contract',diligence:'Due Diligence',closed:'Closed'};
     function saveDeals(){localStorage.setItem('deals',JSON.stringify(deals));}
     let editDealIdx=-1;
-    function renderDeals(){const el=document.getElementById('deals-list');if(!deals.length){el.innerHTML='<div class="tracker-empty">No active deals — add one above</div>';return;}el.innerHTML=deals.map((d,i)=>{if(i===editDealIdx){return `<div class="edit-card"><input class="edit-input" id="ed-addr" value="${esc(d.address)}" style="flex:2;min-width:180px;" /><input class="edit-input" id="ed-price" value="${esc(d.price||'')}" placeholder="Price" style="width:110px;" /><select class="edit-select" id="ed-stage"><option value="loi" ${d.stage==='loi'?'selected':''}>LOI</option><option value="contract" ${d.stage==='contract'?'selected':''}>Under Contract</option><option value="diligence" ${d.stage==='diligence'?'selected':''}>Due Diligence</option><option value="closed" ${d.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ed-close" type="date" value="${d.close||''}" style="width:140px;" /><input class="edit-input" id="ed-notes" value="${esc(d.notes||'')}" placeholder="Notes" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="saveDealEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('deal')">Cancel</button></div></div>`;}const meta=[d.price?'$'+d.price:'',d.close?'Close '+d.close:'',d.notes].filter(Boolean).join(' · ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(d.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${d.stage}">${stageLabel[d.stage]}</span><button class="tc-edit" onclick="editDealIdx=${i};renderDeals()" title="Edit">✎</button><button class="tc-delete" onclick="deleteDeal(${i})">✕</button></div></div>`;}).join('');}
+    function renderDeals(){const el=document.getElementById('deals-list');if(!deals.length){el.innerHTML='<div class="tracker-empty">No active deals &#x2014; add one above</div>';return;}el.innerHTML=deals.map((d,i)=>{if(i===editDealIdx){return `<div class="edit-card"><input class="edit-input" id="ed-addr" value="${esc(d.address)}" style="flex:2;min-width:180px;" /><input class="edit-input" id="ed-price" value="${esc(d.price||'')}" placeholder="Price" style="width:110px;" /><select class="edit-select" id="ed-stage"><option value="loi" ${d.stage==='loi'?'selected':''}>LOI</option><option value="contract" ${d.stage==='contract'?'selected':''}>Under Contract</option><option value="diligence" ${d.stage==='diligence'?'selected':''}>Due Diligence</option><option value="closed" ${d.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ed-close" type="date" value="${d.close||''}" style="width:140px;" /><input class="edit-input" id="ed-notes" value="${esc(d.notes||'')}" placeholder="Notes" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="saveDealEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('deal')">Cancel</button></div></div>`;}const meta=[d.price?'$'+d.price:'',d.close?'Close '+d.close:'',d.notes].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(d.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${d.stage}">${stageLabel[d.stage]}</span><button class="tc-edit" onclick="editDealIdx=${i};renderDeals()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deleteDeal(${i})">&#x2715;</button></div></div>`;}).join('');}
     function saveDealEdit(i){deals[i]={...deals[i],address:document.getElementById('ed-addr').value.trim(),price:document.getElementById('ed-price').value.trim(),stage:document.getElementById('ed-stage').value,close:document.getElementById('ed-close').value,notes:document.getElementById('ed-notes').value.trim()};editDealIdx=-1;saveDeals();renderDeals();}
     function saveDeal(){const addr=document.getElementById('deal-address').value.trim();if(!addr)return;deals.push({address:addr,price:document.getElementById('deal-price').value.trim(),stage:document.getElementById('deal-stage').value,close:document.getElementById('deal-close').value,notes:document.getElementById('deal-notes').value.trim()});saveDeals();renderDeals();toggleForm('deals-form');['deal-address','deal-price','deal-close','deal-notes'].forEach(id=>document.getElementById(id).value='');}
     function deleteDeal(i){deals.splice(i,1);saveDeals();renderDeals();}
 
     /* ── Proforma ── */
     function fmt(n){return n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});}
-    function calcProforma(){const price=parseFloat(document.getElementById('pf-price').value)||0;const downPct=(parseFloat(document.getElementById('pf-down').value)||25)/100;const rate=(parseFloat(document.getElementById('pf-rate').value)||6.5)/100/12;const term=(parseFloat(document.getElementById('pf-term').value)||25)*12;const rent=parseFloat(document.getElementById('pf-rent').value)||0;const vacPct=(parseFloat(document.getElementById('pf-vac').value)||5)/100;const exp=parseFloat(document.getElementById('pf-exp').value)||0;const loan=price*(1-downPct);const mp=rate>0?loan*(rate*Math.pow(1+rate,term))/(Math.pow(1+rate,term)-1):0;const annualDebt=mp*12;const egi=rent*(1-vacPct);const noi=egi-exp;const capRate=price>0?(noi/price)*100:0;const cashFlow=noi-annualDebt;const equity=price*downPct;const coc=equity>0?(cashFlow/equity)*100:0;document.getElementById('pf-loan').textContent=loan>0?'$'+fmt(loan):'—';document.getElementById('pf-debt').textContent=annualDebt>0?'$'+fmt(annualDebt):'—';document.getElementById('pf-noi').textContent=noi!==0?'$'+fmt(noi):'—';const capEl=document.getElementById('pf-cap');capEl.textContent=capRate>0?capRate.toFixed(2)+'%':'—';capEl.className='pf-value';const cfEl=document.getElementById('pf-cf');cfEl.textContent=cashFlow!==0?'$'+fmt(cashFlow):'—';cfEl.className='pf-value '+(cashFlow>=0?'pos':'neg');const cocEl=document.getElementById('pf-coc');cocEl.textContent=coc!==0?coc.toFixed(2)+'%':'—';cocEl.className='pf-value '+(coc>=0?'pos':'neg');}
+    function calcProforma(){const price=parseFloat(document.getElementById('pf-price').value)||0;const downPct=(parseFloat(document.getElementById('pf-down').value)||25)/100;const rate=(parseFloat(document.getElementById('pf-rate').value)||6.5)/100/12;const term=(parseFloat(document.getElementById('pf-term').value)||25)*12;const rent=parseFloat(document.getElementById('pf-rent').value)||0;const vacPct=(parseFloat(document.getElementById('pf-vac').value)||5)/100;const exp=parseFloat(document.getElementById('pf-exp').value)||0;const loan=price*(1-downPct);const mp=rate>0?loan*(rate*Math.pow(1+rate,term))/(Math.pow(1+rate,term)-1):0;const annualDebt=mp*12;const egi=rent*(1-vacPct);const noi=egi-exp;const capRate=price>0?(noi/price)*100:0;const cashFlow=noi-annualDebt;const equity=price*downPct;const coc=equity>0?(cashFlow/equity)*100:0;document.getElementById('pf-loan').textContent=loan>0?'$'+fmt(loan):'&#x2014;';document.getElementById('pf-debt').textContent=annualDebt>0?'$'+fmt(annualDebt):'&#x2014;';document.getElementById('pf-noi').textContent=noi!==0?'$'+fmt(noi):'&#x2014;';const capEl=document.getElementById('pf-cap');capEl.textContent=capRate>0?capRate.toFixed(2)+'%':'&#x2014;';capEl.className='pf-value';const cfEl=document.getElementById('pf-cf');cfEl.textContent=cashFlow!==0?'$'+fmt(cashFlow):'&#x2014;';cfEl.className='pf-value '+(cashFlow>=0?'pos':'neg');const cocEl=document.getElementById('pf-coc');cocEl.textContent=coc!==0?coc.toFixed(2)+'%':'&#x2014;';cocEl.className='pf-value '+(coc>=0?'pos':'neg');}
 
     /* ── Pipeline ── */
     let pipeline=JSON.parse(localStorage.getItem('pipeline')||'[]');
     const pipeStageLabel={lead:'Lead',active:'Active',contract:'Under Contract',closed:'Closed'};
     function savePipelineData(){localStorage.setItem('pipeline',JSON.stringify(pipeline));}
     let editPipeIdx=-1;
-    function renderPipeline(){const el=document.getElementById('pipeline-list');if(!pipeline.length){el.innerHTML='<div class="tracker-empty">No clients in pipeline — add one above</div>';return;}el.innerHTML=pipeline.map((p,i)=>{if(i===editPipeIdx){return `<div class="edit-card"><input class="edit-input" id="ep-name" value="${esc(p.name)}" placeholder="Client name" style="min-width:120px;" /><select class="edit-select" id="ep-type"><option value="buyer" ${p.type==='buyer'?'selected':''}>Buyer</option><option value="seller" ${p.type==='seller'?'selected':''}>Seller</option></select><input class="edit-input" id="ep-prop" value="${esc(p.property||'')}" placeholder="Property / area" style="flex:2;" /><select class="edit-select" id="ep-stage"><option value="lead" ${p.stage==='lead'?'selected':''}>Lead</option><option value="active" ${p.stage==='active'?'selected':''}>Active</option><option value="contract" ${p.stage==='contract'?'selected':''}>Under Contract</option><option value="closed" ${p.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ep-next" value="${esc(p.next||'')}" placeholder="Next action" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="savePipeEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('pipe')">Cancel</button></div></div>`;}const meta=[p.property,p.next?'Next: '+p.next:''].filter(Boolean).join(' · ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(p.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${p.type}">${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</span><span class="stage-badge stage-${p.stage}">${pipeStageLabel[p.stage]}</span><button class="tc-edit" onclick="editPipeIdx=${i};renderPipeline()" title="Edit">✎</button><button class="tc-delete" onclick="deletePipeline(${i})">✕</button></div></div>`;}).join('');}
+    function renderPipeline(){const el=document.getElementById('pipeline-list');if(!pipeline.length){el.innerHTML='<div class="tracker-empty">No clients in pipeline &#x2014; add one above</div>';return;}el.innerHTML=pipeline.map((p,i)=>{if(i===editPipeIdx){return `<div class="edit-card"><input class="edit-input" id="ep-name" value="${esc(p.name)}" placeholder="Client name" style="min-width:120px;" /><select class="edit-select" id="ep-type"><option value="buyer" ${p.type==='buyer'?'selected':''}>Buyer</option><option value="seller" ${p.type==='seller'?'selected':''}>Seller</option></select><input class="edit-input" id="ep-prop" value="${esc(p.property||'')}" placeholder="Property / area" style="flex:2;" /><select class="edit-select" id="ep-stage"><option value="lead" ${p.stage==='lead'?'selected':''}>Lead</option><option value="active" ${p.stage==='active'?'selected':''}>Active</option><option value="contract" ${p.stage==='contract'?'selected':''}>Under Contract</option><option value="closed" ${p.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ep-next" value="${esc(p.next||'')}" placeholder="Next action" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="savePipeEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('pipe')">Cancel</button></div></div>`;}const meta=[p.property,p.next?'Next: '+p.next:''].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(p.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${p.type}">${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</span><span class="stage-badge stage-${p.stage}">${pipeStageLabel[p.stage]}</span><button class="tc-edit" onclick="editPipeIdx=${i};renderPipeline()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deletePipeline(${i})">&#x2715;</button></div></div>`;}).join('');}
     function savePipeEdit(i){pipeline[i]={...pipeline[i],name:document.getElementById('ep-name').value.trim(),type:document.getElementById('ep-type').value,property:document.getElementById('ep-prop').value.trim(),stage:document.getElementById('ep-stage').value,next:document.getElementById('ep-next').value.trim()};editPipeIdx=-1;savePipelineData();renderPipeline();}
     function savePipeline(){const name=document.getElementById('pipe-name').value.trim();if(!name)return;pipeline.push({name,type:document.getElementById('pipe-type').value,property:document.getElementById('pipe-property').value.trim(),stage:document.getElementById('pipe-stage').value,next:document.getElementById('pipe-next').value.trim()});savePipelineData();renderPipeline();toggleForm('pipeline-form');['pipe-name','pipe-property','pipe-next'].forEach(id=>document.getElementById(id).value='');}
     function deletePipeline(i){pipeline.splice(i,1);savePipelineData();renderPipeline();}
@@ -665,11 +703,12 @@
         if(diff<0)over++;else if(diff<=7)soon++;else ok++;
       });
       document.getElementById('contacts-stats').innerHTML=`<div class="cstat"><div class="cstat-num">${contacts.length}</div><div class="cstat-label">Total Contacts</div></div><div class="cstat"><div class="cstat-num ${over?'red':''}">${over}</div><div class="cstat-label">Overdue</div></div><div class="cstat"><div class="cstat-num ${soon?'yellow':''}">${soon}</div><div class="cstat-label">Due This Week</div></div><div class="cstat"><div class="cstat-num">${ok}</div><div class="cstat-label">On Track</div></div>`;
-      if(!contacts.length){document.getElementById('contacts-followup-list').innerHTML='<div class="tracker-empty">No contacts yet — add them via the categories in the dropdown</div>';return;}
+      renderCoffeeMeetings();
+      if(!contacts.length){document.getElementById('contacts-followup-list').innerHTML='<div class="tracker-empty">No contacts yet &#x2014; add them via the categories in the dropdown</div>';return;}
       const sorted=contacts.map((c,i)=>{if(!c.lastContact)return{c,i,diff:-9999};const days=Math.floor((now-new Date(c.lastContact))/86400000);return{c,i,diff:(c.followUpDays||defaultFU(c.type))-days};}).sort((a,b)=>a.diff-b.diff);
       const overdueL=sorted.filter(x=>x.diff<0),soonL=sorted.filter(x=>x.diff>=0&&x.diff<=7),okL=sorted.filter(x=>x.diff>7);
       let h='';
-      if(overdueL.length)h+=`<div class="followup-section-header">Overdue</div>`+overdueL.map(x=>fuCard(x)).join('');
+      if(overdueL.length)h+=`<div class="followup-section-header" style="border-top:none;padding-top:0;">Overdue</div>`+overdueL.map(x=>fuCard(x)).join('');
       if(soonL.length)h+=`<div class="followup-section-header">Due This Week</div>`+soonL.map(x=>fuCard(x)).join('');
       if(okL.length)h+=`<div class="followup-section-header">On Track</div>`+okL.map(x=>fuCard(x)).join('');
       document.getElementById('contacts-followup-list').innerHTML=h;
@@ -683,7 +722,7 @@
       else if(diff<=7){dt='Due in '+diff+'d';dc='soon';}
       else{dt=diff+'d until follow-up';dc='ok';}
       const contact=c.phone||c.email||'';
-      return `<div class="followup-card"><div style="flex:1;min-width:0;"><div class="fc-name">${esc(c.name)}</div><div class="fc-meta">${tl}${contact?' · '+esc(contact):''}</div></div><div class="fc-days ${dc}">${dt}</div><button class="log-btn" onclick="logContact(${i})">✓ Logged</button></div>`;
+      return `<div class="followup-card"><div style="flex:1;min-width:0;"><div class="fc-name">${esc(c.name)}</div><div class="fc-meta">${tl}${contact?' &middot; '+esc(contact):''}</div></div><div class="fc-days ${dc}">${dt}</div><button class="log-btn" onclick="logContact(${i})">&#x2713; Logged</button></div>`;
     }
     function logContact(i){contacts[i].lastContact=new Date().toISOString().slice(0,10);saveContacts();renderContactsOverview();}
 
@@ -694,20 +733,49 @@
       document.getElementById('ctype-followup').placeholder='Follow-up days (default: '+defaultFU(type)+')';
       const filtered=contacts.map((c,i)=>({c,i})).filter(({c})=>c.type===type);
       const el=document.getElementById('contacts-type-list');
-      if(!filtered.length){el.innerHTML='<div class="tracker-empty">No contacts yet — add one above</div>';return;}
+      if(!filtered.length){el.innerHTML='<div class="tracker-empty">No contacts yet &#x2014; add one above</div>';return;}
       const now=new Date();now.setHours(0,0,0,0);
       el.innerHTML=filtered.map(({c,i})=>{
         if(i===editConIdx){return `<div class="edit-card"><input class="edit-input" id="ec-name" value="${esc(c.name)}" placeholder="Name" style="flex:1;min-width:120px;" /><input class="edit-input" id="ec-phone" value="${esc(c.phone||'')}" placeholder="Phone" style="width:140px;" /><input class="edit-input" id="ec-email" value="${esc(c.email||'')}" placeholder="Email" style="flex:1;" /><input class="edit-input" id="ec-fu" value="${c.followUpDays||''}" placeholder="Follow-up days" type="number" style="width:110px;" /><div class="edit-actions"><button class="form-save" onclick="saveConEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('con')">Cancel</button></div></div>`;}
         let daysText='Never contacted';
         if(c.lastContact){const days=Math.floor((now-new Date(c.lastContact))/86400000);const diff=(c.followUpDays||defaultFU(c.type))-days;daysText=diff<0?Math.abs(diff)+'d overdue':diff+'d until follow-up';}
-        const meta=[c.phone,c.email,daysText].filter(Boolean).join(' · ');
-        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(c.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><button class="log-btn" onclick="logContactType(${i})">✓ Log</button><button class="tc-edit" onclick="editConIdx=${i};renderContactsByType()" title="Edit">✎</button><button class="tc-delete" onclick="deleteContact(${i})">✕</button></div></div>`;
+        const meta=[c.phone,c.email,daysText].filter(Boolean).join(' &middot; ');
+        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(c.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><button class="log-btn" onclick="logContactType(${i})">&#x2713; Log</button><button class="tc-edit" onclick="editConIdx=${i};renderContactsByType()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deleteContact(${i})">&#x2715;</button></div></div>`;
       }).join('');
     }
     function logContactType(i){contacts[i].lastContact=new Date().toISOString().slice(0,10);saveContacts();renderContactsByType();}
     function saveConEdit(i){contacts[i]={...contacts[i],name:document.getElementById('ec-name').value.trim(),phone:document.getElementById('ec-phone').value.trim(),email:document.getElementById('ec-email').value.trim(),followUpDays:parseInt(document.getElementById('ec-fu').value)||null};editConIdx=-1;saveContacts();renderContactsByType();}
     function saveContactType(){const name=document.getElementById('ctype-name').value.trim();if(!name)return;contacts.push({name,type:currentContactType,phone:document.getElementById('ctype-phone').value.trim(),email:document.getElementById('ctype-email').value.trim(),followUpDays:parseInt(document.getElementById('ctype-followup').value)||null,lastContact:null});saveContacts();renderContactsByType();toggleForm('contacts-type-form');['ctype-name','ctype-phone','ctype-email','ctype-followup'].forEach(id=>document.getElementById(id).value='');}
     function deleteContact(i){contacts.splice(i,1);saveContacts();renderContactsByType();}
+
+    /* ── Coffee Meetings ── */
+    let coffeeMeetings=JSON.parse(localStorage.getItem('coffeeMeetings')||'[]');
+    function saveCoffee(){localStorage.setItem('coffeeMeetings',JSON.stringify(coffeeMeetings));}
+    function getWeekStart(date){const d=date?new Date(date):new Date();d.setHours(0,0,0,0);const day=d.getDay();d.setDate(d.getDate()-(day===0?6:day-1));return d;}
+    function toggleCoffeeForm(){const f=document.getElementById('coffee-form');if(f.style.display==='none'){f.style.display='flex';document.getElementById('cf-date').value=new Date().toISOString().slice(0,10);}else{f.style.display='none';}}
+    function renderCoffeeMeetings(){
+      const ws=getWeekStart();const we=new Date(ws);we.setDate(ws.getDate()+7);
+      const thisWeek=coffeeMeetings.filter(m=>{const d=new Date(m.date+'T12:00:00');return d>=ws&&d<we;}).length;
+      const goal=2;
+      const pips=Array.from({length:goal},(_,i)=>`<div class="coffee-pip${i<thisWeek?' filled':''}"></div>`).join('');
+      document.getElementById('coffee-progress').innerHTML=`<div class="coffee-progress-row"><div class="coffee-pips">${pips}</div><span class="coffee-count"><span class="cn">${thisWeek}</span> / ${goal} this week</span></div>`;
+      const log=document.getElementById('coffee-log');
+      if(!coffeeMeetings.length){log.innerHTML='';return;}
+      const sorted=[...coffeeMeetings].map((m,i)=>({...m,i})).sort((a,b)=>new Date(b.date)-new Date(a.date));
+      const weeks={};
+      sorted.forEach(m=>{const wk=getWeekStart(new Date(m.date+'T12:00:00'));const key=wk.getTime();if(!weeks[key])weeks[key]={start:wk,entries:[]};weeks[key].entries.push(m);});
+      const nowWS=ws.getTime();
+      log.innerHTML=Object.values(weeks).map(({start,entries})=>{
+        const isCurrent=start.getTime()===nowWS;
+        const end=new Date(start);end.setDate(start.getDate()+6);
+        const label=isCurrent?'This Week':start.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' &#x2013; '+end.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+        const rows=entries.map(m=>{const ds=new Date(m.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});return `<div class="coffee-entry"><div style="flex:1;"><div class="coffee-entry-name">${esc(m.name)}</div><div class="coffee-entry-meta">${ds}${m.notes?' &middot; '+esc(m.notes):''}</div></div><button class="tc-delete" onclick="deleteCoffeeMeeting(${m.i})">&#x2715;</button></div>`;}).join('');
+        return `<div class="coffee-week-label">${label}</div><div class="coffee-week-box">${rows}</div>`;
+      }).join('');
+    }
+    function saveCoffeeMeeting(){const name=document.getElementById('cf-name').value.trim();if(!name)return;const date=document.getElementById('cf-date').value||new Date().toISOString().slice(0,10);const notes=document.getElementById('cf-notes').value.trim();coffeeMeetings.push({name,date,notes});saveCoffee();renderCoffeeMeetings();toggleForm('coffee-form');['cf-name','cf-notes'].forEach(id=>document.getElementById(id).value='');}
+    function deleteCoffeeMeeting(i){coffeeMeetings.splice(i,1);saveCoffee();renderCoffeeMeetings();}
+
     function showContactsHome(e){e.preventDefault();if(isMobile())closeNav();document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');const main=document.getElementById('main-panel');main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById('contacts-panel').style.display='flex';renderContactsOverview();document.getElementById('contacts-dropdown').classList.toggle('open');}
     function showContactType(e,type){e.preventDefault();if(isMobile())closeNav();currentContactType=type;editConIdx=-1;document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');const main=document.getElementById('main-panel');main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById('contacts-type-panel').style.display='flex';renderContactsByType();}
 
