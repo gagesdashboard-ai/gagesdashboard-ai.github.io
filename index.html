@@ -56,6 +56,10 @@
     .cal-event-loc { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: #555; margin-top: 2px; }
     .cal-loading { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #444; }
     #widget-todo { grid-column: 2; grid-row: 2; }
+    .todo-tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+    .todo-tab { background: none; border: 1px solid #222; border-radius: 4px; color: #444; padding: 5px 16px; font-family: 'Inter', sans-serif; font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.15s; }
+    .todo-tab:hover { color: #888; border-color: #333; }
+    .todo-tab.active { border-color: #444; color: #ccc; background: #1e1e1e; }
     .todo-input-row { display: flex; gap: 8px; margin-bottom: 16px; }
     .todo-input { flex: 1; background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 4px; padding: 8px 12px; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #ccc; outline: none; }
     .todo-input::placeholder { color: #444; }
@@ -235,6 +239,10 @@
         </div>
         <div class="widget" id="widget-todo">
           <div class="widget-label">To-Do</div>
+          <div class="todo-tabs">
+            <button class="todo-tab active" id="tab-daily" onclick="switchTodoTab('daily')">Daily</button>
+            <button class="todo-tab" id="tab-weekly" onclick="switchTodoTab('weekly')">Weekly</button>
+          </div>
           <div class="todo-input-row">
             <input class="todo-input" id="todo-input" type="text" placeholder="Add a task..." />
             <button class="todo-add-btn" onclick="addTodo()">+ Add</button>
@@ -445,14 +453,57 @@
         }).catch(()=>{document.getElementById('cal-events').innerHTML='<span class="cal-empty">Could not load calendar</span>';});
     }
 
-    /* ── To-Do ── */
-    let todos=JSON.parse(localStorage.getItem('todos')||'[]');
-    function saveTodos(){localStorage.setItem('todos',JSON.stringify(todos));}
-    function renderTodos(){const list=document.getElementById('todo-list');list.innerHTML='';todos.forEach((t,i)=>{const li=document.createElement('li');li.className='todo-item';li.innerHTML=`<input type="checkbox" class="todo-checkbox" ${t.done?'checked':''} onchange="toggleTodo(${i})"/><span class="todo-text ${t.done?'done':''}">${t.text}</span><button class="todo-delete" onclick="deleteTodo(${i})">✕</button>`;list.appendChild(li);});}
-    function addTodo(){const inp=document.getElementById('todo-input');const t=inp.value.trim();if(!t)return;todos.push({text:t,done:false});saveTodos();renderTodos();inp.value='';}
-    function toggleTodo(i){todos[i].done=!todos[i].done;saveTodos();renderTodos();}
-    function deleteTodo(i){todos.splice(i,1);saveTodos();renderTodos();}
-    document.getElementById('todo-input').addEventListener('keydown',e=>{if(e.key==='Enter')addTodo();});
+    /* ── To-Do (Daily + Weekly) ── */
+    let todosDaily = JSON.parse(localStorage.getItem('todos_daily') || '[]');
+    let todosWeekly = JSON.parse(localStorage.getItem('todos_weekly') || '[]');
+    let todoMode = 'daily';
+
+    // Migrate old single 'todos' key into daily
+    (function migrateTodos(){
+      const old = localStorage.getItem('todos');
+      if (old && !localStorage.getItem('todos_daily')) {
+        todosDaily = JSON.parse(old);
+        localStorage.setItem('todos_daily', old);
+        localStorage.removeItem('todos');
+      }
+    })();
+
+    function curTodos(){ return todoMode === 'daily' ? todosDaily : todosWeekly; }
+    function saveTodos(){ localStorage.setItem(todoMode === 'daily' ? 'todos_daily' : 'todos_weekly', JSON.stringify(curTodos())); }
+
+    function switchTodoTab(mode){
+      todoMode = mode;
+      document.getElementById('tab-daily').classList.toggle('active', mode === 'daily');
+      document.getElementById('tab-weekly').classList.toggle('active', mode === 'weekly');
+      renderTodos();
+    }
+
+    function renderTodos(){
+      const list = document.getElementById('todo-list');
+      const todos = curTodos();
+      list.innerHTML = '';
+      todos.forEach((t, i) => {
+        const li = document.createElement('li');
+        li.className = 'todo-item';
+        li.innerHTML = `<input type="checkbox" class="todo-checkbox" ${t.done ? 'checked' : ''} onchange="toggleTodo(${i})"/><span class="todo-text ${t.done ? 'done' : ''}">${t.text}</span><button class="todo-delete" onclick="deleteTodo(${i})">✕</button>`;
+        list.appendChild(li);
+      });
+    }
+
+    function addTodo(){
+      const inp = document.getElementById('todo-input');
+      const t = inp.value.trim();
+      if (!t) return;
+      curTodos().push({text: t, done: false});
+      saveTodos();
+      renderTodos();
+      inp.value = '';
+    }
+
+    function toggleTodo(i){ curTodos()[i].done = !curTodos()[i].done; saveTodos(); renderTodos(); }
+    function deleteTodo(i){ curTodos().splice(i, 1); saveTodos(); renderTodos(); }
+
+    document.getElementById('todo-input').addEventListener('keydown', e => { if (e.key === 'Enter') addTodo(); });
     renderTodos();
 
     /* ── Deadline helpers ── */
@@ -464,8 +515,6 @@
 
     /* ─────────────────────────────────────────────────────────
        PDF SEED INJECTION — v1 (2026-06-25)
-       Listings extracted from PDFs uploaded by Gage.
-       Bump LISTING_SEED_VERSION each time new PDFs are pushed.
     ───────────────────────────────────────────────────────── */
     const LISTING_SEED_VERSION = 'v1';
     const LISTING_SEED = [
@@ -477,7 +526,6 @@
     /* ── Active Listings ── */
     let listings = JSON.parse(localStorage.getItem('listings') || '[]');
 
-    // Merge seed on version change — preserves existing edits, appends new addresses
     (function seedListings() {
       if (localStorage.getItem('lstSeedVer') !== LISTING_SEED_VERSION && LISTING_SEED.length) {
         const existing = new Set(listings.map(l => l.address.trim().toLowerCase()));
