@@ -38,7 +38,6 @@
 
     .panel-page { display: none; width: 100%; max-width: 860px; flex-direction: column; gap: 24px; }
 
-    /* Home */
     #home-panel { display: none; width: 100%; height: 100%; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; gap: 16px; }
     .widget { background: #141414; border-radius: 8px; padding: 20px 24px; display: flex; flex-direction: column; }
     .widget-label { font-family: 'Inter', sans-serif; font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: #444; margin-bottom: 12px; }
@@ -84,7 +83,6 @@
     .todo-delete { background: none; border: none; color: #333; cursor: pointer; font-size: 0.9rem; padding: 0 4px; transition: color 0.15s; }
     .todo-delete:hover { color: #888; }
 
-    /* Profile cards */
     .card { width: 100%; max-width: 600px; }
     .card-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
     .card-title { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 32px; color: #fff; }
@@ -118,7 +116,6 @@
     .claims-note a { color: #666; text-decoration: none; }
     .claims-note a:hover { color: #aaa; }
 
-    /* Tracker shared */
     .tracker-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .tracker-title { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.5px; color: #fff; }
     .tracker-label { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 20px; }
@@ -138,7 +135,6 @@
     .form-cancel { background: none; border: none; color: #444; padding: 8px 12px; font-family: 'Inter', sans-serif; font-size: 0.78rem; cursor: pointer; transition: color 0.15s; }
     .form-cancel:hover { color: #888; }
 
-    /* Tracker cards */
     .tracker-card { background: #111; border: 1px solid #1e1e1e; border-radius: 8px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .tracker-card:hover { border-color: #2a2a2a; }
     .tc-main { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
@@ -161,7 +157,6 @@
     .tc-delete { background: none; border: none; color: #2a2a2a; cursor: pointer; font-size: 1rem; padding: 4px 2px; transition: color 0.15s; }
     .tc-delete:hover { color: #888; }
 
-    /* Inline edit card */
     .edit-card { background: #111; border: 1px solid #2a2a2a; border-radius: 8px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
     .edit-input { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4px; padding: 7px 10px; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #ccc; outline: none; min-width: 80px; }
     .edit-input:focus { border-color: #444; }
@@ -170,7 +165,6 @@
     .edit-select option { background: #1a1a1a; }
     .edit-actions { display: flex; gap: 6px; margin-left: auto; }
 
-    /* Proforma */
     .proforma-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
     .proforma-section { padding: 24px; }
     .proforma-section:first-child { border-right: 1px solid #1e1e1e; }
@@ -185,7 +179,6 @@
     .pf-value.neg { color: #E05252; }
     .pf-divider { border: none; border-top: 1px solid #1e1e1e; margin: 4px 0; }
 
-    /* ── Contacts CRM ── */
     .contacts-stats { display: flex; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
     .cstat { background: #111; border: 1px solid #1e1e1e; border-radius: 8px; padding: 16px 20px; flex: 1; min-width: 110px; display: flex; flex-direction: column; gap: 4px; }
     .cstat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 600; color: #fff; line-height: 1; }
@@ -205,7 +198,6 @@
     .log-btn { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4px; color: #555; padding: 6px 12px; font-family: 'Inter', sans-serif; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: color 0.15s, border-color 0.15s; white-space: nowrap; flex-shrink: 0; }
     .log-btn:hover { color: #4CAF7D; border-color: #4CAF7D; }
 
-    /* ── Coffee Meetings ── */
     .coffee-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
     .coffee-section-label { font-family: 'Inter', sans-serif; font-size: 0.62rem; letter-spacing: 2.5px; text-transform: uppercase; color: #555; margin-bottom: 8px; border-top: 1px solid #1a1a1a; padding-top: 16px; }
     .coffee-progress-row { display: flex; align-items: center; gap: 10px; }
@@ -228,49 +220,28 @@
       header .subtitle { font-size: 0.6rem; letter-spacing: 2.5px; }
       .logo { height: 52px; right: 16px; }
       .hamburger { display: flex; }
-
-      nav {
-        position: fixed;
-        top: 0; left: -100%;
-        width: 260px; height: 100vh;
-        background: #111;
-        border-right: 1px solid #1e1e1e;
-        z-index: 100;
-        padding: 80px 0 40px;
-        justify-content: flex-start;
-        gap: 0;
-        transition: left 0.28s ease;
-        overflow-y: auto;
-      }
+      nav { position: fixed; top: 0; left: -100%; width: 260px; height: 100vh; background: #111; border-right: 1px solid #1e1e1e; z-index: 100; padding: 80px 0 40px; justify-content: flex-start; gap: 0; transition: left 0.28s ease; overflow-y: auto; }
       nav.nav-open { left: 0; }
       nav a { padding: 16px 24px; text-align: left; font-size: 1.05rem; }
       .dropdown a { text-align: left; padding: 10px 36px; }
-
       .layout { flex-direction: column; }
       main { padding: 16px; align-items: flex-start; }
-
       #home-panel { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
       #widget-calendar { grid-column: 1; grid-row: auto; min-height: 200px; }
       #widget-todo { grid-column: 1; grid-row: auto; }
-
       .card { max-width: 100%; }
       .fields { grid-template-columns: 1fr; gap: 20px; }
-
       .proforma-grid { grid-template-columns: 1fr; }
       .proforma-section:first-child { border-right: none; border-bottom: 1px solid #1e1e1e; }
       .pf-input { width: 100px; }
-
       .tracker-card { flex-wrap: wrap; gap: 10px; }
       .tc-right { width: 100%; justify-content: flex-start; }
       .tc-name { white-space: normal; }
-
       .panel-page { max-width: 100%; }
       .add-form { padding: 14px; }
       .add-form input, .add-form select { min-width: 0; }
-
       .followup-card { flex-wrap: wrap; gap: 8px; }
       .fc-days { margin-left: 0; padding-right: 0; }
-
       .coffee-header { flex-wrap: wrap; gap: 8px; }
     }
   </style>
@@ -278,13 +249,8 @@
 <body>
   <div class="nav-overlay" id="nav-overlay" onclick="closeNav()"></div>
   <header>
-    <button class="hamburger" id="hamburger" onclick="openNav()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="header-text">
-      <h1>Gage Burd</h1>
-      <div class="subtitle">Real Estate Dashboard</div>
-    </div>
+    <button class="hamburger" id="hamburger" onclick="openNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="header-text"><h1>Gage Burd</h1><div class="subtitle">Real Estate Dashboard</div></div>
     <img class="logo" src="https://www.shepherdgroupre.com/wp-content/uploads/sites/2492/2025/07/Logo-with-bottom-padding.png" alt="Shepherd Group" />
   </header>
   <div class="layout">
@@ -324,302 +290,81 @@
           <a href="#" onclick="showContactType(event,'professional')">RE Professionals</a>
         </div>
       </div>
+      <a href="#" onclick="showPanel(event,'settings-panel')" style="font-size:0.85rem;padding:12px 16px;color:#2a2a2a;margin-top:auto;">&#x2699; Settings</a>
     </nav>
     <main id="main-panel">
 
-      <!-- HOME -->
       <div id="home-panel" style="display:none;">
-        <div class="widget" id="widget-datetime">
-          <div class="widget-label">Date &amp; Time</div>
-          <div class="time" id="clock">--:--</div>
-          <div class="date" id="datestr">--</div>
-        </div>
-        <div class="widget" id="widget-weather">
-          <div class="widget-label">Nashville Weather</div>
-          <div class="weather-main">
-            <div class="weather-icon" id="weather-icon">--</div>
-            <div class="temp" id="weather-temp">--&deg;</div>
-          </div>
-          <div class="condition" id="weather-condition">Loading...</div>
-        </div>
-        <div class="widget" id="widget-calendar">
-          <div class="widget-header">
-            <div class="widget-label">Upcoming Schedule</div>
-            <button class="cal-refresh" onclick="loadCalendar()">&#x21BB; Refresh</button>
-          </div>
-          <div id="cal-events"><span class="cal-loading">Loading calendar...</span></div>
-        </div>
-        <div class="widget" id="widget-todo">
-          <div class="widget-label">To-Do</div>
-          <div class="todo-tabs">
-            <button class="todo-tab active" id="tab-daily" onclick="switchTodoTab('daily')">Daily</button>
-            <button class="todo-tab" id="tab-weekly" onclick="switchTodoTab('weekly')">Weekly</button>
-          </div>
-          <div class="todo-input-row">
-            <input class="todo-input" id="todo-input" type="text" placeholder="Add a task..." />
-            <button class="todo-add-btn" onclick="addTodo()">+ Add</button>
-          </div>
-          <ul class="todo-list" id="todo-list"></ul>
-        </div>
+        <div class="widget" id="widget-datetime"><div class="widget-label">Date &amp; Time</div><div class="time" id="clock">--:--</div><div class="date" id="datestr">--</div></div>
+        <div class="widget" id="widget-weather"><div class="widget-label">Nashville Weather</div><div class="weather-main"><div class="weather-icon" id="weather-icon">--</div><div class="temp" id="weather-temp">--&deg;</div></div><div class="condition" id="weather-condition">Loading...</div></div>
+        <div class="widget" id="widget-calendar"><div class="widget-header"><div class="widget-label">Upcoming Schedule</div><button class="cal-refresh" onclick="loadCalendar()">&#x21BB; Refresh</button></div><div id="cal-events"><span class="cal-loading">Loading calendar...</span></div></div>
+        <div class="widget" id="widget-todo"><div class="widget-label">To-Do</div><div class="todo-tabs"><button class="todo-tab active" id="tab-daily" onclick="switchTodoTab('daily')">Daily</button><button class="todo-tab" id="tab-weekly" onclick="switchTodoTab('weekly')">Weekly</button></div><div class="todo-input-row"><input class="todo-input" id="todo-input" type="text" placeholder="Add a task..." /><button class="todo-add-btn" onclick="addTodo()">+ Add</button></div><ul class="todo-list" id="todo-list"></ul></div>
       </div>
 
-      <!-- E&O -->
-      <div id="eo-panel" class="card" style="display:none;">
-        <div class="card-label">Profile / Insurance</div>
-        <div class="card-title">Errors &amp; Omissions Policy</div>
-        <div class="status-badge"><div class="status-dot" id="eo-status-dot"></div><span class="status-text" id="eo-status-text"></span></div>
-        <hr class="divider" />
-        <div class="fields">
-          <div><div class="field-label">Carrier</div><div class="field-value">Continental Casualty Co. (CNA)</div></div>
-          <div><div class="field-label">Producer</div><div class="field-value">Rice Insurance (RISC)</div></div>
-          <div><div class="field-label">Policy Number</div><div class="field-value highlight">26 EO 0033KY</div></div>
-          <div><div class="field-label">License</div><div class="field-value">KY: 293113&ndash;S</div></div>
-          <div><div class="field-label">Effective Date</div><div class="field-value">April 1, 2026</div></div>
-          <div><div class="field-label">Expiration Date</div><div class="field-value highlight">April 1, 2028</div></div>
-          <div><div class="field-label">Per Claim Limit</div><div class="field-value">$100,000</div></div>
-          <div><div class="field-label">Aggregate Limit</div><div class="field-value">$1,000,000</div></div>
-          <div><div class="field-label">Deductible</div><div class="field-value">$0</div></div>
-          <div><div class="field-label">Days Remaining</div><div class="field-value highlight" id="eo-days"></div></div>
-        </div>
-        <div class="claims-note">To report a claim contact RISC in writing within 90 days.<br />Email: <a href="mailto:claims@risceo.com">claims@risceo.com</a> &nbsp;&middot;&nbsp; Phone: <a href="tel:18006377319">(800) 637-7319</a></div>
-      </div>
+      <div id="eo-panel" class="card" style="display:none;"><div class="card-label">Profile / Insurance</div><div class="card-title">Errors &amp; Omissions Policy</div><div class="status-badge"><div class="status-dot" id="eo-status-dot"></div><span class="status-text" id="eo-status-text"></span></div><hr class="divider" /><div class="fields"><div><div class="field-label">Carrier</div><div class="field-value">Continental Casualty Co. (CNA)</div></div><div><div class="field-label">Producer</div><div class="field-value">Rice Insurance (RISC)</div></div><div><div class="field-label">Policy Number</div><div class="field-value highlight">26 EO 0033KY</div></div><div><div class="field-label">License</div><div class="field-value">KY: 293113&ndash;S</div></div><div><div class="field-label">Effective Date</div><div class="field-value">April 1, 2026</div></div><div><div class="field-label">Expiration Date</div><div class="field-value highlight">April 1, 2028</div></div><div><div class="field-label">Per Claim Limit</div><div class="field-value">$100,000</div></div><div><div class="field-label">Aggregate Limit</div><div class="field-value">$1,000,000</div></div><div><div class="field-label">Deductible</div><div class="field-value">$0</div></div><div><div class="field-label">Days Remaining</div><div class="field-value highlight" id="eo-days"></div></div></div><div class="claims-note">To report a claim contact RISC in writing within 90 days.<br />Email: <a href="mailto:claims@risceo.com">claims@risceo.com</a> &nbsp;&middot;&nbsp; Phone: <a href="tel:18006377319">(800) 637-7319</a></div></div>
 
-      <!-- KREC -->
-      <div id="krec-panel" class="card" style="display:none;">
-        <div class="card-label">Profile / Licensing</div>
-        <div class="card-title">KREC License</div>
-        <hr class="divider" />
-        <div class="fields" style="margin-bottom:36px;">
-          <div><div class="field-label">License Type</div><div class="field-value">Sales Associate</div></div>
-          <div><div class="field-label">License Number</div><div class="field-value highlight">293113</div></div>
-          <div><div class="field-label">Status</div><div class="field-value highlight" style="color:#4CAF7D;">Active</div></div>
-          <div><div class="field-label">Issue Date</div><div class="field-value">July 10, 2024</div></div>
-          <div><div class="field-label">Post-Licensing Education</div><div class="field-value highlight" style="color:#4CAF7D;">&#x2713; Completed June 18, 2026</div></div>
-          <div><div class="field-label">Affiliated Broker</div><div class="field-value">BHG Realty</div></div>
-        </div>
-        <div class="field-label" style="margin-bottom:14px; letter-spacing:2.5px;">Upcoming Deadlines</div>
-        <div class="deadline-grid" id="krec-deadlines"></div>
-        <div class="claims-note">Kentucky Real Estate Commission &nbsp;&middot;&nbsp; <a href="https://oop.ky.gov/DPLServices/Logout.aspx" target="_blank">Log in to KREC Portal &rarr;</a></div>
-      </div>
+      <div id="krec-panel" class="card" style="display:none;"><div class="card-label">Profile / Licensing</div><div class="card-title">KREC License</div><hr class="divider" /><div class="fields" style="margin-bottom:36px;"><div><div class="field-label">License Type</div><div class="field-value">Sales Associate</div></div><div><div class="field-label">License Number</div><div class="field-value highlight">293113</div></div><div><div class="field-label">Status</div><div class="field-value highlight" style="color:#4CAF7D;">Active</div></div><div><div class="field-label">Issue Date</div><div class="field-value">July 10, 2024</div></div><div><div class="field-label">Post-Licensing Education</div><div class="field-value highlight" style="color:#4CAF7D;">&#x2713; Completed June 18, 2026</div></div><div><div class="field-label">Affiliated Broker</div><div class="field-value">BHG Realty</div></div></div><div class="field-label" style="margin-bottom:14px;letter-spacing:2.5px;">Upcoming Deadlines</div><div class="deadline-grid" id="krec-deadlines"></div><div class="claims-note">Kentucky Real Estate Commission &nbsp;&middot;&nbsp; <a href="https://oop.ky.gov/DPLServices/Logout.aspx" target="_blank">Log in to KREC Portal &rarr;</a></div></div>
 
-      <!-- TREC -->
-      <div id="trec-panel" class="card" style="display:none;">
-        <div class="card-label">Profile / Licensing</div>
-        <div class="card-title">TREC License</div>
-        <hr class="divider" />
-        <div class="fields" style="margin-bottom:36px;">
-          <div><div class="field-label">License Type</div><div class="field-value">Affiliate Broker</div></div>
-          <div><div class="field-label">License Number</div><div class="field-value highlight">382231</div></div>
-          <div><div class="field-label">Status</div><div class="field-value highlight" style="color:#4CAF7D;">Active</div></div>
-          <div><div class="field-label">State</div><div class="field-value">Tennessee</div></div>
-          <div><div class="field-label">Issuing Authority</div><div class="field-value">Dept. of Commerce &amp; Insurance</div></div>
-          <div><div class="field-label">Address</div><div class="field-value">3615 Wilbur Pl, Nashville TN 37204</div></div>
-        </div>
-        <div class="field-label" style="margin-bottom:14px; letter-spacing:2.5px;">Upcoming Deadlines</div>
-        <div class="deadline-grid" id="trec-deadlines"></div>
-        <div class="claims-note">Tennessee Real Estate Commission &nbsp;&middot;&nbsp; <a href="https://licensedprofessions.tn.gov/" target="_blank">Log in to TREC Portal &rarr;</a></div>
-      </div>
+      <div id="trec-panel" class="card" style="display:none;"><div class="card-label">Profile / Licensing</div><div class="card-title">TREC License</div><hr class="divider" /><div class="fields" style="margin-bottom:36px;"><div><div class="field-label">License Type</div><div class="field-value">Affiliate Broker</div></div><div><div class="field-label">License Number</div><div class="field-value highlight">382231</div></div><div><div class="field-label">Status</div><div class="field-value highlight" style="color:#4CAF7D;">Active</div></div><div><div class="field-label">State</div><div class="field-value">Tennessee</div></div><div><div class="field-label">Issuing Authority</div><div class="field-value">Dept. of Commerce &amp; Insurance</div></div><div><div class="field-label">Address</div><div class="field-value">3615 Wilbur Pl, Nashville TN 37204</div></div></div><div class="field-label" style="margin-bottom:14px;letter-spacing:2.5px;">Upcoming Deadlines</div><div class="deadline-grid" id="trec-deadlines"></div><div class="claims-note">Tennessee Real Estate Commission &nbsp;&middot;&nbsp; <a href="https://licensedprofessions.tn.gov/" target="_blank">Log in to TREC Portal &rarr;</a></div></div>
 
-      <!-- ACTIVE DEALS -->
-      <div id="deals-panel" class="panel-page">
-        <div class="tracker-header">
-          <div><div class="tracker-label">Commercial</div><div class="tracker-title">Active Deals</div></div>
-          <button class="add-btn" onclick="toggleForm('deals-form')">+ Add Deal</button>
-        </div>
-        <div class="add-form" id="deals-form" style="display:none;">
-          <input id="deal-address" placeholder="Property address" style="flex:2;" />
-          <input id="deal-price" placeholder="Price" />
-          <select id="deal-stage">
-            <option value="loi">LOI</option>
-            <option value="contract">Under Contract</option>
-            <option value="diligence">Due Diligence</option>
-            <option value="closed">Closed</option>
-          </select>
-          <input id="deal-close" type="date" title="Target close date" />
-          <input id="deal-notes" placeholder="Notes" style="flex:2;" />
-          <div class="form-actions">
-            <button class="form-save" onclick="saveDeal()">Save</button>
-            <button class="form-cancel" onclick="toggleForm('deals-form')">Cancel</button>
+      <div id="deals-panel" class="panel-page"><div class="tracker-header"><div><div class="tracker-label">Commercial</div><div class="tracker-title">Active Deals</div></div><button class="add-btn" onclick="toggleForm('deals-form')">+ Add Deal</button></div><div class="add-form" id="deals-form" style="display:none;"><input id="deal-address" placeholder="Property address" style="flex:2;" /><input id="deal-price" placeholder="Price" /><select id="deal-stage"><option value="loi">LOI</option><option value="contract">Under Contract</option><option value="diligence">Due Diligence</option><option value="closed">Closed</option></select><input id="deal-close" type="date" title="Target close date" /><input id="deal-notes" placeholder="Notes" style="flex:2;" /><div class="form-actions"><button class="form-save" onclick="saveDeal()">Save</button><button class="form-cancel" onclick="toggleForm('deals-form')">Cancel</button></div></div><div class="tracker-list" id="deals-list"></div></div>
+
+      <div id="proforma-panel" class="panel-page"><div class="tracker-header"><div><div class="tracker-label">Commercial</div><div class="tracker-title">Proforma</div></div></div><div style="background:#111;border:1px solid #1e1e1e;border-radius:8px;overflow:hidden;"><div class="proforma-grid"><div class="proforma-section"><div class="proforma-section-title">Acquisition</div><div class="pf-row"><span class="pf-label">Purchase Price</span><input class="pf-input" id="pf-price" placeholder="0" oninput="calcProforma()" /></div><div class="pf-row"><span class="pf-label">Down Payment %</span><input class="pf-input" id="pf-down" placeholder="25" oninput="calcProforma()" /></div><div class="pf-row"><span class="pf-label">Loan Amount</span><span class="pf-value" id="pf-loan">&mdash;</span></div><div class="pf-row"><span class="pf-label">Interest Rate %</span><input class="pf-input" id="pf-rate" placeholder="6.5" oninput="calcProforma()" /></div><div class="pf-row"><span class="pf-label">Loan Term (yrs)</span><input class="pf-input" id="pf-term" placeholder="25" oninput="calcProforma()" /></div><div class="pf-row"><span class="pf-label">Annual Debt Service</span><span class="pf-value" id="pf-debt">&mdash;</span></div></div><div class="proforma-section"><div class="proforma-section-title">Income &amp; Returns</div><div class="pf-row"><span class="pf-label">Gross Annual Rent</span><input class="pf-input" id="pf-rent" placeholder="0" oninput="calcProforma()" /></div><div class="pf-row"><span class="pf-label">Vacancy %</span><input class="pf-input" id="pf-vac" placeholder="5" oninput="calcProforma()" /></div><div class="pf-row"><span class="pf-label">Annual Expenses</span><input class="pf-input" id="pf-exp" placeholder="0" oninput="calcProforma()" /></div><div class="pf-row"><span class="pf-label">NOI</span><span class="pf-value" id="pf-noi">&mdash;</span></div><hr class="pf-divider" /><div class="pf-row"><span class="pf-label">Cap Rate</span><span class="pf-value" id="pf-cap">&mdash;</span></div><div class="pf-row"><span class="pf-label">Annual Cash Flow</span><span class="pf-value" id="pf-cf">&mdash;</span></div><div class="pf-row"><span class="pf-label">Cash-on-Cash Return</span><span class="pf-value" id="pf-coc">&mdash;</span></div></div></div></div></div>
+
+      <div id="listings-panel" class="panel-page"><div class="tracker-header"><div><div class="tracker-label">Residential</div><div class="tracker-title">Active Listings</div></div><button class="add-btn" onclick="toggleForm('listings-form')">+ Add Listing</button></div><div class="add-form" id="listings-form" style="display:none;"><input id="lst-address" placeholder="Property address" style="flex:2;" /><input id="lst-price" placeholder="List price" /><select id="lst-stage"><option value="active">Active</option><option value="pending">Under Contract</option><option value="sold">Sold</option></select><input id="lst-date" type="date" title="List date" /><div class="form-actions"><button class="form-save" onclick="saveListing()">Save</button><button class="form-cancel" onclick="toggleForm('listings-form')">Cancel</button></div></div><div class="tracker-list" id="listings-list"></div></div>
+
+      <div id="pipeline-panel" class="panel-page"><div class="tracker-header"><div><div class="tracker-label">Residential</div><div class="tracker-title">Pipeline</div></div><button class="add-btn" onclick="toggleForm('pipeline-form')">+ Add Client</button></div><div class="add-form" id="pipeline-form" style="display:none;"><input id="pipe-name" placeholder="Client name" /><select id="pipe-type"><option value="buyer">Buyer</option><option value="seller">Seller</option></select><input id="pipe-property" placeholder="Property / target area" style="flex:2;" /><select id="pipe-stage"><option value="lead">Lead</option><option value="active">Active</option><option value="contract">Under Contract</option><option value="closed">Closed</option></select><input id="pipe-next" placeholder="Next action" style="flex:2;" /><div class="form-actions"><button class="form-save" onclick="savePipeline()">Save</button><button class="form-cancel" onclick="toggleForm('pipeline-form')">Cancel</button></div></div><div class="tracker-list" id="pipeline-list"></div></div>
+
+      <div id="contacts-panel" class="panel-page"><div class="tracker-header" style="margin-bottom:20px;"><div><div class="tracker-label">Networking CRM</div><div class="tracker-title">Contacts Overview</div></div></div><div class="contacts-stats" id="contacts-stats"></div><div id="coffee-section" style="margin-top:8px;"><div class="coffee-header"><div><div class="coffee-section-label">Coffee Meetings</div><div id="coffee-progress"></div></div><button class="add-btn" onclick="toggleCoffeeForm()">+ Log Meeting</button></div><div class="add-form" id="coffee-form" style="display:none;"><input id="cf-name" placeholder="Name" style="flex:1;" /><input id="cf-date" type="date" style="width:150px;" /><input id="cf-notes" placeholder="Notes (optional)" style="flex:2;" /><div class="form-actions"><button class="form-save" onclick="saveCoffeeMeeting()">Save</button><button class="form-cancel" onclick="toggleForm('coffee-form')">Cancel</button></div></div><div id="coffee-log"></div></div><div class="followup-section-header" style="margin-top:20px;">Follow-Up Reminders</div><div id="contacts-followup-list"></div></div>
+
+      <div id="contacts-type-panel" class="panel-page"><div class="tracker-header"><div><div class="tracker-label" id="ctype-label">Contacts</div><div class="tracker-title" id="ctype-title"></div></div><button class="add-btn" onclick="toggleForm('contacts-type-form')">+ Add Contact</button></div><div class="add-form" id="contacts-type-form" style="display:none;"><input id="ctype-name" placeholder="Name" style="flex:1;" /><input id="ctype-phone" placeholder="Phone" style="width:140px;" /><input id="ctype-email" placeholder="Email" style="flex:1;" /><input id="ctype-followup" placeholder="Follow-up days" type="number" style="width:130px;" /><div class="form-actions"><button class="form-save" onclick="saveContactType()">Save</button><button class="form-cancel" onclick="toggleForm('contacts-type-form')">Cancel</button></div></div><div class="tracker-list" id="contacts-type-list"></div></div>
+
+      <!-- SETTINGS -->
+      <div id="settings-panel" class="card" style="display:none;">
+        <div class="card-label">Data / Sync</div>
+        <div class="card-title">Google Sheets</div>
+        <div id="sheets-status"></div>
+        <hr class="divider" style="margin-top:16px;" />
+        <div style="margin-bottom:20px;">
+          <div class="field-label" style="margin-bottom:10px;letter-spacing:2.5px;">Apps Script URL</div>
+          <input id="sheets-url-input" style="width:100%;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:4px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:0.82rem;color:#ccc;outline:none;box-sizing:border-box;" placeholder="https://script.google.com/macros/s/.../exec" />
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="form-save" onclick="saveAndTestSheetsUrl()">Save &amp; Connect</button>
+            <button class="form-save" onclick="forceSyncToSheets()" style="border-color:#4A6FA5;color:#5a9fd4;">&#x21BB; Force Sync Now</button>
+            <button class="form-cancel" onclick="clearSheetsUrl()">Disconnect</button>
           </div>
         </div>
-        <div class="tracker-list" id="deals-list"></div>
-      </div>
-
-      <!-- PROFORMA -->
-      <div id="proforma-panel" class="panel-page">
-        <div class="tracker-header">
-          <div><div class="tracker-label">Commercial</div><div class="tracker-title">Proforma</div></div>
+        <div class="claims-note" style="line-height:2.2;">
+          <strong style="color:#666;">One-time setup:</strong><br/>
+          1. Open your Google Sheet &rarr; <strong>Extensions &rarr; Apps Script</strong><br/>
+          2. Delete any existing code, paste the <strong>SheetsAPI.gs</strong> script<br/>
+          3. Click <strong>Deploy &rarr; New deployment &rarr; Web app</strong><br/>
+          4. Set <em>Execute as: Me</em> &nbsp;&middot;&nbsp; <em>Who has access: Anyone</em> &rarr; Deploy<br/>
+          5. Copy the web app URL and paste it above &rarr; Save &amp; Connect<br/><br/>
+          Synced: Contacts, Coffee Meetings, Deals, Listings, Pipeline. Every save auto-syncs.
         </div>
-        <div style="background:#111; border:1px solid #1e1e1e; border-radius:8px; overflow:hidden;">
-          <div class="proforma-grid">
-            <div class="proforma-section">
-              <div class="proforma-section-title">Acquisition</div>
-              <div class="pf-row"><span class="pf-label">Purchase Price</span><input class="pf-input" id="pf-price" placeholder="0" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">Down Payment %</span><input class="pf-input" id="pf-down" placeholder="25" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">Loan Amount</span><span class="pf-value" id="pf-loan">&mdash;</span></div>
-              <div class="pf-row"><span class="pf-label">Interest Rate %</span><input class="pf-input" id="pf-rate" placeholder="6.5" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">Loan Term (yrs)</span><input class="pf-input" id="pf-term" placeholder="25" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">Annual Debt Service</span><span class="pf-value" id="pf-debt">&mdash;</span></div>
-            </div>
-            <div class="proforma-section">
-              <div class="proforma-section-title">Income &amp; Returns</div>
-              <div class="pf-row"><span class="pf-label">Gross Annual Rent</span><input class="pf-input" id="pf-rent" placeholder="0" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">Vacancy %</span><input class="pf-input" id="pf-vac" placeholder="5" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">Annual Expenses</span><input class="pf-input" id="pf-exp" placeholder="0" oninput="calcProforma()" /></div>
-              <div class="pf-row"><span class="pf-label">NOI</span><span class="pf-value" id="pf-noi">&mdash;</span></div>
-              <hr class="pf-divider" />
-              <div class="pf-row"><span class="pf-label">Cap Rate</span><span class="pf-value" id="pf-cap">&mdash;</span></div>
-              <div class="pf-row"><span class="pf-label">Annual Cash Flow</span><span class="pf-value" id="pf-cf">&mdash;</span></div>
-              <div class="pf-row"><span class="pf-label">Cash-on-Cash Return</span><span class="pf-value" id="pf-coc">&mdash;</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ACTIVE LISTINGS -->
-      <div id="listings-panel" class="panel-page">
-        <div class="tracker-header">
-          <div><div class="tracker-label">Residential</div><div class="tracker-title">Active Listings</div></div>
-          <button class="add-btn" onclick="toggleForm('listings-form')">+ Add Listing</button>
-        </div>
-        <div class="add-form" id="listings-form" style="display:none;">
-          <input id="lst-address" placeholder="Property address" style="flex:2;" />
-          <input id="lst-price" placeholder="List price" />
-          <select id="lst-stage">
-            <option value="active">Active</option>
-            <option value="pending">Under Contract</option>
-            <option value="sold">Sold</option>
-          </select>
-          <input id="lst-date" type="date" title="List date" />
-          <div class="form-actions">
-            <button class="form-save" onclick="saveListing()">Save</button>
-            <button class="form-cancel" onclick="toggleForm('listings-form')">Cancel</button>
-          </div>
-        </div>
-        <div class="tracker-list" id="listings-list"></div>
-      </div>
-
-      <!-- PIPELINE -->
-      <div id="pipeline-panel" class="panel-page">
-        <div class="tracker-header">
-          <div><div class="tracker-label">Residential</div><div class="tracker-title">Pipeline</div></div>
-          <button class="add-btn" onclick="toggleForm('pipeline-form')">+ Add Client</button>
-        </div>
-        <div class="add-form" id="pipeline-form" style="display:none;">
-          <input id="pipe-name" placeholder="Client name" />
-          <select id="pipe-type">
-            <option value="buyer">Buyer</option>
-            <option value="seller">Seller</option>
-          </select>
-          <input id="pipe-property" placeholder="Property / target area" style="flex:2;" />
-          <select id="pipe-stage">
-            <option value="lead">Lead</option>
-            <option value="active">Active</option>
-            <option value="contract">Under Contract</option>
-            <option value="closed">Closed</option>
-          </select>
-          <input id="pipe-next" placeholder="Next action" style="flex:2;" />
-          <div class="form-actions">
-            <button class="form-save" onclick="savePipeline()">Save</button>
-            <button class="form-cancel" onclick="toggleForm('pipeline-form')">Cancel</button>
-          </div>
-        </div>
-        <div class="tracker-list" id="pipeline-list"></div>
-      </div>
-
-      <!-- CONTACTS OVERVIEW -->
-      <div id="contacts-panel" class="panel-page">
-        <div class="tracker-header" style="margin-bottom:20px;">
-          <div><div class="tracker-label">Networking CRM</div><div class="tracker-title">Contacts Overview</div></div>
-        </div>
-        <div class="contacts-stats" id="contacts-stats"></div>
-
-        <!-- Coffee Meetings -->
-        <div id="coffee-section" style="margin-top:8px;">
-          <div class="coffee-header">
-            <div>
-              <div class="coffee-section-label">Coffee Meetings</div>
-              <div id="coffee-progress"></div>
-            </div>
-            <button class="add-btn" onclick="toggleCoffeeForm()">+ Log Meeting</button>
-          </div>
-          <div class="add-form" id="coffee-form" style="display:none;">
-            <input id="cf-name" placeholder="Name" style="flex:1;" />
-            <input id="cf-date" type="date" style="width:150px;" />
-            <input id="cf-notes" placeholder="Notes (optional)" style="flex:2;" />
-            <div class="form-actions">
-              <button class="form-save" onclick="saveCoffeeMeeting()">Save</button>
-              <button class="form-cancel" onclick="toggleForm('coffee-form')">Cancel</button>
-            </div>
-          </div>
-          <div id="coffee-log"></div>
-        </div>
-
-        <div class="followup-section-header" style="margin-top:20px;">Follow-Up Reminders</div>
-        <div id="contacts-followup-list"></div>
-      </div>
-
-      <!-- CONTACTS TYPE LIST -->
-      <div id="contacts-type-panel" class="panel-page">
-        <div class="tracker-header">
-          <div><div class="tracker-label" id="ctype-label">Contacts</div><div class="tracker-title" id="ctype-title"></div></div>
-          <button class="add-btn" onclick="toggleForm('contacts-type-form')">+ Add Contact</button>
-        </div>
-        <div class="add-form" id="contacts-type-form" style="display:none;">
-          <input id="ctype-name" placeholder="Name" style="flex:1;" />
-          <input id="ctype-phone" placeholder="Phone" style="width:140px;" />
-          <input id="ctype-email" placeholder="Email" style="flex:1;" />
-          <input id="ctype-followup" placeholder="Follow-up days" type="number" style="width:130px;" />
-          <div class="form-actions">
-            <button class="form-save" onclick="saveContactType()">Save</button>
-            <button class="form-cancel" onclick="toggleForm('contacts-type-form')">Cancel</button>
-          </div>
-        </div>
-        <div class="tracker-list" id="contacts-type-list"></div>
       </div>
 
     </main>
   </div>
 
   <script>
-    /* ── Clock ── */
     function updateClock(){const now=new Date();const h=now.getHours(),m=now.getMinutes();document.getElementById('clock').textContent=(h%12||12)+':'+String(m).padStart(2,'0')+' '+(h>=12?'PM':'AM');const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];const months=['January','February','March','April','May','June','July','August','September','October','November','December'];document.getElementById('datestr').textContent=days[now.getDay()]+', '+months[now.getMonth()]+' '+now.getDate()+', '+now.getFullYear();}
     updateClock();setInterval(updateClock,1000);
 
-    /* ── Weather ── */
     function weatherIcon(c){return c===0?'☀️':c<=3?'⛅':c<=48?'🌫️':c<=55?'🌦️':c<=65?'🌧️':c<=77?'❄️':c<=82?'🌧️':'⛈️';}
     function weatherDesc(c){return c===0?'Clear sky':c===1?'Mainly clear':c===2?'Partly cloudy':c===3?'Overcast':c<=48?'Foggy':c<=55?'Drizzle':c<=65?'Rainy':c<=77?'Snowy':c<=82?'Rain showers':'Thunderstorm';}
     fetch('https://api.open-meteo.com/v1/forecast?latitude=36.1627&longitude=-86.7816&current=temperature_2m,weathercode&temperature_unit=fahrenheit')
       .then(r=>r.json()).then(d=>{document.getElementById('weather-temp').innerHTML=Math.round(d.current.temperature_2m)+'&deg;F';document.getElementById('weather-icon').textContent=weatherIcon(d.current.weathercode);document.getElementById('weather-condition').textContent=weatherDesc(d.current.weathercode);}).catch(()=>{document.getElementById('weather-condition').textContent='Unavailable';});
 
-    /* ── Calendar (7-day) ── */
     const ICS_URL='https://outlook.office365.com/owa/calendar/12181659029f4cf7806875d56986eb19@shepherdgroupre.com/86fc5440fc8a4049bf0e02a753ba57c57529967293964519218/calendar.ics';
     const CAL_DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const CAL_MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     function parseICSDate(str){if(!str)return null;const s=str.replace('Z','').replace(/[:-]/g,'');if(s.length===8)return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8));return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8),+s.slice(9,11)||0,+s.slice(11,13)||0);}
     function fmtTime(d){if(!d||isNaN(d))return'All day';const h=d.getHours(),m=d.getMinutes();return(h%12||12)+(m?':'+String(m).padStart(2,'0'):'')+(h>=12?'pm':'am');}
     function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
-    function loadCalendar(){
-      document.getElementById('cal-events').innerHTML='<span class="cal-loading">Loading...</span>';
-      fetch('https://corsproxy.io/?'+encodeURIComponent(ICS_URL+'?_='+Date.now()),{cache:'no-store'})
-        .then(r=>r.text()).then(text=>{
-          text=text.replace(/\r\n[ \t]/g,'').replace(/\r/g,'');
-          const events=[];
-          text.split('BEGIN:VEVENT').slice(1).forEach(block=>{
-            const get=k=>{const m=block.match(new RegExp(k+'(?:;[^:]*)?:(.+)'));return m?m[1].trim():'';};
-            const startRaw=get('DTSTART');const start=parseICSDate(startRaw);
-            if(start)events.push({summary:get('SUMMARY').replace(/\\,/g,',').replace(/\\n/g,' '),location:get('LOCATION').replace(/\\,/g,','),start,allDay:startRaw.length===8});
-          });
-          const now=new Date();
-          const buckets=[];
-          for(let i=0;i<7;i++){const day=new Date(now);day.setDate(now.getDate()+i);day.setHours(0,0,0,0);const dayEvents=events.filter(e=>sameDay(e.start,day)).sort((a,b)=>a.start-b.start);if(dayEvents.length)buckets.push({day,events:dayEvents,isToday:i===0});}
-          const container=document.getElementById('cal-events');
-          if(!buckets.length){container.innerHTML='<span class="cal-empty">No events in the next 7 days</span>';return;}
-          container.innerHTML=buckets.map(b=>{const label=b.isToday?'Today':(CAL_DAYS[b.day.getDay()]+' &middot; '+CAL_MONTHS[b.day.getMonth()]+' '+b.day.getDate());const evHTML=b.events.map(e=>`<div class="cal-event"><div class="cal-event-bar"></div><div class="cal-event-time">${fmtTime(e.start)}</div><div><div class="cal-event-title">${e.summary}</div>${e.location?`<div class="cal-event-loc">${e.location}</div>`:''}</div></div>`).join('');return `<div class="cal-day-header${b.isToday?' today':''}">${label}</div>${evHTML}`;}).join('');
-        }).catch(()=>{document.getElementById('cal-events').innerHTML='<span class="cal-empty">Could not load calendar</span>';});
-    }
+    function loadCalendar(){document.getElementById('cal-events').innerHTML='<span class="cal-loading">Loading...</span>';fetch('https://corsproxy.io/?'+encodeURIComponent(ICS_URL+'?_='+Date.now()),{cache:'no-store'}).then(r=>r.text()).then(text=>{text=text.replace(/\r\n[ \t]/g,'').replace(/\r/g,'');const events=[];text.split('BEGIN:VEVENT').slice(1).forEach(block=>{const get=k=>{const m=block.match(new RegExp(k+'(?:;[^:]*)?:(.+)'));return m?m[1].trim():'';};const startRaw=get('DTSTART');const start=parseICSDate(startRaw);if(start)events.push({summary:get('SUMMARY').replace(/\\,/g,',').replace(/\\n/g,' '),location:get('LOCATION').replace(/\\,/g,','),start,allDay:startRaw.length===8});});const now=new Date();const buckets=[];for(let i=0;i<7;i++){const day=new Date(now);day.setDate(now.getDate()+i);day.setHours(0,0,0,0);const dayEvents=events.filter(e=>sameDay(e.start,day)).sort((a,b)=>a.start-b.start);if(dayEvents.length)buckets.push({day,events:dayEvents,isToday:i===0});}const container=document.getElementById('cal-events');if(!buckets.length){container.innerHTML='<span class="cal-empty">No events in the next 7 days</span>';return;}container.innerHTML=buckets.map(b=>{const label=b.isToday?'Today':(CAL_DAYS[b.day.getDay()]+' &middot; '+CAL_MONTHS[b.day.getMonth()]+' '+b.day.getDate());const evHTML=b.events.map(e=>`<div class="cal-event"><div class="cal-event-bar"></div><div class="cal-event-time">${fmtTime(e.start)}</div><div><div class="cal-event-title">${e.summary}</div>${e.location?`<div class="cal-event-loc">${e.location}</div>`:''}</div></div>`).join('');return `<div class="cal-day-header${b.isToday?' today':''}">${label}</div>${evHTML}`;}).join('');}).catch(()=>{document.getElementById('cal-events').innerHTML='<span class="cal-empty">Could not load calendar</span>';});}
 
-    /* ── To-Do (Daily + Weekly) ── */
     let todosDaily=JSON.parse(localStorage.getItem('todos_daily')||'[]');
     let todosWeekly=JSON.parse(localStorage.getItem('todos_weekly')||'[]');
     let todoMode='daily';
@@ -634,14 +379,12 @@
     document.getElementById('todo-input').addEventListener('keydown',e=>{if(e.key==='Enter')addTodo();});
     renderTodos();
 
-    /* ── Deadline helpers ── */
     function daysUntil(d){return Math.ceil((new Date(d)-new Date())/(1000*60*60*24));}
     function statusColor(d){return d>180?'green':d>60?'yellow':'red';}
     function updateEOStatus(){const diff=daysUntil('2028-04-01');document.getElementById('eo-days').textContent=diff+' days';const dot=document.getElementById('eo-status-dot'),txt=document.getElementById('eo-status-text');const c=statusColor(diff);dot.className='status-dot '+c;txt.className='status-text '+c;txt.innerHTML=c==='green'?'Active &mdash; Coverage in good standing':c==='yellow'?'Expiring soon &mdash; Renew immediately':'Expired &mdash; Action required';}
     function renderKREC(){const dl=[{name:'License Expiration',date:'2028-03-31',completed:false},{name:'Continuing Education',date:'2027-12-31',completed:false},{name:'Core Education',date:'2028-12-31',completed:false}];document.getElementById('krec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'&mdash;':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
     function renderTREC(){const dl=[{name:'License Expiration',date:'2027-05-22',completed:false},{name:'Continuing Education',date:'2027-05-22',completed:false}];document.getElementById('trec-deadlines').innerHTML=dl.map(d=>{const days=daysUntil(d.date);const c=d.completed?'green':statusColor(days);const label=new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});return `<div class="deadline-row"><div class="deadline-left"><div class="deadline-name">${d.name}</div><div class="deadline-date">Due ${label}</div></div><div class="deadline-right"><div class="deadline-days ${c}">${d.completed?'&mdash;':days+' days'}</div><div class="deadline-status ${d.completed?'done':'pending'}">${d.completed?'Completed':'Pending'}</div></div></div>`;}).join('');}
 
-    /* ── PDF Seed ── */
     const LISTING_SEED_VERSION='v1';
     const LISTING_SEED=[
       {address:'321 Marley Street, Scottsville, KY 42164',price:'280,000',stage:'active',date:'2026-06-25',beds:'3',baths:'2',sqft:'1,404',mls:'RA20263777',source:'pdf'},
@@ -649,45 +392,40 @@
       {address:"1282 Clarence O'Dell Road, Bowling Green, KY 42101",price:'285,999',stage:'pending',date:'2026-05-01',close:'2026-07-06',beds:'3',baths:'2',sqft:'1,767',mls:'RA20262503',source:'pdf'},
     ];
 
-    /* ── Active Listings ── */
     let listings=JSON.parse(localStorage.getItem('listings')||'[]');
     (function seedListings(){if(localStorage.getItem('lstSeedVer')!==LISTING_SEED_VERSION&&LISTING_SEED.length){const existing=new Set(listings.map(l=>l.address.trim().toLowerCase()));LISTING_SEED.forEach(l=>{if(!existing.has(l.address.trim().toLowerCase()))listings.push(l);});localStorage.setItem('listings',JSON.stringify(listings));localStorage.setItem('lstSeedVer',LISTING_SEED_VERSION);}})();
     const lstLabel={active:'Active',pending:'Under Contract',sold:'Sold'};
-    function saveListings(){localStorage.setItem('listings',JSON.stringify(listings));}
+    function saveListings(){localStorage.setItem('listings',JSON.stringify(listings));syncToSheets('Listings',listings);}
     let editLstIdx=-1;
-    function renderListings(){const el=document.getElementById('listings-list');if(!listings.length){el.innerHTML='<div class="tracker-empty">Send me a PDF of your listings and I\'ll load them directly</div>';return;}el.innerHTML=listings.map((l,i)=>{if(i===editLstIdx){return `<div class="edit-card"><input class="edit-input" id="el-addr" value="${esc(l.address)}" style="flex:2;min-width:180px;" /><input class="edit-input" id="el-price" value="${esc(l.price||'')}" placeholder="Price" style="width:110px;" /><select class="edit-select" id="el-stage"><option value="active" ${l.stage==='active'?'selected':''}>Active</option><option value="pending" ${l.stage==='pending'?'selected':''}>Under Contract</option><option value="sold" ${l.stage==='sold'?'selected':''}>Sold</option></select><input class="edit-input" id="el-date" type="date" value="${l.date||''}" style="width:140px;" /><div class="edit-actions"><button class="form-save" onclick="saveLstEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('lst')">Cancel</button></div></div>`;}const dom=l.date?Math.floor((Date.now()-new Date(l.date))/(1000*60*60*24))+'d on market':'';const closeNote=l.close?' &middot; Closing '+l.close:'';const meta=[l.price?'$'+l.price:'',dom+closeNote,l.beds?l.beds+'bd/'+l.baths+'ba':'',l.sqft?l.sqft+' sqft':''].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(l.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${l.stage}">${lstLabel[l.stage]}</span><button class="tc-edit" onclick="editLstIdx=${i};renderListings()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deleteListing(${i})">&#x2715;</button></div></div>`;}).join('');}
+    function renderListings(){const el=document.getElementById('listings-list');if(!listings.length){el.innerHTML='<div class="tracker-empty">No listings yet &mdash; add one above</div>';return;}el.innerHTML=listings.map((l,i)=>{if(i===editLstIdx){return `<div class="edit-card"><input class="edit-input" id="el-addr" value="${esc(l.address)}" style="flex:2;min-width:180px;" /><input class="edit-input" id="el-price" value="${esc(l.price||'')}" placeholder="Price" style="width:110px;" /><select class="edit-select" id="el-stage"><option value="active" ${l.stage==='active'?'selected':''}>Active</option><option value="pending" ${l.stage==='pending'?'selected':''}>Under Contract</option><option value="sold" ${l.stage==='sold'?'selected':''}>Sold</option></select><input class="edit-input" id="el-date" type="date" value="${l.date||''}" style="width:140px;" /><div class="edit-actions"><button class="form-save" onclick="saveLstEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('lst')">Cancel</button></div></div>`;}const dom=l.date?Math.floor((Date.now()-new Date(l.date))/(1000*60*60*24))+'d on market':'';const closeNote=l.close?' &middot; Closing '+l.close:'';const meta=[l.price?'$'+l.price:'',dom+closeNote,l.beds?l.beds+'bd/'+l.baths+'ba':'',l.sqft?l.sqft+' sqft':''].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(l.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${l.stage}">${lstLabel[l.stage]}</span><button class="tc-edit" onclick="editLstIdx=${i};renderListings()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deleteListing(${i})">&#x2715;</button></div></div>`;}).join('');}
     function saveLstEdit(i){listings[i]={...listings[i],address:document.getElementById('el-addr').value.trim(),price:document.getElementById('el-price').value.trim(),stage:document.getElementById('el-stage').value,date:document.getElementById('el-date').value};editLstIdx=-1;saveListings();renderListings();}
     function saveListing(){const addr=document.getElementById('lst-address').value.trim();if(!addr)return;listings.push({address:addr,price:document.getElementById('lst-price').value.trim(),stage:document.getElementById('lst-stage').value,date:document.getElementById('lst-date').value,source:'manual'});saveListings();renderListings();toggleForm('listings-form');['lst-address','lst-price','lst-date'].forEach(id=>document.getElementById(id).value='');}
     function deleteListing(i){listings.splice(i,1);saveListings();renderListings();}
 
-    /* ── Active Deals ── */
     let deals=JSON.parse(localStorage.getItem('deals')||'[]');
     const stageLabel={loi:'LOI',contract:'Under Contract',diligence:'Due Diligence',closed:'Closed'};
-    function saveDeals(){localStorage.setItem('deals',JSON.stringify(deals));}
+    function saveDeals(){localStorage.setItem('deals',JSON.stringify(deals));syncToSheets('Deals',deals);}
     let editDealIdx=-1;
     function renderDeals(){const el=document.getElementById('deals-list');if(!deals.length){el.innerHTML='<div class="tracker-empty">No active deals &mdash; add one above</div>';return;}el.innerHTML=deals.map((d,i)=>{if(i===editDealIdx){return `<div class="edit-card"><input class="edit-input" id="ed-addr" value="${esc(d.address)}" style="flex:2;min-width:180px;" /><input class="edit-input" id="ed-price" value="${esc(d.price||'')}" placeholder="Price" style="width:110px;" /><select class="edit-select" id="ed-stage"><option value="loi" ${d.stage==='loi'?'selected':''}>LOI</option><option value="contract" ${d.stage==='contract'?'selected':''}>Under Contract</option><option value="diligence" ${d.stage==='diligence'?'selected':''}>Due Diligence</option><option value="closed" ${d.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ed-close" type="date" value="${d.close||''}" style="width:140px;" /><input class="edit-input" id="ed-notes" value="${esc(d.notes||'')}" placeholder="Notes" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="saveDealEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('deal')">Cancel</button></div></div>`;}const meta=[d.price?'$'+d.price:'',d.close?'Close '+d.close:'',d.notes].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(d.address)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${d.stage}">${stageLabel[d.stage]}</span><button class="tc-edit" onclick="editDealIdx=${i};renderDeals()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deleteDeal(${i})">&#x2715;</button></div></div>`;}).join('');}
     function saveDealEdit(i){deals[i]={...deals[i],address:document.getElementById('ed-addr').value.trim(),price:document.getElementById('ed-price').value.trim(),stage:document.getElementById('ed-stage').value,close:document.getElementById('ed-close').value,notes:document.getElementById('ed-notes').value.trim()};editDealIdx=-1;saveDeals();renderDeals();}
     function saveDeal(){const addr=document.getElementById('deal-address').value.trim();if(!addr)return;deals.push({address:addr,price:document.getElementById('deal-price').value.trim(),stage:document.getElementById('deal-stage').value,close:document.getElementById('deal-close').value,notes:document.getElementById('deal-notes').value.trim()});saveDeals();renderDeals();toggleForm('deals-form');['deal-address','deal-price','deal-close','deal-notes'].forEach(id=>document.getElementById(id).value='');}
     function deleteDeal(i){deals.splice(i,1);saveDeals();renderDeals();}
 
-    /* ── Proforma ── */
     function fmt(n){return n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});}
     function calcProforma(){const price=parseFloat(document.getElementById('pf-price').value)||0;const downPct=(parseFloat(document.getElementById('pf-down').value)||25)/100;const rate=(parseFloat(document.getElementById('pf-rate').value)||6.5)/100/12;const term=(parseFloat(document.getElementById('pf-term').value)||25)*12;const rent=parseFloat(document.getElementById('pf-rent').value)||0;const vacPct=(parseFloat(document.getElementById('pf-vac').value)||5)/100;const exp=parseFloat(document.getElementById('pf-exp').value)||0;const loan=price*(1-downPct);const mp=rate>0?loan*(rate*Math.pow(1+rate,term))/(Math.pow(1+rate,term)-1):0;const annualDebt=mp*12;const egi=rent*(1-vacPct);const noi=egi-exp;const capRate=price>0?(noi/price)*100:0;const cashFlow=noi-annualDebt;const equity=price*downPct;const coc=equity>0?(cashFlow/equity)*100:0;document.getElementById('pf-loan').innerHTML=loan>0?'$'+fmt(loan):'&mdash;';document.getElementById('pf-debt').innerHTML=annualDebt>0?'$'+fmt(annualDebt):'&mdash;';document.getElementById('pf-noi').innerHTML=noi!==0?'$'+fmt(noi):'&mdash;';const capEl=document.getElementById('pf-cap');capEl.innerHTML=capRate>0?capRate.toFixed(2)+'%':'&mdash;';capEl.className='pf-value';const cfEl=document.getElementById('pf-cf');cfEl.innerHTML=cashFlow!==0?'$'+fmt(cashFlow):'&mdash;';cfEl.className='pf-value '+(cashFlow>=0?'pos':'neg');const cocEl=document.getElementById('pf-coc');cocEl.innerHTML=coc!==0?coc.toFixed(2)+'%':'&mdash;';cocEl.className='pf-value '+(coc>=0?'pos':'neg');}
 
-    /* ── Pipeline ── */
     let pipeline=JSON.parse(localStorage.getItem('pipeline')||'[]');
     const pipeStageLabel={lead:'Lead',active:'Active',contract:'Under Contract',closed:'Closed'};
-    function savePipelineData(){localStorage.setItem('pipeline',JSON.stringify(pipeline));}
+    function savePipelineData(){localStorage.setItem('pipeline',JSON.stringify(pipeline));syncToSheets('Pipeline',pipeline);}
     let editPipeIdx=-1;
     function renderPipeline(){const el=document.getElementById('pipeline-list');if(!pipeline.length){el.innerHTML='<div class="tracker-empty">No clients in pipeline &mdash; add one above</div>';return;}el.innerHTML=pipeline.map((p,i)=>{if(i===editPipeIdx){return `<div class="edit-card"><input class="edit-input" id="ep-name" value="${esc(p.name)}" placeholder="Client name" style="min-width:120px;" /><select class="edit-select" id="ep-type"><option value="buyer" ${p.type==='buyer'?'selected':''}>Buyer</option><option value="seller" ${p.type==='seller'?'selected':''}>Seller</option></select><input class="edit-input" id="ep-prop" value="${esc(p.property||'')}" placeholder="Property / area" style="flex:2;" /><select class="edit-select" id="ep-stage"><option value="lead" ${p.stage==='lead'?'selected':''}>Lead</option><option value="active" ${p.stage==='active'?'selected':''}>Active</option><option value="contract" ${p.stage==='contract'?'selected':''}>Under Contract</option><option value="closed" ${p.stage==='closed'?'selected':''}>Closed</option></select><input class="edit-input" id="ep-next" value="${esc(p.next||'')}" placeholder="Next action" style="flex:1;" /><div class="edit-actions"><button class="form-save" onclick="savePipeEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('pipe')">Cancel</button></div></div>`;}const meta=[p.property,p.next?'Next: '+p.next:''].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(p.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><span class="stage-badge stage-${p.type}">${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</span><span class="stage-badge stage-${p.stage}">${pipeStageLabel[p.stage]}</span><button class="tc-edit" onclick="editPipeIdx=${i};renderPipeline()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deletePipeline(${i})">&#x2715;</button></div></div>`;}).join('');}
     function savePipeEdit(i){pipeline[i]={...pipeline[i],name:document.getElementById('ep-name').value.trim(),type:document.getElementById('ep-type').value,property:document.getElementById('ep-prop').value.trim(),stage:document.getElementById('ep-stage').value,next:document.getElementById('ep-next').value.trim()};editPipeIdx=-1;savePipelineData();renderPipeline();}
     function savePipeline(){const name=document.getElementById('pipe-name').value.trim();if(!name)return;pipeline.push({name,type:document.getElementById('pipe-type').value,property:document.getElementById('pipe-property').value.trim(),stage:document.getElementById('pipe-stage').value,next:document.getElementById('pipe-next').value.trim()});savePipelineData();renderPipeline();toggleForm('pipeline-form');['pipe-name','pipe-property','pipe-next'].forEach(id=>document.getElementById(id).value='');}
     function deletePipeline(i){pipeline.splice(i,1);savePipelineData();renderPipeline();}
 
-    /* ── Contacts CRM ── */
     let contacts=JSON.parse(localStorage.getItem('contacts')||'[]');
     contacts=contacts.map(c=>({type:'agent',followUpDays:null,lastContact:null,...c}));
-    function saveContacts(){localStorage.setItem('contacts',JSON.stringify(contacts));}
+    function saveContacts(){localStorage.setItem('contacts',JSON.stringify(contacts));syncToSheets('Contacts',contacts);}
     let editConIdx=-1;
     let currentContactType='agent';
     const ctypeLabel={agent:'Agents / Brokers',seller:'Sellers',buyer:'Buyers',professional:'RE Professionals'};
@@ -696,12 +434,7 @@
     function renderContactsOverview(){
       const now=new Date();now.setHours(0,0,0,0);
       let over=0,soon=0,ok=0;
-      contacts.forEach(c=>{
-        if(!c.lastContact){over++;return;}
-        const days=Math.floor((now-new Date(c.lastContact))/86400000);
-        const diff=(c.followUpDays||defaultFU(c.type))-days;
-        if(diff<0)over++;else if(diff<=7)soon++;else ok++;
-      });
+      contacts.forEach(c=>{if(!c.lastContact){over++;return;}const days=Math.floor((now-new Date(c.lastContact))/86400000);const diff=(c.followUpDays||defaultFU(c.type))-days;if(diff<0)over++;else if(diff<=7)soon++;else ok++;});
       document.getElementById('contacts-stats').innerHTML=`<div class="cstat"><div class="cstat-num">${contacts.length}</div><div class="cstat-label">Total Contacts</div></div><div class="cstat"><div class="cstat-num ${over?'red':''}">${over}</div><div class="cstat-label">Overdue</div></div><div class="cstat"><div class="cstat-num ${soon?'yellow':''}">${soon}</div><div class="cstat-label">Due This Week</div></div><div class="cstat"><div class="cstat-num">${ok}</div><div class="cstat-label">On Track</div></div>`;
       renderCoffeeMeetings();
       if(!contacts.length){document.getElementById('contacts-followup-list').innerHTML='<div class="tracker-empty">No contacts yet &mdash; add them via the categories in the dropdown</div>';return;}
@@ -713,68 +446,31 @@
       if(okL.length)h+=`<div class="followup-section-header">On Track</div>`+okL.map(x=>fuCard(x)).join('');
       document.getElementById('contacts-followup-list').innerHTML=h;
     }
-    function fuCard({c,i,diff}){
-      const tl=ctypeLabel[c.type]||c.type||'';
-      let dt,dc;
-      if(!c.lastContact){dt='Never contacted';dc='overdue';}
-      else if(diff<0){dt=Math.abs(diff)+'d overdue';dc='overdue';}
-      else if(diff===0){dt='Due today';dc='soon';}
-      else if(diff<=7){dt='Due in '+diff+'d';dc='soon';}
-      else{dt=diff+'d until follow-up';dc='ok';}
-      const contact=c.phone||c.email||'';
-      return `<div class="followup-card"><div style="flex:1;min-width:0;"><div class="fc-name">${esc(c.name)}</div><div class="fc-meta">${tl}${contact?' &middot; '+esc(contact):''}</div></div><div class="fc-days ${dc}">${dt}</div><button class="log-btn" onclick="logContact(${i})">&#x2713; Logged</button></div>`;
-    }
+    function fuCard({c,i,diff}){const tl=ctypeLabel[c.type]||c.type||'';let dt,dc;if(!c.lastContact){dt='Never contacted';dc='overdue';}else if(diff<0){dt=Math.abs(diff)+'d overdue';dc='overdue';}else if(diff===0){dt='Due today';dc='soon';}else if(diff<=7){dt='Due in '+diff+'d';dc='soon';}else{dt=diff+'d until follow-up';dc='ok';}const contact=c.phone||c.email||'';return `<div class="followup-card"><div style="flex:1;min-width:0;"><div class="fc-name">${esc(c.name)}</div><div class="fc-meta">${tl}${contact?' &middot; '+esc(contact):''}</div></div><div class="fc-days ${dc}">${dt}</div><button class="log-btn" onclick="logContact(${i})">&#x2713; Logged</button></div>`;}
     function logContact(i){contacts[i].lastContact=new Date().toISOString().slice(0,10);saveContacts();renderContactsOverview();}
-
-    function renderContactsByType(){
-      const type=currentContactType;
-      document.getElementById('ctype-label').textContent='Contacts';
-      document.getElementById('ctype-title').textContent=ctypeLabel[type];
-      document.getElementById('ctype-followup').placeholder='Follow-up days (default: '+defaultFU(type)+')';
-      const filtered=contacts.map((c,i)=>({c,i})).filter(({c})=>c.type===type);
-      const el=document.getElementById('contacts-type-list');
-      if(!filtered.length){el.innerHTML='<div class="tracker-empty">No contacts yet &mdash; add one above</div>';return;}
-      const now=new Date();now.setHours(0,0,0,0);
-      el.innerHTML=filtered.map(({c,i})=>{
-        if(i===editConIdx){return `<div class="edit-card"><input class="edit-input" id="ec-name" value="${esc(c.name)}" placeholder="Name" style="flex:1;min-width:120px;" /><input class="edit-input" id="ec-phone" value="${esc(c.phone||'')}" placeholder="Phone" style="width:140px;" /><input class="edit-input" id="ec-email" value="${esc(c.email||'')}" placeholder="Email" style="flex:1;" /><input class="edit-input" id="ec-fu" value="${c.followUpDays||''}" placeholder="Follow-up days" type="number" style="width:110px;" /><div class="edit-actions"><button class="form-save" onclick="saveConEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('con')">Cancel</button></div></div>`;}
-        let daysText='Never contacted';
-        if(c.lastContact){const days=Math.floor((now-new Date(c.lastContact))/86400000);const diff=(c.followUpDays||defaultFU(c.type))-days;daysText=diff<0?Math.abs(diff)+'d overdue':diff+'d until follow-up';}
-        const meta=[c.phone,c.email,daysText].filter(Boolean).join(' &middot; ');
-        return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(c.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><button class="log-btn" onclick="logContactType(${i})">&#x2713; Log</button><button class="tc-edit" onclick="editConIdx=${i};renderContactsByType()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deleteContact(${i})">&#x2715;</button></div></div>`;
-      }).join('');
-    }
+    function renderContactsByType(){const type=currentContactType;document.getElementById('ctype-label').textContent='Contacts';document.getElementById('ctype-title').textContent=ctypeLabel[type];document.getElementById('ctype-followup').placeholder='Follow-up days (default: '+defaultFU(type)+')';const filtered=contacts.map((c,i)=>({c,i})).filter(({c})=>c.type===type);const el=document.getElementById('contacts-type-list');if(!filtered.length){el.innerHTML='<div class="tracker-empty">No contacts yet &mdash; add one above</div>';return;}const now=new Date();now.setHours(0,0,0,0);el.innerHTML=filtered.map(({c,i})=>{if(i===editConIdx){return `<div class="edit-card"><input class="edit-input" id="ec-name" value="${esc(c.name)}" placeholder="Name" style="flex:1;min-width:120px;" /><input class="edit-input" id="ec-phone" value="${esc(c.phone||'')}" placeholder="Phone" style="width:140px;" /><input class="edit-input" id="ec-email" value="${esc(c.email||'')}" placeholder="Email" style="flex:1;" /><input class="edit-input" id="ec-fu" value="${c.followUpDays||''}" placeholder="Follow-up days" type="number" style="width:110px;" /><div class="edit-actions"><button class="form-save" onclick="saveConEdit(${i})">Save</button><button class="form-cancel" onclick="cancelEdit('con')">Cancel</button></div></div>`;}let daysText='Never contacted';if(c.lastContact){const days=Math.floor((now-new Date(c.lastContact))/86400000);const diff=(c.followUpDays||defaultFU(c.type))-days;daysText=diff<0?Math.abs(diff)+'d overdue':diff+'d until follow-up';}const meta=[c.phone,c.email,daysText].filter(Boolean).join(' &middot; ');return `<div class="tracker-card"><div class="tc-main"><div class="tc-name">${esc(c.name)}</div><div class="tc-meta">${meta}</div></div><div class="tc-right"><button class="log-btn" onclick="logContactType(${i})">&#x2713; Log</button><button class="tc-edit" onclick="editConIdx=${i};renderContactsByType()" title="Edit">&#x270E;</button><button class="tc-delete" onclick="deleteContact(${i})">&#x2715;</button></div></div>`;}).join('');}
     function logContactType(i){contacts[i].lastContact=new Date().toISOString().slice(0,10);saveContacts();renderContactsByType();}
     function saveConEdit(i){contacts[i]={...contacts[i],name:document.getElementById('ec-name').value.trim(),phone:document.getElementById('ec-phone').value.trim(),email:document.getElementById('ec-email').value.trim(),followUpDays:parseInt(document.getElementById('ec-fu').value)||null};editConIdx=-1;saveContacts();renderContactsByType();}
     function saveContactType(){const name=document.getElementById('ctype-name').value.trim();if(!name)return;contacts.push({name,type:currentContactType,phone:document.getElementById('ctype-phone').value.trim(),email:document.getElementById('ctype-email').value.trim(),followUpDays:parseInt(document.getElementById('ctype-followup').value)||null,lastContact:null});saveContacts();renderContactsByType();toggleForm('contacts-type-form');['ctype-name','ctype-phone','ctype-email','ctype-followup'].forEach(id=>document.getElementById(id).value='');}
     function deleteContact(i){contacts.splice(i,1);saveContacts();renderContactsByType();}
 
-    /* ── Coffee Meetings ── */
     let coffeeMeetings=JSON.parse(localStorage.getItem('coffeeMeetings')||'[]');
-    function saveCoffee(){localStorage.setItem('coffeeMeetings',JSON.stringify(coffeeMeetings));}
+    function saveCoffee(){localStorage.setItem('coffeeMeetings',JSON.stringify(coffeeMeetings));syncToSheets('CoffeeMeetings',coffeeMeetings);}
     function getWeekStart(date){const d=date?new Date(date):new Date();d.setHours(0,0,0,0);const day=d.getDay();d.setDate(d.getDate()-(day===0?6:day-1));return d;}
     function toggleCoffeeForm(){const f=document.getElementById('coffee-form');if(f.style.display==='none'){f.style.display='flex';document.getElementById('cf-date').value=new Date().toISOString().slice(0,10);}else{f.style.display='none';}}
-    function renderCoffeeMeetings(){
-      const ws=getWeekStart();const we=new Date(ws);we.setDate(ws.getDate()+7);
-      const thisWeek=coffeeMeetings.filter(m=>{const d=new Date(m.date+'T12:00:00');return d>=ws&&d<we;}).length;
-      const goal=2;
-      const pips=Array.from({length:goal},(_,i)=>`<div class="coffee-pip${i<thisWeek?' filled':''}"></div>`).join('');
-      document.getElementById('coffee-progress').innerHTML=`<div class="coffee-progress-row"><div class="coffee-pips">${pips}</div><span class="coffee-count"><span class="cn">${thisWeek}</span> / ${goal} this week</span></div>`;
-      const log=document.getElementById('coffee-log');
-      if(!coffeeMeetings.length){log.innerHTML='';return;}
-      const sorted=[...coffeeMeetings].map((m,i)=>({...m,i})).sort((a,b)=>new Date(b.date)-new Date(a.date));
-      const weeks={};
-      sorted.forEach(m=>{const wk=getWeekStart(new Date(m.date+'T12:00:00'));const key=wk.getTime();if(!weeks[key])weeks[key]={start:wk,entries:[]};weeks[key].entries.push(m);});
-      const nowWS=ws.getTime();
-      log.innerHTML=Object.values(weeks).map(({start,entries})=>{
-        const isCurrent=start.getTime()===nowWS;
-        const end=new Date(start);end.setDate(start.getDate()+6);
-        const label=isCurrent?'This Week':start.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' &ndash; '+end.toLocaleDateString('en-US',{month:'short',day:'numeric'});
-        const rows=entries.map(m=>{const ds=new Date(m.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});return `<div class="coffee-entry"><div style="flex:1;"><div class="coffee-entry-name">${esc(m.name)}</div><div class="coffee-entry-meta">${ds}${m.notes?' &middot; '+esc(m.notes):''}</div></div><button class="tc-delete" onclick="deleteCoffeeMeeting(${m.i})">&#x2715;</button></div>`;}).join('');
-        return `<div class="coffee-week-label">${label}</div><div class="coffee-week-box">${rows}</div>`;
-      }).join('');
-    }
+    function renderCoffeeMeetings(){const ws=getWeekStart();const we=new Date(ws);we.setDate(ws.getDate()+7);const thisWeek=coffeeMeetings.filter(m=>{const d=new Date(m.date+'T12:00:00');return d>=ws&&d<we;}).length;const goal=2;const pips=Array.from({length:goal},(_,i)=>`<div class="coffee-pip${i<thisWeek?' filled':''}"></div>`).join('');document.getElementById('coffee-progress').innerHTML=`<div class="coffee-progress-row"><div class="coffee-pips">${pips}</div><span class="coffee-count"><span class="cn">${thisWeek}</span> / ${goal} this week</span></div>`;const log=document.getElementById('coffee-log');if(!coffeeMeetings.length){log.innerHTML='';return;}const sorted=[...coffeeMeetings].map((m,i)=>({...m,i})).sort((a,b)=>new Date(b.date)-new Date(a.date));const weeks={};sorted.forEach(m=>{const wk=getWeekStart(new Date(m.date+'T12:00:00'));const key=wk.getTime();if(!weeks[key])weeks[key]={start:wk,entries:[]};weeks[key].entries.push(m);});const nowWS=ws.getTime();log.innerHTML=Object.values(weeks).map(({start,entries})=>{const isCurrent=start.getTime()===nowWS;const end=new Date(start);end.setDate(start.getDate()+6);const label=isCurrent?'This Week':start.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' &ndash; '+end.toLocaleDateString('en-US',{month:'short',day:'numeric'});const rows=entries.map(m=>{const ds=new Date(m.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});return `<div class="coffee-entry"><div style="flex:1;"><div class="coffee-entry-name">${esc(m.name)}</div><div class="coffee-entry-meta">${ds}${m.notes?' &middot; '+esc(m.notes):''}</div></div><button class="tc-delete" onclick="deleteCoffeeMeeting(${m.i})">&#x2715;</button></div>`;}).join('');return `<div class="coffee-week-label">${label}</div><div class="coffee-week-box">${rows}</div>`;}).join('');}
     function saveCoffeeMeeting(){const name=document.getElementById('cf-name').value.trim();if(!name)return;const date=document.getElementById('cf-date').value||new Date().toISOString().slice(0,10);const notes=document.getElementById('cf-notes').value.trim();coffeeMeetings.push({name,date,notes});saveCoffee();renderCoffeeMeetings();toggleForm('coffee-form');['cf-name','cf-notes'].forEach(id=>document.getElementById(id).value='');}
     function deleteCoffeeMeeting(i){coffeeMeetings.splice(i,1);saveCoffee();renderCoffeeMeetings();}
+
+    /* ── Google Sheets Sync ── */
+    let SHEETS_URL=localStorage.getItem('gd_sheetsUrl')||'';
+    function renderSheetsStatus(status){const el=document.getElementById('sheets-status');if(!el)return;if(status==='connected')el.innerHTML='<div class="status-badge"><div class="status-dot green"></div><span class="status-text green">Connected &amp; syncing</span></div>';else if(status==='testing')el.innerHTML='<div class="status-badge"><div class="status-dot yellow"></div><span class="status-text yellow">Connecting...</span></div>';else if(status==='error')el.innerHTML='<div class="status-badge"><div class="status-dot red"></div><span class="status-text red">Connection failed &mdash; check the URL</span></div>';else el.innerHTML='<div class="status-badge"><div class="status-dot" style="background:#2a2a2a;box-shadow:none;"></div><span style="color:#444;font-family:Inter,sans-serif;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;">Not connected</span></div>';}
+    async function saveAndTestSheetsUrl(){const url=document.getElementById('sheets-url-input').value.trim();if(!url)return;SHEETS_URL=url;localStorage.setItem('gd_sheetsUrl',url);renderSheetsStatus('testing');try{await loadFromSheets();renderSheetsStatus('connected');syncToSheets('Contacts',contacts);syncToSheets('CoffeeMeetings',coffeeMeetings);syncToSheets('Deals',deals);syncToSheets('Listings',listings);syncToSheets('Pipeline',pipeline);}catch(e){console.error(e);renderSheetsStatus('error');}}
+    function clearSheetsUrl(){SHEETS_URL='';localStorage.removeItem('gd_sheetsUrl');const i=document.getElementById('sheets-url-input');if(i)i.value='';renderSheetsStatus('disconnected');}
+    async function loadFromSheets(){if(!SHEETS_URL)return;const r=await fetch(SHEETS_URL+'?action=readAll&_='+Date.now());const data=await r.json();if(data.error)throw new Error(data.error);if(Array.isArray(data.Contacts)){contacts=data.Contacts.map(c=>({type:'agent',followUpDays:null,lastContact:null,...c,followUpDays:c.followUpDays?parseInt(c.followUpDays)||null:null}));localStorage.setItem('contacts',JSON.stringify(contacts));}if(Array.isArray(data.CoffeeMeetings)){coffeeMeetings=data.CoffeeMeetings;localStorage.setItem('coffeeMeetings',JSON.stringify(coffeeMeetings));}if(Array.isArray(data.Deals)){deals=data.Deals;localStorage.setItem('deals',JSON.stringify(deals));}if(Array.isArray(data.Listings)&&data.Listings.length>0){listings=data.Listings;localStorage.setItem('listings',JSON.stringify(listings));localStorage.setItem('lstSeedVer',LISTING_SEED_VERSION);}if(Array.isArray(data.Pipeline)){pipeline=data.Pipeline;localStorage.setItem('pipeline',JSON.stringify(pipeline));}}
+    function syncToSheets(sheetName,data){if(!SHEETS_URL)return;fetch(SHEETS_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'replace',sheet:sheetName,data:data}),headers:{'Content-Type':'text/plain'}}).catch(e=>console.warn('Sheets sync failed:',e));}
+    async function forceSyncToSheets(){if(!SHEETS_URL){renderSheetsStatus('error');return;}renderSheetsStatus('testing');syncToSheets('Contacts',contacts);syncToSheets('CoffeeMeetings',coffeeMeetings);syncToSheets('Deals',deals);syncToSheets('Listings',listings);syncToSheets('Pipeline',pipeline);await new Promise(r=>setTimeout(r,2000));renderSheetsStatus('connected');}
+    async function initSheetsSync(){if(!SHEETS_URL)return;try{await loadFromSheets();const shown=document.querySelector('#main-panel > div[style*="display: flex"], #main-panel > div[style*="display: grid"], #main-panel > div[style*="display: block"]');if(shown){const id=shown.id;if(id==='contacts-panel')renderContactsOverview();else if(id==='contacts-type-panel')renderContactsByType();else if(id==='listings-panel')renderListings();else if(id==='deals-panel')renderDeals();else if(id==='pipeline-panel')renderPipeline();}}catch(e){console.warn('Initial Sheets sync failed:',e);}}
 
     function showContactsHome(e){e.preventDefault();if(isMobile())closeNav();document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');const main=document.getElementById('main-panel');main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById('contacts-panel').style.display='flex';renderContactsOverview();document.getElementById('contacts-dropdown').classList.toggle('open');}
     function showContactType(e,type){e.preventDefault();if(isMobile())closeNav();currentContactType=type;editConIdx=-1;document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');const main=document.getElementById('main-panel');main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById('contacts-type-panel').style.display='flex';renderContactsByType();}
@@ -783,21 +479,20 @@
     function openNav(){document.getElementById('main-nav').classList.add('nav-open');document.getElementById('nav-overlay').classList.add('open');}
     function closeNav(){document.getElementById('main-nav').classList.remove('nav-open');document.getElementById('nav-overlay').classList.remove('open');}
 
-    /* ── Helpers ── */
     function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
     function cancelEdit(t){if(t==='lst'){editLstIdx=-1;renderListings();}else if(t==='deal'){editDealIdx=-1;renderDeals();}else if(t==='con'){editConIdx=-1;renderContactsByType();}else{editPipeIdx=-1;renderPipeline();}}
     function toggleForm(id){const f=document.getElementById(id);f.style.display=f.style.display==='none'?'flex':'none';}
     function toggleDropdown(e,id){e.preventDefault();document.getElementById(id).classList.toggle('open');e.currentTarget.classList.toggle('active');}
     function isMobile(){return window.innerWidth<=768;}
     function showPanel(e,panelId){
-      e.preventDefault();
-      if(isMobile())closeNav();
+      e.preventDefault();if(isMobile())closeNav();
       document.querySelectorAll('#main-panel > div').forEach(el=>el.style.display='none');
       const main=document.getElementById('main-panel');
       if(panelId==='home-panel'){main.style.alignItems='stretch';main.style.padding=isMobile()?'12px':'24px';document.getElementById('home-panel').style.display='grid';loadCalendar();}
       else if(['deals-panel','proforma-panel','listings-panel','pipeline-panel'].includes(panelId)){main.style.alignItems='flex-start';main.style.padding=isMobile()?'16px':'40px';document.getElementById(panelId).style.display='flex';if(panelId==='deals-panel')renderDeals();if(panelId==='listings-panel')renderListings();if(panelId==='pipeline-panel')renderPipeline();}
-      else{main.style.alignItems=isMobile()?'flex-start':'center';main.style.padding=isMobile()?'16px':'48px';document.getElementById(panelId).style.display='block';if(panelId==='eo-panel')updateEOStatus();if(panelId==='krec-panel')renderKREC();if(panelId==='trec-panel')renderTREC();}
+      else{main.style.alignItems=isMobile()?'flex-start':'center';main.style.padding=isMobile()?'16px':'48px';document.getElementById(panelId).style.display='block';if(panelId==='eo-panel')updateEOStatus();if(panelId==='krec-panel')renderKREC();if(panelId==='trec-panel')renderTREC();if(panelId==='settings-panel'){const inp=document.getElementById('sheets-url-input');if(inp)inp.value=SHEETS_URL;renderSheetsStatus(SHEETS_URL?'connected':'disconnected');}}
     }
+    initSheetsSync();
   </script>
 </body>
 </html>
